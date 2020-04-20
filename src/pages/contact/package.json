@@ -1,0 +1,6 @@
+{
+    "name": "Contact",
+    "version": "0.0.1",
+    "main": "./contact.js",
+    "private": true
+}

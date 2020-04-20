@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
 import styles from "./Text.module.css";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -11,34 +11,13 @@ class Text extends PureComponent {
 
   static propTypes = {
     /**
-     * The text value
-     */
-    text: PropTypes.string,
-    /**
      * The text variant
      */
     variant: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "h6", "p"]),
     /**
-     * The text style decoration
+     * Wether the text should link to something
      */
-    decoration: PropTypes.oneOf([
-      "primary",
-      "secondary",
-      "tertiary",
-      "disabled",
-      "colored",
-      "error",
-      "success",
-      "warning",
-    ]),
-    /**
-     * The line-height
-     */
-    height: PropTypes.oneOf(["small", "medium", "large"]),
-    /**
-     * Active text
-     */
-    active: PropTypes.bool,
+    link: PropTypes.string,
     /**
      * Strength of text
      */
@@ -46,24 +25,32 @@ class Text extends PureComponent {
   };
 
   static defaultProps = {
-    text: null,
     variant: "p",
-    decoration: "primary",
-    height: "small",
-    active: false,
-    strong: false
+    strong: false,
   };
 
   render() {
-    const { text, variant, strong } = this.props;
+    const { text, variant, strong, link } = this.props;
     let ComponentType = variant;
 
     return (
-      <ComponentType
-        className={classnames(styles.root, {[styles.strong] : strong})}
-      >
-        {text}
-      </ComponentType>
+      <Fragment>
+        {link ? (
+          <a className={classnames(styles.link)} href={link}>
+            <ComponentType
+              className={classnames(styles.root, { [styles.strong]: strong })}
+            >
+              {text}
+            </ComponentType>
+          </a>
+        ) : (
+          <ComponentType
+            className={classnames(styles.root, { [styles.strong]: strong })}
+          >
+            {text}
+          </ComponentType>
+        )}
+      </Fragment>
     );
   }
 }

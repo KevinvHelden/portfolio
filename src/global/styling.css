@@ -8,7 +8,14 @@
     */
     --primary: var(--green);
     --secondary: var(--white);
+    --link-colour: var(--green);
     --default-font-colour: var(--white);
+    --base: var(--black);
+    --lifted1: var(--grey5);
+    --lifted2: var(--grey4);
+    --lifted3: var(--grey3);
+    --lifted4: var(--grey2);
+    --lifted5: var(--grey1);
     /*
     * Fonts
     ================================================================
@@ -27,6 +34,7 @@
     * Layout & Sizes
     ================================================================
     */
+    --header-height: 70px;
     /*
     * Animation
     ================================================================

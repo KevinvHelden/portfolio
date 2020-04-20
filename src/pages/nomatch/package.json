@@ -1,0 +1,6 @@
+{
+    "name": "NoMatch",
+    "version": "0.0.1",
+    "main": "./NoMatch.js",
+    "private": true
+}

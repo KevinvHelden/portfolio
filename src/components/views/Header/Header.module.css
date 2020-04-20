@@ -1,0 +1,37 @@
+@import "../../../global/styling.css";
+
+.root {
+  height: var(--header-height);
+  border-bottom: 1px var(--lifted2) solid;
+  background-color: var(--base);
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.root img {
+  height: 20px;
+  width: auto;
+}
+
+.root .navigation {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.root .social {
+  width: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.root .social img {
+  width: auto;
+  height: 15px;
+}
+
+.root .social img:hover {
+  cursor: pointer;
+}

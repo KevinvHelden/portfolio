@@ -9,7 +9,20 @@
   font-family: var(--default-font-paragraph-strong);
 }
 
-h1, h2, h3, h4, h5, h6 {
+.link p:hover {
+  color: var(--link-colour);
+}
+
+.link  {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--default-font-header);
 }
 
@@ -39,4 +52,5 @@ h6 {
 
 p {
   font-family: var(--default-font-paragraph);
+  font-size: var(--default-font-size-paragraph);
 }

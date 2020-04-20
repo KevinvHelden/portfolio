@@ -1,0 +1,30 @@
+@import "../../../global/styling.css";
+
+.root {
+  width: 200px;
+  height: 50px;
+  outline: none;
+  border: none;
+  border-radius: 25px;
+  transition: var(--default-transition);
+}
+
+.root:hover {
+  cursor: pointer;
+}
+
+.root.primary {
+  background-color: var(--green);
+}
+
+.root.primary:hover {
+  filter: brightness(120%)
+}
+
+.root.secondary p {
+  color: var(--black);
+}
+
+.root.secondary:hover p {
+  color: var(--green);
+}
