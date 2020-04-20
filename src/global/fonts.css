@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Circular_Black';
+    src: url('./fonts/CircularStd-Black.ttf');
+}
+
+@font-face {
+    font-family: 'HKGrotesk_Bold';
+    src: url('./fonts/HKGrotesk-Bold.otf');
+}
+
+@font-face {
+    font-family: 'HKGrotesk_Regular';
+    src: url('./fonts/HKGrotesk-Regular.otf');
+}

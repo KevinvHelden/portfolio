@@ -1,0 +1,42 @@
+@import "../../../global/styling.css";
+
+.root {
+  color: var(--default-font-colour);
+  margin: 0;
+}
+
+.root.strong {
+  font-family: var(--default-font-paragraph-strong);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--default-font-header);
+}
+
+h1 {
+  font-size: var(--default-font-size-header1);
+}
+
+h2 {
+  font-size: var(--default-font-size-header2);
+}
+
+h3 {
+  font-size: var(--default-font-size-header3);
+}
+
+h4 {
+  font-size: var(--default-font-size-header4);
+}
+
+h5 {
+  font-size: var(--default-font-size-header5);
+}
+
+h6 {
+  font-size: var(--default-font-size-header6);
+}
+
+p {
+  font-family: var(--default-font-paragraph);
+}

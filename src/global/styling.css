@@ -1,0 +1,45 @@
+@import './fonts.css';
+@import './colours.css';
+
+:root {
+     /*
+    * Colors
+    ================================================================
+    */
+    --primary: var(--green);
+    --secondary: var(--white);
+    --default-font-colour: var(--white);
+    /*
+    * Fonts
+    ================================================================
+    */
+    --default-font-header: 'Circular_Black', sans-serif;
+    --default-font-paragraph: 'HKGrotesk_Regular', serif;
+    --default-font-paragraph-strong: 'HKGrotesk_Bold', serif;
+    --default-font-size-header1: 6rem;
+    --default-font-size-header2: 3.75rem;
+    --default-font-size-header3: 3rem;
+    --default-font-size-header4: 2.125rem;
+    --default-font-size-header5: 1.5rem;
+    --default-font-size-header6: 1.25rem;
+    --default-font-size-paragraph: 1rem;
+    /*
+    * Layout & Sizes
+    ================================================================
+    */
+    /*
+    * Animation
+    ================================================================
+    */
+    --fast-transition-duration: 0.15s;
+    --default-transition-duration: 0.3s;
+    --slow-transition-duration: 0.5s;
+    --default-transition-type: ease-in-out;
+    --fast-transition: var(--fast-transition-duration) var(--default-transition-type);
+    --default-transition: var(--default-transition-duration) var(--default-transition-type);
+    --slow-transition: var(--slow-transition-duration) var(--default-transition-type);
+    /*
+    * Media queries breakpoints
+    ================================================================
+    */
+}

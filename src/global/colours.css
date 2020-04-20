@@ -1,0 +1,23 @@
+:root {
+    /* RGB */
+    --blackRGB: 0,0,0;
+    --whiteRGB: 255,255,255;
+    
+    /* HEX */
+    --black: #000000;
+    --grey5: #2C2C2E;
+    --grey4: #3A3A3C;
+    --grey3: #48484A;
+    --grey2: #636366;
+    --grey1: #8E8E93;
+    --white: #ffffff;
+    --blue: #0A84FF;
+    --indigo: #5E5CE6;
+    --purple: #BF5AF2;
+    --green: #30D158;
+    --red: #D5150A;
+    --pink: #FF375F;
+    --teal: #64D2FF;
+    --orange: #FF9F0A;
+    --yellow: #FFD60A;
+}
