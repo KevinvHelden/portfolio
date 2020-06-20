@@ -1,40 +1,44 @@
 @import './fonts.css';
 @import './colours.css';
+@import './light.css';
+@import './dark.css';
 
 :root {
      /*
     * Colors
     ================================================================
     */
-    --primary: var(--green);
+    --primary: var(--styled-orange);
     --secondary: var(--white);
-    --link-colour: var(--green);
-    --default-font-colour: var(--white);
-    --base: var(--black);
-    --lifted1: var(--grey5);
-    --lifted2: var(--grey4);
-    --lifted3: var(--grey3);
-    --lifted4: var(--grey2);
-    --lifted5: var(--grey1);
+    --link: var(--primary);
+    --default-font-colour: var(--styled-font-colour);
+    --base: var(--styled-base);
+    --lifted5: var(--styled-lifted5);
+    --lifted4: var(--styled-lifted4);
+    --lifted3: var(--styled-lifted3);
+    --lifted2: var(--styled-lifted2);
+    --lifted1: var(--styled-lifted1);
     /*
     * Fonts
     ================================================================
     */
-    --default-font-header: 'Circular_Black', sans-serif;
+    --default-font-header: 'gilroy extra bold', sans-serif;
     --default-font-paragraph: 'HKGrotesk_Regular', serif;
     --default-font-paragraph-strong: 'HKGrotesk_Bold', serif;
-    --default-font-size-header1: 6rem;
-    --default-font-size-header2: 3.75rem;
-    --default-font-size-header3: 3rem;
-    --default-font-size-header4: 2.125rem;
-    --default-font-size-header5: 1.5rem;
-    --default-font-size-header6: 1.25rem;
-    --default-font-size-paragraph: 1rem;
+    --default-font-size-header1: 3.5rem; /*56px*/
+    --default-font-size-header2: 3rem; /*48px*/
+    --default-font-size-header3: 2.5rem; /*40px*/
+    --default-font-size-header4: 2.125rem; /*34px*/
+    --default-font-size-header5: 1.5rem; /*24px*/
+    --default-font-size-header6: 1.25rem; /*20px*/
+    --default-font-size-paragraph: 1rem; /*16px*/
+ 
+    --large-font-size-header1: 9.25rem; /*148px*/
     /*
     * Layout & Sizes
     ================================================================
     */
-    --header-height: 70px;
+    --header-height: 80px;
     /*
     * Animation
     ================================================================
@@ -50,4 +54,7 @@
     * Media queries breakpoints
     ================================================================
     */
+    --breakpoint-min: 768px;
+    --breakpoint-med: 992px;
+    --breakpoint-large: 1200px;
 }

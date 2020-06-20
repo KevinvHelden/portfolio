@@ -1,0 +1,44 @@
+@import "../../../global/styling.css";
+
+.root {
+  width: 100%;
+}
+
+.root .title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: fit-content;
+}
+
+.root .title > :first-child {
+  margin-right: 50px;
+}
+
+.root .title:hover {
+  cursor: pointer;
+}
+
+.root .content {
+  display: none;
+  flex-direction: column;
+  margin-top: 15px;
+  width: fit-content;
+}
+
+.root .content > * {
+  margin-bottom: 15px;
+}
+
+.root .content h5 {
+  color: var(--grey1);
+}
+
+.root .content h5:hover {
+  color: var(--grey2);
+  cursor: pointer;
+}
+
+.root .content.open {
+  display: flex;
+}

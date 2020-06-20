@@ -13,8 +13,12 @@
   color: var(--link-colour);
 }
 
-.link  {
+a {
   text-decoration: none;
+}
+
+.root.link {
+  color: var(--link);
 }
 
 h1,
@@ -53,4 +57,13 @@ h6 {
 p {
   font-family: var(--default-font-paragraph);
   font-size: var(--default-font-size-paragraph);
+}
+
+.extraLarge {
+  font-size: var(--large-font-size-header1);
+}
+
+@media only screen and (min-width: 1200px) {
+
+
 }

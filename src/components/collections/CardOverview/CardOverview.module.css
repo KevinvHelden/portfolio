@@ -1,0 +1,50 @@
+@import "../../../global/styling.css";
+
+:root {
+  --card-height: 420px;
+  --card-padding: 25px;
+  --page-padding: 300px;
+  --card-overview-padding-top: 100px;
+  --card-overview-padding-left: var(--page-padding);
+  --card-overview-padding: var(--card-overview-padding-top) 0 0 var(--page-padding);
+  --card-overview-height: calc(var(--card-height) + calc(100px + var(--card-overview-padding-top)));
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: var(--card-overview-height);
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: var(--card-overview-padding);
+}
+
+.root > * {
+  margin-right: 50px;
+}
+
+.root::-webkit-scrollbar {
+  height: 6px;
+}
+  
+.root::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 25px;
+}
+
+.root::-webkit-scrollbar-track-piece {
+  background-color: var(--lifted1);
+  border-radius: 25px;
+}
+
+.root::-webkit-scrollbar-track-piece:end {
+  margin-right: 30%; 
+}
+
+.root::-webkit-scrollbar-track-piece:start {
+  margin-left: 30%;
+}
+

@@ -1,0 +1,29 @@
+@import "../../../../global/styling.css";
+
+.root {
+  flex-direction: column;
+}
+
+.root .article {
+  margin-top: 50px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.root .articlePiece {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+}
+
+.root .articlePieceLarge {
+  width: 60%;
+  margin-top: 15px;
+}
+
+.root .articlePieceSmall {
+  width: 40%;
+}

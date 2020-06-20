@@ -1,0 +1,50 @@
+@import "../../../global/styling.css";
+
+:root {
+  --card-width: 375px;
+}
+
+.root {
+  width: var(--card-width);
+  height: fit-content;
+  transition: var(--fast-transition);
+}
+
+.root p {
+  color: var(--grey2);
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.root .imageContainer {
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--fast-transition);
+}
+
+.root .imageContainer .image {
+  min-height: 100%;
+  display: flex;
+}
+
+.root .title {
+  margin-top: 20px;
+}
+
+.root:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
+}
+
+.root:hover .imageContainer {
+  transform: scale(1.025);
+}
+
+.root:hover h5 {
+  color: var(--link);
+}

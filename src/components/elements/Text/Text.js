@@ -22,6 +22,11 @@ class Text extends PureComponent {
      * Strength of text
      */
     strong: PropTypes.bool,
+    /**
+     * Huge versions of text
+     */
+    extraLarge: PropTypes.bool,
+    clickFunc: PropTypes.func,
   };
 
   static defaultProps = {
@@ -30,7 +35,7 @@ class Text extends PureComponent {
   };
 
   render() {
-    const { text, variant, strong, link } = this.props;
+    const { text, variant, strong, link, extraLarge, clickFunc } = this.props;
     let ComponentType = variant;
 
     return (
@@ -38,14 +43,24 @@ class Text extends PureComponent {
         {link ? (
           <a className={classnames(styles.link)} href={link}>
             <ComponentType
-              className={classnames(styles.root, { [styles.strong]: strong })}
+              className={classnames(
+                styles.root, styles.link,
+                { [styles.strong]: strong },
+                { [styles.extraLarge]: extraLarge }
+              )}
+              onClick={clickFunc}
             >
               {text}
             </ComponentType>
           </a>
         ) : (
           <ComponentType
-            className={classnames(styles.root, { [styles.strong]: strong })}
+            className={classnames(
+              styles.root,
+              { [styles.strong]: strong },
+              { [styles.extraLarge]: extraLarge }
+            )}
+            onClick={clickFunc}
           >
             {text}
           </ComponentType>

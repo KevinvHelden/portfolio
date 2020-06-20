@@ -1,0 +1,21 @@
+@import "../../../../global/styling.css";
+
+.root {
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  padding: 80px 300px 0px;
+}
+
+.root .title {
+  margin-top: 50px;
+}
+
+.root form {
+  margin-top: 75px;
+}
+
+.root form > * {
+  margin-bottom: 50px;
+}

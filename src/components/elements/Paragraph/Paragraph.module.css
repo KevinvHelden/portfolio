@@ -1,0 +1,56 @@
+@import "../../../global/styling.css";
+
+.root {
+  margin: auto 0 50px 0;
+  color: var(--default-font-colour);
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  padding: 80px 300px 0px;
+}
+
+.root .textContainer {
+  width: 60%;
+  height: auto;
+  margin-top: 25px;
+}
+
+.root .imageContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.root .imageContainer > * {
+  max-width: 650px;
+  max-height: 360px;
+  border-radius: 5px;
+}
+
+.root .imageContainer > p {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.root .textAndImageContainer {
+  margin-top: 25px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.root .textAndImageContainer > * {
+  width: calc(50% - 25px);
+  max-height: 360px;
+}
+
+@media screen and (min-width: 576px) {
+}
+
+@media screen and (min-width: 992px) {
+}

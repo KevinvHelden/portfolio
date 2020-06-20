@@ -14,7 +14,7 @@
 }
 
 .root.primary {
-  background-color: var(--green);
+  background-color: var(--primary);
 }
 
 .root.primary:hover {
@@ -26,5 +26,5 @@
 }
 
 .root.secondary:hover p {
-  color: var(--green);
+  color: var(--primary);
 }

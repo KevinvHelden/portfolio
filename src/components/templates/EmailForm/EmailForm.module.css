@@ -1,0 +1,6 @@
+@import "../../../global/styling.css";
+
+.root {
+  display: flex;
+  flex-direction: column;
+}

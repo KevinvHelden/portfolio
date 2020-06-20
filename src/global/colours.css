@@ -1,23 +1,20 @@
 :root {
-    /* RGB */
-    --blackRGB: 0,0,0;
-    --whiteRGB: 255,255,255;
-    
-    /* HEX */
-    --black: #000000;
-    --grey5: #2C2C2E;
-    --grey4: #3A3A3C;
-    --grey3: #48484A;
-    --grey2: #636366;
-    --grey1: #8E8E93;
-    --white: #ffffff;
-    --blue: #0A84FF;
-    --indigo: #5E5CE6;
-    --purple: #BF5AF2;
-    --green: #30D158;
-    --red: #D5150A;
-    --pink: #FF375F;
-    --teal: #64D2FF;
-    --orange: #FF9F0A;
-    --yellow: #FFD60A;
+  /* RGB */
+  --blackRGB: 0, 0, 0;
+  --whiteRGB: 255, 255, 255;
+
+  /* HEX */
+  --black: #000000;
+  --grey5: #1C1C1E;
+  --grey4: #3a3a3c;
+  --grey3: #707070;
+  --grey2: #aca9a9;
+  --grey1: #d9d9d9;
+  --white: #ffffff;
+  --blue: #43d3ee;
+  --green: #30d158;
+  --red: #d5150a;
+  --orange-darker: #FF9500;
+  --orange-lighter: #FF9F0A;
+  --yellow: #ffd60a;
 }

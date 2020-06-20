@@ -1,0 +1,22 @@
+@import "../../../global/styling.css";
+
+.root {
+  outline: none;
+  border: 1px var(--lifted3) solid;
+  height: 300px;
+  width: 800px;
+  padding: 25px;
+  font-family: var(--default-font-paragraph-strong);
+  font-size: var(--default-font-size-header6);
+  resize: none;
+  background-color: var(--base);
+}
+
+.root::placeholder {
+  color: var(--lifted3);
+}
+
+.root:not(:placeholder-shown) {
+  color: var(--default-font-colour);
+  border: 1px var(--default-font-colour) solid;
+}

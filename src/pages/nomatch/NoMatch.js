@@ -1,21 +1,26 @@
 import React, { PureComponent } from "react";
-import "./NoMatch.css";
+import styles from "./NoMatch.module.css";
+import classnames from "classnames";
+
+import { Text } from "../../components/elements";
 
 class NoMatch extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  componentDidMount() {
+    this.props.setAltHeader();
+  }
+
   render() {
     return (
-      <div className={"noMatchRoot content"}>
-        <span className={"pageTitle"}>
-          404
-        </span>
-        <span className={"pageInfo"}>
-          The page wasn't found, my portfolio is still under construction.
-        </span>
-      </div>
+      <main className={classnames(styles.root)}>
+        <Text variant={"h1"} text={"404"} extraLarge />
+        <Text variant={"h2"} text={"I’m sorry, I couldn’t find your page."} />
+        <Text variant={"h2"} text={"This link will take you home."} link={"/"} />
+      </main>
     );
   }
 }

@@ -1,0 +1,20 @@
+@import '../../../global/styling.css';
+
+.root {
+    width: 100%;
+    height: 740px;
+    overflow: hidden;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--lifted1);
+}
+
+.root img {
+    width: 100%;
+}
+
+.root .noImage {
+    width: 100px;
+    height: auto;
+}

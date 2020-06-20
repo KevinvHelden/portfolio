@@ -1,18 +1,6 @@
 @import "../../global/styling.css";
 
 .root {
-    width: 100vw;
-    height: calc(100vh - var(--header-height));
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-}
-
-.root .actions {
-    margin: 50px auto 0 auto;
-    width: 450px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  height: 100%;
+  width: 100%;
 }

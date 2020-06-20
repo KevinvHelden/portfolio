@@ -2,36 +2,132 @@
 
 .root {
   height: var(--header-height);
-  border-bottom: 1px var(--lifted2) solid;
+  width: 100vw;
+  top: 0;
+  position: fixed;
+  z-index: 15;
   background-color: var(--base);
-  padding: 25px;
+  padding: 25px 0;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
 }
 
-.root img {
-  height: 20px;
+.overlay {
+  width: 100vw;
+  min-height: 100vh;
+  height: 500px;
+  position: fixed;
+  background-color: var(--white);
+  z-index: 14;
+  display: none;
+  padding: 130px 300px 0;
+  justify-content: center;
+  overflow-y: scroll;
+  overflow: auto;
+}
+
+.overlay.active {
+  display: flex;
+}
+
+.overlayInner {
+  height: auto;
+  max-width: 100%;
+}
+
+.overlayInner > * {
+  margin-bottom: 45px;
+}
+
+.root .logo {
+  height: 100%;
   width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.root .logo img {
+  margin: auto;
+}
+
+.root .side {
+  width: 300px;
 }
 
 .root .navigation {
-  width: 120px;
+  width: 100%;
+}
+
+.root .navigation .navItems {
   display: flex;
-  justify-content: space-between;
+  width: fit-content;
+  height: 100%;
+  margin: auto;
+}
+
+.root .navigation .navItems:hover {
+  color: var(--grey1) !important;
+}
+
+.root .navigation .navItems .navItem {
+  margin: auto 0;
+  display: flex;
+  margin-right: 50px;
+}
+
+.root .navigation .navItems .navItem:hover {
+  cursor: pointer;
+}
+
+.root .navigation .navItems .navItem p {
+  color: var(--lifted3);
+}
+
+.root .navigation .navItems .navItem.active p {
+  color: var(--default-font-colour);
+}
+
+.root .navigation .navItems .navItem > :first-child {
+  margin-right: 10px;
+}
+
+.root .navigation .navItems .navItem > :last-child {
+  margin-right: 0px;
 }
 
 .root .social {
-  width: 50px;
-  display: flex;
+  display: none;
+  width: fit-content;
   flex-direction: row;
-  justify-content: space-between;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
-.root .social img {
-  width: auto;
-  height: 15px;
+.root .hamburger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.root .hamburger:hover {
+  cursor: pointer;
 }
 
 .root .social img:hover {
   cursor: pointer;
+}
+
+@media only screen and (min-width: 1200px) {
+  .root .social {
+    display: flex;
+  }
+
+  .root .hamburger {
+    display: none;
+  }
 }

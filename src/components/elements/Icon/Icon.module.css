@@ -1,0 +1,16 @@
+@import "../../../global/styling.css";
+
+.root {
+  width: auto;
+  height: 18px;
+}
+
+.root.vertical {
+  width: 18px;
+  height: auto;
+}
+
+.root img {
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+:root {
+    --styled-font-colour: var(--white);
+    --styled-base: var(--black);
+
+    --styled-orange: var(--orange-lighter);
+    --styled-lifted5: var(--grey1);
+    --styled-lifted4: var(--grey2);
+    --styled-lifted3: var(--grey3);
+    --styled-lifted2: var(--grey4);
+    --styled-lifted1: var(--grey5);
+}

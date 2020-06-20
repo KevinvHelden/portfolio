@@ -1,0 +1,17 @@
+@import "../../global/styling.css";
+
+.root {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.root h1 {
+    margin-bottom: 50px;
+}
+
+.root h2 {
+    color: var(--grey2);
+}
