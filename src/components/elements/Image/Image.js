@@ -10,16 +10,12 @@ class Image extends PureComponent {
   }
 
   render() {
+    //clickFunc is usually for opening the image in an imageview component
     const { reference, source, alt, clickFunc } = this.props;
     return (
-      <div className={classnames(styles.root)}>
+      <div onClick={clickFunc && clickFunc} className={classnames(styles.root)}>
         {source ? (
-          <img
-            ref={reference}
-            onClick={clickFunc && clickFunc}
-            src={source}
-            alt={alt}
-          />
+          <img ref={reference} src={source} alt={alt} />
         ) : (
           <img
             className={classnames(styles.noImage)}

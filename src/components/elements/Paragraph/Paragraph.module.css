@@ -11,6 +11,42 @@
   padding: 80px 300px 0px;
 }
 
+.root .imageContainerInner {
+  position: relative;
+  max-height: 360px;
+}
+
+.root .imageContainerInner > * {
+  max-height: inherit;
+}
+
+.overlay {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: var(--fast-transition);
+  z-index: 30;
+}
+
+.overlay:hover {
+  opacity: 1;
+}
+
+.root .overlay .overlay_inner {
+  display: flex;
+  flex-direction: row;
+}
+
+.root .overlay .overlay_inner img {
+  margin-right: 10px;
+}
+
 .root .textContainer {
   width: 60%;
   height: auto;
@@ -25,7 +61,7 @@
 }
 
 .root .imageContainer > * {
-  max-width: 650px;
+  width: 650px;
   max-height: 360px;
   border-radius: 5px;
 }

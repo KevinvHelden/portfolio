@@ -3,6 +3,7 @@ import styles from "./Paragraph.module.css";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { Text, Image } from "../";
+import maximize from "../../../images/icons/maximize.svg";
 
 class Paragraph extends PureComponent {
   constructor(props) {
@@ -50,6 +51,7 @@ class Paragraph extends PureComponent {
       imageAlt,
       imageLeft,
       imageDescription,
+      imageClickFunc,
     } = this.props;
 
     return (
@@ -62,14 +64,40 @@ class Paragraph extends PureComponent {
         )}
         {variant === "image" && (
           <div className={classnames(styles.imageContainer)}>
-            {<Image source={image} alt={imageAlt} />}
+            <div className={classnames(styles.imageContainerInner)}>
+              <div onClick={imageClickFunc} className={classnames(styles.overlay)}>
+                <div className={classnames(styles.overlay_inner)}>
+                  <img src={maximize} alt={"maximize"} />
+                  <Text text={"Enlarge"} strong />
+                </div>
+              </div>
+              {
+                <Image
+                  source={image}
+                  alt={imageAlt}
+                />
+              }
+            </div>
             {imageDescription && <Text text={imageDescription} />}
           </div>
         )}
         {variant === "textAndImage" && (
           <div className={classnames(styles.textAndImageContainer)}>
             {<Text text={text} />}
-            {<Image source={image} alt={imageAlt} />}
+            <div className={classnames(styles.imageContainerInner)}>
+              <div onClick={imageClickFunc} className={classnames(styles.overlay)}>
+                <div className={classnames(styles.overlay_inner)}>
+                  <img src={maximize} alt={"maximize"} />
+                  <Text text={"Enlarge"} strong />
+                </div>
+              </div>
+              {
+                <Image
+                  source={image}
+                  alt={imageAlt}
+                />
+              }
+            </div>
           </div>
         )}
         {children}

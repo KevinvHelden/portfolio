@@ -143,3 +143,7 @@
   width: 100%;
   height: auto;
 }
+
+.content > * {
+  margin-bottom: 75px;
+}

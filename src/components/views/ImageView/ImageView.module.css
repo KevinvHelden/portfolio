@@ -1,0 +1,51 @@
+@import "../../../global/styling.css";
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+}
+
+.root.active {
+  display: flex;
+}
+
+.root .imageContainer {
+  width: 80vw;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.root .imageContainer img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.root .noImageContainer {
+    width: 80vw;
+    height: 80vh;
+    overflow: hidden;
+    background-color: var(--lifted1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.root .noImageContainer .noImage {
+  width: 100px;
+  height: auto;
+}

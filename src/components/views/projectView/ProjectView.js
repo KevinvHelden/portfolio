@@ -1,8 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
 import styles from "./ProjectView.module.css";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { Text, Icon, Paragraph, Image } from "../../elements";
+import { ImageView } from "../";
 import backArrow from "../../../images/icons/arrow-left.svg";
 
 class ProjectView extends PureComponent {
@@ -11,6 +12,8 @@ class ProjectView extends PureComponent {
     this.state = {
       isOpen: this.props.isOpen,
       variableHeaderVisible: false,
+      imageViewOpen: false,
+      imageViewData: { image: null, alt: null },
     };
     this.projectRef = React.createRef();
     this.titleRef = React.createRef();
@@ -95,85 +98,130 @@ class ProjectView extends PureComponent {
     }
   };
 
+  handleClose = () => {
+    const { closeProject } = this.props;
+    const { projectRef } = this;
+    const project = projectRef.current;
+    closeProject && closeProject();
+    setTimeout(() => {
+      project.scrollTop = 0;
+    }, 300);
+  };
+
+  openImageView = (image, alt) => {
+    console.log("open imageview");
+    this.setState({
+      imageViewData: {
+        image: image,
+        alt: alt,
+      },
+      imageViewOpen: true,
+    });
+  };
+
   /* 
   * Render
   ================================================================
   */
   render() {
-    const { data, closeProject } = this.props;
-    const { isOpen, variableHeaderVisible } = this.state;
-    const { projectRef, titleRef, bannerRef, variableHeaderRef } = this;
+    const { data } = this.props;
+    const {
+      isOpen,
+      variableHeaderVisible,
+      imageViewOpen,
+      imageViewData,
+    } = this.state;
+    const {
+      projectRef,
+      titleRef,
+      bannerRef,
+      variableHeaderRef,
+      handleClose,
+      openImageView,
+    } = this;
 
     return (
-      <div
-        ref={projectRef}
-        className={classnames(styles.root, { [styles.active]: isOpen })}
-      >
+      <Fragment>
         <div
-          ref={variableHeaderRef}
-          className={classnames(styles.variableHeader, {
-            [styles.visible]: variableHeaderVisible,
-          })}
+          ref={projectRef}
+          className={classnames(styles.root, { [styles.active]: isOpen })}
         >
           <div
-            className={classnames(styles.backContainer)}
-            onClick={closeProject}
+            ref={variableHeaderRef}
+            className={classnames(styles.variableHeader, {
+              [styles.visible]: variableHeaderVisible,
+            })}
           >
-            <img
-              className={classnames(styles.dismissButton)}
-              src={backArrow}
-              alt={"back button"}
-            />
-            <Text text={"Back"} strong />
+            <div
+              className={classnames(styles.backContainer)}
+              onClick={handleClose}
+            >
+              <img
+                className={classnames(styles.dismissButton)}
+                src={backArrow}
+                alt={"back button"}
+              />
+              <Text text={"Back"} strong />
+            </div>
+            <Text text={data.title} strong />
           </div>
-          <Text text={data.title} strong />
-        </div>
-        <div className={classnames(styles.frontpage)}>
-          <div className={classnames(styles.backgroundImage)}>
-            <img ref={bannerRef} src={data.background} alt={"background"} />
-            <div className={classnames(styles.backgroundFilter)} />
-          </div>
+          <div className={classnames(styles.frontpage)}>
+            <div className={classnames(styles.backgroundImage)}>
+              <img ref={bannerRef} src={data.background} alt={"background"} />
+              <div className={classnames(styles.backgroundFilter)} />
+            </div>
 
-          <div ref={titleRef} className={classnames(styles.projectTitle)}>
-            <div className={classnames(styles.projectTitleInner)}>
-              <Text variant={"h2"} text={data.subtitle} />
-              <Text variant={"h1"} text={data.title} extraLarge />
+            <div ref={titleRef} className={classnames(styles.projectTitle)}>
+              <div className={classnames(styles.projectTitleInner)}>
+                <Text variant={"h2"} text={data.subtitle} />
+                <Text variant={"h1"} text={data.title} extraLarge />
+              </div>
+            </div>
+
+            <div ref={this.scrollRef} className={classnames(styles.scroll)}>
+              <Icon icon={"mouse"} />
             </div>
           </div>
 
-          <div ref={this.scrollRef} className={classnames(styles.scroll)}>
-            <Icon icon={"mouse"} />
+          <div className={classnames(styles.content)}>
+            <Paragraph
+              title={"Intro"}
+              variant={"text"}
+              text={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              }
+            />
+            <Paragraph
+              variant={"textAndImage"}
+              imageClickFunc={() =>
+                openImageView(data.background, "Digitas banner")
+              }
+              text={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              }
+              image={""}
+              imageAlt={"Digitas banner"}
+            />
+
+            <Paragraph
+              variant={"image"}
+              imageClickFunc={() =>
+                openImageView(data.background, "Digitas banner")
+              }
+              image={""}
+              imageAlt={"Digitas banner"}
+              imageDescription={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              }
+            />
+            <Image
+              source={""}
+              alt={"Digitas banner"}
+            />
           </div>
         </div>
-
-        <div className={classnames(styles.content)}>
-          <Paragraph
-            title={"Intro"}
-            variant={"text"}
-            text={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            }
-          />
-          <Paragraph
-            variant={"textAndImage"}
-            text={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            }
-            image={""}
-            imageAlt={"Digitas banner"}
-          />
-
-          <Paragraph
-            variant={"image"}
-            image={""}
-            imageAlt={"Digitas banner"}
-            imageDescription={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            }
-          />
-          <Image source={""} alt={"Digitas banner"} />
-        </div>
-      </div>
+        <ImageView open={imageViewOpen} data={imageViewData} />
+      </Fragment>
     );
   }
 }
