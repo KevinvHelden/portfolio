@@ -1,15 +1,9 @@
 import React, { PureComponent } from "react";
-import styles from "./Home.module.css";
-import classnames from "classnames";
+import styles from './Home.module.scss';
+import classnames from 'classnames'
+import { Landing, Projects, Contact } from './sections';
 
-import { Landing, Projects, Contact } from "./sections";
-
-class Home extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+class Home extends PureComponent{
   render() {
     return (
       <main className={classnames(styles.root)}>

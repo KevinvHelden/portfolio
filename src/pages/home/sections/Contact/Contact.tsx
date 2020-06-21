@@ -5,12 +5,11 @@ import classnames from "classnames";
 
 import { EmailForm } from "../../../../components/templates";
 
-class Contact extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+type Props = {
+  anchor: string,
+}
 
+class Contact extends PureComponent <Props> {
   render() {
     const { anchor } = this.props;
     return (

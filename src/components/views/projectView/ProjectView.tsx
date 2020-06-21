@@ -1,60 +1,48 @@
 import React, { PureComponent, Fragment } from "react";
 import styles from "./ProjectView.module.css";
-import PropTypes from "prop-types";
 import classnames from "classnames";
 import { Text, Icon, Paragraph, Image } from "../../elements";
 import { ImageView } from "../";
 import backArrow from "../../../images/icons/arrow-left.svg";
 
-class ProjectView extends PureComponent {
-  constructor(props) {
+interface Props {
+  data: {
+    title: string,
+    subtitle: string,
+    background: string,
+  },
+  isOpen: boolean,
+  closeProject: () => void,
+}
+
+interface State {
+  isOpen: boolean,
+  variableHeaderVisible: boolean,
+  imageViewOpen: boolean,
+  imageViewData: object,
+}
+
+class ProjectView extends PureComponent<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      isOpen: this.props.isOpen,
+      isOpen: props.isOpen,
       variableHeaderVisible: false,
       imageViewOpen: false,
       imageViewData: { image: null, alt: null },
     };
-    this.projectRef = React.createRef();
-    this.titleRef = React.createRef();
-    this.bannerRef = React.createRef();
-    this.variableHeaderRef = React.createRef();
-    this.scrollRef = React.createRef();
   }
 
-  /* 
-  * PropTypes
-  ================================================================
-  */
-  static propTypes = {
-    /**
-     * The used in the projectView
-     */
-    data: PropTypes.object,
-    /**
-     * Determines if component is active or not
-     */
-    isOpen: PropTypes.bool.isRequired,
-    /**
-     * Closes the project
-     */
-    closeProject: PropTypes.func.isRequired,
-  };
+  private projectRef = React.createRef<HTMLDivElement>();
+  private titleRef = React.createRef<HTMLDivElement>();
+  private bannerRef = React.createRef<HTMLImageElement>();
+  private scrollRef = React.createRef<HTMLDivElement>();
 
-  static defaultProps = {
-    data: {},
-  };
-
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(props: Props) {
     return {
-      isOpen: nextProps.isOpen,
+      isOpen: props.isOpen,
     };
   }
-
-  /* 
-  * Mounting
-  ================================================================
-  */
 
   componentDidMount() {
     const project = this.projectRef.current;
@@ -66,19 +54,14 @@ class ProjectView extends PureComponent {
     project && project.removeEventListener("scroll", this.onScrollFunctions);
   }
 
-  /*
-  * Scroll function
-  ================================================================
-  */
   onScrollFunctions = () => {
-    const { projectRef, titleRef, bannerRef, scrollRef } = this;
-    const project = projectRef.current;
-    const title = titleRef.current;
-    const banner = bannerRef.current;
-    const scrollIcon = scrollRef.current;
-    const scrollTop = project.scrollTop / 1000;
+    const project = this.projectRef.current;
+    const title = this.titleRef.current;
+    const banner = this.bannerRef.current;
+    const scrollIcon = this.scrollRef.current;
+    const scrollTop = project && project.scrollTop / 1000;
 
-    if (scrollTop >= 0.34) {
+    if (scrollTop && scrollTop >= 0.34) {
       this.setState({ variableHeaderVisible: true });
     } else {
       this.setState({ variableHeaderVisible: false });
@@ -86,30 +69,28 @@ class ProjectView extends PureComponent {
 
     if (banner && title) {
       //make header enlarge while scrolling
-      if (scrollTop >= 0) {
+      if (scrollTop && scrollTop >= 0) {
         //image enlarges on scroll
         banner.style.transform =
           "translateY(-50%) scale(" + (scrollTop / 3 + 1) + ")";
         //become invisible on scroll
-        banner.style.opacity = 1 - scrollTop;
-        scrollIcon.style.opacity = 1 - scrollTop;
-        title.style.opacity = 1 - scrollTop;
+        banner.style.opacity = (1 - scrollTop).toString();
+        scrollIcon && (scrollIcon.style.opacity = (1 - scrollTop).toString());
+        title.style.opacity = (1 - scrollTop).toString();
       }
     }
   };
 
   handleClose = () => {
     const { closeProject } = this.props;
-    const { projectRef } = this;
-    const project = projectRef.current;
+    const project = this.projectRef.current;
     closeProject && closeProject();
     setTimeout(() => {
-      project.scrollTop = 0;
+      project && (project.scrollTop = 0);
     }, 300);
   };
 
-  openImageView = (image, alt) => {
-    console.log("open imageview");
+  openImageView = (image: string, alt: string) => {
     this.setState({
       imageViewData: {
         image: image,
@@ -119,10 +100,6 @@ class ProjectView extends PureComponent {
     });
   };
 
-  /* 
-  * Render
-  ================================================================
-  */
   render() {
     const { data } = this.props;
     const {
@@ -132,12 +109,12 @@ class ProjectView extends PureComponent {
       imageViewData,
     } = this.state;
     const {
+      handleClose,
+      openImageView,
       projectRef,
       titleRef,
       bannerRef,
-      variableHeaderRef,
-      handleClose,
-      openImageView,
+      scrollRef
     } = this;
 
     return (
@@ -147,7 +124,7 @@ class ProjectView extends PureComponent {
           className={classnames(styles.root, { [styles.active]: isOpen })}
         >
           <div
-            ref={variableHeaderRef}
+            id={"variableHeaderRef"}
             className={classnames(styles.variableHeader, {
               [styles.visible]: variableHeaderVisible,
             })}
@@ -178,7 +155,7 @@ class ProjectView extends PureComponent {
               </div>
             </div>
 
-            <div ref={this.scrollRef} className={classnames(styles.scroll)}>
+            <div ref={scrollRef} className={classnames(styles.scroll)}>
               <Icon icon={"mouse"} />
             </div>
           </div>

@@ -3,12 +3,11 @@ import styles from "./Landing.module.css";
 import { Text, Icon } from "../../../../components/elements";
 import classnames from "classnames";
 
-class Landing extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+type Props = {
+  anchor: string,
+}
 
+class Landing extends PureComponent <Props> {
   render() {
     const { anchor } = this.props;
     return (

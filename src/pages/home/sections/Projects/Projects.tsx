@@ -9,13 +9,20 @@ import digitasLarge from '../../../../images/projects/Large/digitasLarge.jpg';
 
 import cards from "./fixtures/cards";
 
-class Projects extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      projectIsOpen: false,
-    };
-  }
+interface Props {
+  anchor: string,
+}
+
+interface State {
+  projectIsOpen: boolean,
+}
+
+class Projects extends PureComponent<Props, State> {
+
+  state = {
+    projectIsOpen: false
+  };
+
 
   openProject = () => {
     this.setState({
