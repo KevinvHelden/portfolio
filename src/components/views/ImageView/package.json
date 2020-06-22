@@ -1,6 +1,6 @@
 {
     "name": "ImageView",
     "version": "0.0.1",
-    "main": "./ImageView.js",
+    "main": "./ImageView.tsx",
     "private": true
 }

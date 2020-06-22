@@ -1,31 +1,30 @@
 import React, { PureComponent } from "react";
-import styles from "./ImageView.module.css";
-import PropTypes from "prop-types";
+import styles from "./ImageView.module.scss";
 import classnames from "classnames";
 import noImage from "../../../images/icons/noImage.svg";
 
-class ImageView extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
+interface Props {
+  data: {
+    image: string,
+    alt: string,
+  },
+  open: boolean,
+}
 
-  /* 
-  * PropTypes
-  ================================================================
-  */
-  static propTypes = {
-    /**
-     * The data used to preview the image
-     */
-    data: PropTypes.object.isRequired,
-  };
+interface State {
+  open: boolean,
+}
 
-  static getDerivedStateFromProps(nextProps) {
+const intialState = Object.freeze({open: false,})
+
+class ImageView extends PureComponent <Props, State> {
+  
+  readonly state = intialState
+
+
+  static getDerivedStateFromProps(props: Props) {
     return {
-      open: nextProps.open,
+      open: props.open,
     };
   }
 

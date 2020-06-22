@@ -1,31 +1,34 @@
 import React, { PureComponent } from "react";
-import styles from "./Dropdown.module.css";
-import PropTypes from "prop-types";
+import styles from "./Dropdown.module.scss";
 import classnames from "classnames";
 
 import { Text, Icon } from "../../elements";
 
-class Dropdown extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
+interface Props {
+  title: string,
+  large: boolean,
+  content: string[],
+  clickFunc: () => void,
+}
 
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    large: PropTypes.bool,
-    content: PropTypes.array.isRequired,
-    clickFunc: PropTypes.func,
-  };
+interface State {
+  open: boolean,
+}
+
+const initialState = {
+  open: false,
+}
+
+class Dropdown extends PureComponent <Props, State> {
+
+  readonly state = initialState
 
   toggleDropdown = () => {
     const { open } = this.state;
     this.setState({ open: !open });
   };
 
-  lowerCaseNoSpaces = (value) => {
+  lowerCaseNoSpaces = (value: string) => {
     return value.toLowerCase().replace(/\s/g, "");
   };
 

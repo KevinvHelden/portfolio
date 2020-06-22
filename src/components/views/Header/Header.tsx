@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
-import styles from "./Header.module.css";
-import PropTypes from "prop-types";
+import styles from "./Header.module.scss";
 import classnames from "classnames";
 
 import { Text, Icon } from "../../elements";
@@ -8,76 +7,37 @@ import { Dropdown } from "../../views";
 
 import Logo from "../../../images/icons/logo_white.svg";
 
-class Header extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
+interface Props {
+  activePage: string,
+  alt: boolean,
+  navClickFunc: (ref: string) => void,
+  pageRefs: {
+    home: string,
+    projects: string,
+    contact: string,
+  },
+}
+
+interface State {
+  activePage: string,
+  activeOverlay: boolean,
+  alt: boolean,
+}
+
+const intialState = Object.freeze({ activePage: "", activeOverlay: false, alt: false, })
+
+class Header extends PureComponent<Props, State> {
+
+  readonly state = intialState;
+
+  private hamburgerRef = React.createRef<HTMLDivElement>();
+
+  static getDerivedStateFromProps(props: Props) {
+    return {
       activePage: props.activePage,
-      activeOverlay: false,
+      alt: props.alt
     };
-    this.homeRef = React.createRef();
-    this.projectRef = React.createRef();
-    this.contactRef = React.createRef();
-    this.hamburgerRef = React.createRef();
   }
-
-  static propTypes = {
-    activePage: PropTypes.string.isRequired,
-    alt: PropTypes.bool,
-  };
-
-  static getDerivedStateFromProps(nextProps) {
-    return { activePage: nextProps.activePage, alt: nextProps.alt };
-  }
-
-  componentDidMount() {
-    const { alt } = this.props;
-    !alt &&
-      this.homeRef.current.addEventListener("click", this.handleHomeClick);
-    !alt &&
-      this.projectRef.current.addEventListener(
-        "click",
-        this.handleProjectsClick
-      );
-    !alt &&
-      this.contactRef.current.addEventListener(
-        "click",
-        this.handleContactClick
-      );
-  }
-
-  componentWillUnmount() {
-    const { alt } = this.props;
-    !alt &&
-      this.homeRef.current.removeEventListener("click", this.handleHomeClick);
-    !alt &&
-      this.projectRef.current.removeEventListener(
-        "click",
-        this.handleProjectsClick
-      );
-    !alt &&
-      this.contactRef.current.removeEventListener(
-        "click",
-        this.handleContactClick
-      );
-  }
-
-  scrollFunc = (id) => {
-    const elmnt = document.getElementById(id);
-    elmnt.scrollIntoView({ block: "center" });
-  };
-
-  handleHomeClick = () => {
-    this.scrollFunc("#home");
-  };
-
-  handleProjectsClick = () => {
-    this.scrollFunc("#projects");
-  };
-
-  handleContactClick = () => {
-    this.scrollFunc("#contact");
-  };
 
   toggleHamburger = () => {
     const { activeOverlay } = this.state;
@@ -86,6 +46,7 @@ class Header extends PureComponent {
 
   render() {
     const { activePage, alt, activeOverlay } = this.state;
+    const { navClickFunc, pageRefs } = this.props;
     const { toggleHamburger } = this;
 
     return (
@@ -144,14 +105,14 @@ class Header extends PureComponent {
             </div>
           </div>
         ) : (
-          <div
-            className={classnames(styles.overlay, {
-              [styles.active]: activeOverlay,
-            })}
-          >
-            <Text text={"Normal overlay"} strong />
-          </div>
-        )}
+            <div
+              className={classnames(styles.overlay, {
+                [styles.active]: activeOverlay,
+              })}
+            >
+              <Text text={"Normal overlay"} strong />
+            </div>
+          )}
 
         <div className={classnames(styles.root)}>
           <div className={classnames(styles.side)}>
@@ -166,7 +127,7 @@ class Header extends PureComponent {
             <div className={classnames(styles.navigation)}>
               <div className={classnames(styles.navItems)}>
                 <div
-                  ref={this.homeRef}
+                  onClick={() => navClickFunc(pageRefs.home)}
                   className={classnames(styles.navItem, {
                     [styles.active]: activePage === "home",
                   })}
@@ -177,7 +138,7 @@ class Header extends PureComponent {
                   <Text text={"Home"} strong />
                 </div>
                 <div
-                  ref={this.projectRef}
+                  onClick={() => navClickFunc(pageRefs.projects)}
                   className={classnames(styles.navItem, {
                     [styles.active]: activePage === "projects",
                   })}
@@ -192,7 +153,7 @@ class Header extends PureComponent {
                   <Text text={"Projects"} strong />
                 </div>
                 <div
-                  ref={this.contactRef}
+                  onClick={() => navClickFunc(pageRefs.contact)}
                   className={classnames(styles.navItem, {
                     [styles.active]: activePage === "contact",
                   })}

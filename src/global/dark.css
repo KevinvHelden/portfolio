@@ -1,3 +1,5 @@
+@import './colours.css';
+
 :root {
     --styled-font-colour: var(--white);
     --styled-base: var(--black);

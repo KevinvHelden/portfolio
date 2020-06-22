@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import styles from "./Projects.module.css";
+import styles from "./Projects.module.scss";
 import { Text } from "../../../../components/elements";
 import classnames from "classnames";
 
@@ -11,17 +11,18 @@ import cards from "./fixtures/cards";
 
 interface Props {
   anchor: string,
+  reference: string,
 }
 
 interface State {
   projectIsOpen: boolean,
 }
 
+const intialState = Object.freeze({projectIsOpen: false,})
+
 class Projects extends PureComponent<Props, State> {
 
-  state = {
-    projectIsOpen: false
-  };
+  readonly state = intialState
 
 
   openProject = () => {
@@ -37,13 +38,13 @@ class Projects extends PureComponent<Props, State> {
   }
 
   render() {
-    const { anchor } = this.props;
+    const { anchor, reference } = this.props;
     const { openProject, closeProject } = this;
     const { projectIsOpen } = this.state;
     const projectData = { title: "3rd Year internship", subtitle: "Digitas", background: digitasLarge, content: "" };
 
     return (
-      <section id={anchor} className={classnames(styles.root)}>
+      <section ref={reference} id={anchor} className={classnames(styles.root)}>
         <div className={classnames(styles.title)}>
           <Text variant={"h2"} text={"Projects"} />
           <CardOverview cards={cards} cardFunc={openProject} />

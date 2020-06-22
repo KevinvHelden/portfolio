@@ -31,7 +31,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: var(--fast-transition);
-  z-index: 30;
+  z-index: 19;
 }
 
 .overlay:hover {

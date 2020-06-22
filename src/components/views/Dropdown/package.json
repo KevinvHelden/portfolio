@@ -1,6 +1,6 @@
 {
     "name": "Dropdown",
     "version": "0.0.1",
-    "main": "./Dropdown.js",
+    "main": "./Dropdown.tsx",
     "private": true
 }

@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
-import styles from "./ProjectView.module.css";
+import styles from "./ProjectView.module.scss";
 import classnames from "classnames";
 import { Text, Icon, Paragraph, Image } from "../../elements";
 import { ImageView } from "../";
@@ -19,19 +19,22 @@ interface State {
   isOpen: boolean,
   variableHeaderVisible: boolean,
   imageViewOpen: boolean,
-  imageViewData: object,
+  imageViewData: {
+    image: string,
+    alt: string
+  },
 }
 
+const intialState = Object.freeze({
+  isOpen: false,
+  variableHeaderVisible: false,
+  imageViewOpen: false,
+  imageViewData: { image: "", alt: "" }
+})
+
 class ProjectView extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isOpen: props.isOpen,
-      variableHeaderVisible: false,
-      imageViewOpen: false,
-      imageViewData: { image: null, alt: null },
-    };
-  }
+
+  readonly state = intialState
 
   private projectRef = React.createRef<HTMLDivElement>();
   private titleRef = React.createRef<HTMLDivElement>();
@@ -197,7 +200,7 @@ class ProjectView extends PureComponent<Props, State> {
             />
           </div>
         </div>
-        <ImageView open={imageViewOpen} data={imageViewData} />
+        <ImageView open={imageViewOpen} data={{ image: imageViewData.image, alt: imageViewData.alt }} />
       </Fragment>
     );
   }

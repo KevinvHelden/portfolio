@@ -3,13 +3,21 @@ import styles from './Home.module.scss';
 import classnames from 'classnames'
 import { Landing, Projects, Contact } from './sections';
 
-class Home extends PureComponent{
+interface Props {
+  pageRefs: {
+    home: string,
+    projects: string,
+    contact: string,
+  },
+}
+
+class Home extends PureComponent <Props>{
   render() {
     return (
       <main className={classnames(styles.root)}>
-        <Landing anchor={"#home"} />
-        <Projects anchor={"#projects"} />
-        <Contact anchor={"#contact"} />
+        <Landing reference={this.props.pageRefs.home} anchor={"#home"} />
+        <Projects reference={this.props.pageRefs.projects} anchor={"#projects"} />
+        <Contact reference={this.props.pageRefs.contact} anchor={"#contact"} />
       </main>
     );
   }

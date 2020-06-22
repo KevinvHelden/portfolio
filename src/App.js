@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from "react";
-import "./App.css";
+import "./App.module.scss";
 import { Header } from "./components/views";
 import { AfstudeerPortfolio, Home, NoMatch } from "./pages";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -11,6 +11,9 @@ class App extends PureComponent {
       activePage: "home",
       altHeader: false,
     };
+    this.homeRef = React.createRef();
+    this.projectsRef = React.createRef();
+    this.contactRef = React.createRef();
   }
 
   componentDidMount() {
@@ -44,25 +47,43 @@ class App extends PureComponent {
     this.setState({ altHeader: true });
   };
 
+  scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
   render() {
     const { activePage, altHeader } = this.state;
+    const { scrollToRef, homeRef, projectsRef, contactRef } = this;
+    const pageRefs = {
+      home: homeRef,
+      projects: projectsRef,
+      contact: contactRef,
+    };
+
     return (
       <div className="App">
         <BrowserRouter>
           <Fragment>
-            <Header activePage={activePage} alt={altHeader} />
+            <Header
+              pageRefs={pageRefs}
+              navClickFunc={scrollToRef}
+              activePage={activePage}
+              alt={altHeader}
+            />
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route
+                exact
+                path="/"
+                component={() => <Home pageRefs={pageRefs} />}
+              />
               <Route
                 exact
                 path="/afstudeerportfolio"
                 component={() => (
-                  <AfstudeerPortfolio
-                    setAltHeader={this.setAltHeader}
-                  />
+                  <AfstudeerPortfolio setAltHeader={this.setAltHeader} />
                 )}
               />
-              <Route component={() => <NoMatch setAltHeader={this.setAltHeader}/>} />
+              <Route
+                component={() => <NoMatch setAltHeader={this.setAltHeader} />}
+              />
             </Switch>
           </Fragment>
         </BrowserRouter>

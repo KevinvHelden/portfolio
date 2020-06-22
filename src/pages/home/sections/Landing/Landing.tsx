@@ -1,17 +1,18 @@
 import React, { PureComponent } from "react";
-import styles from "./Landing.module.css";
+import styles from "./Landing.module.scss";
 import { Text, Icon } from "../../../../components/elements";
 import classnames from "classnames";
 
 type Props = {
   anchor: string,
+  reference: string,
 }
 
 class Landing extends PureComponent <Props> {
   render() {
-    const { anchor } = this.props;
+    const { anchor, reference } = this.props;
     return (
-      <section id={anchor} className={classnames(styles.root)}>
+      <section ref={reference} id={anchor} className={classnames(styles.root)}>
         <div className={classnames(styles.title)}>
           <div className={classnames(styles.outerRing)}>
             <div className={classnames(styles.outerRingTwo)}>

@@ -1,7 +1,7 @@
 /** 
  * Views Components
  */
-export { default as Dropdown } from './Dropdown';
-export { default as Header } from './Header';
-export { default as ImageView } from './ImageView';
-export { default as ProjectView } from './projectView/ProjectView.tsx';
+export { default as Dropdown } from './Dropdown/Dropdown';
+export { default as Header } from './Header/Header';
+export { default as ImageView } from './ImageView/ImageView';
+export { default as ProjectView } from './projectView/ProjectView';

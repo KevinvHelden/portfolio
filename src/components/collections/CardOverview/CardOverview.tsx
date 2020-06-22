@@ -1,26 +1,19 @@
 import React, { PureComponent } from "react";
-import styles from "./CardOverview.module.css";
-import PropTypes from "prop-types";
+import styles from "./CardOverview.module.scss";
 import classnames from "classnames";
 
 import { Card } from "../../elements";
 
-class CardOverview extends PureComponent {
-  constructor(props) {
+interface Props {
+  cards: object[],
+  cardFunc: () => void,
+}
+
+class CardOverview extends PureComponent <Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {};
   }
-
-  static propTypes = {
-    /**
-     * The data shown in the card
-     */
-    cards: PropTypes.array,
-    /**
-     * The function passed to every card
-     */
-    cardFunc: PropTypes.func,
-  };
 
   formatCards = () => {
     const { cards, cardFunc } = this.props;
