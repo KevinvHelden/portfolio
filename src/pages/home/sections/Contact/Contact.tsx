@@ -10,7 +10,7 @@ type Props = {
   reference: string,
 }
 
-class Contact extends PureComponent <Props> {
+class Contact extends PureComponent<Props> {
   render() {
     const { anchor, reference } = this.props;
     return (

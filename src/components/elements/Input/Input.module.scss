@@ -11,6 +11,7 @@ select {
   font-size: var(--default-font-size-header6);
   width: 500px;
   background-color: var(--base);
+  color: var(--default-font-colour);
 }
 
 .root::placeholder {

@@ -1,4 +1,4 @@
 /** 
  * Template Components
  */
-export { default as EmailForm } from './EmailForm';
+export { default as EmailForm } from './EmailForm/EmailForm';

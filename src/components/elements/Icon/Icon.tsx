@@ -1,47 +1,30 @@
-import React, { PureComponent } from "react";
-import styles from "./Icon.module.css";
-import PropTypes from "prop-types";
+import React, { PureComponent, } from "react";
+import styles from "./Icon.module.scss";
 import classnames from "classnames";
 
 import icons from "./fixtures/icons";
 
-class Icon extends PureComponent {
-  constructor(props) {
+type Props = {
+  icon: string,
+  clickFunc: () => void | undefined,
+}
+
+
+class Icon extends PureComponent<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {};
   }
 
-  static propTypes = {
-    /**
-     * The text variant
-     */
-    icon: PropTypes.oneOf([
-      "mouse",
-      "home",
-      "homeDeselected",
-      "projects",
-      "projectsDeselected",
-      "mail",
-      "mailDeselected",
-      "linkedIn",
-      "hamburgerClosed",
-      "arrowRight",
-      "chevronDown",
-      "chevronUp",
-    ]).isRequired,
-    clickFunc: PropTypes.func,
-  };
-
-  // static defaultProps = {
-  //   variant: "p",
-  // };
+  static defaultProps = {
+    clickFunc: undefined,
+  }
 
   render() {
-    const { icon, reference, clickFunc } = this.props;
+    const { icon, clickFunc } = this.props;
     return (
       <img
-        ref={reference}
-        onClick={clickFunc}
+        onClick={clickFunc && clickFunc}
         className={classnames(styles.root, {
           [styles.vertical]:
             icon === "mouse" ||
@@ -63,7 +46,8 @@ class Icon extends PureComponent {
           (icon === "hamburgerClosed" && icons.hamburgerClosed) ||
           (icon === "arrowRight" && icons.arrowRight) ||
           (icon === "chevronDown" && icons.chevronDown) ||
-          (icon === "chevronUp" && icons.chevronUp)
+          (icon === "chevronUp" && icons.chevronUp) ||
+          undefined
         }
         alt={icon}
       />

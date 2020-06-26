@@ -1,38 +1,32 @@
 import React, { PureComponent } from "react";
-import styles from "./Card.module.css";
-import PropTypes from "prop-types";
+import styles from "./Card.module.scss";
 import classnames from "classnames";
 
 import { Text } from "../";
 
-class Card extends PureComponent {
-  constructor(props) {
+type Props = {
+  data: {
+    title: string,
+    subtitle: string,
+    image: {
+      src: string,
+      alt: string,
+    }
+  },
+  clickFunc: () => void,
+}
+
+class Card extends PureComponent <Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {};
-    this.cardRef = React.createRef();
   }
-
-  static propTypes = {
-    /**
-     * The data shown in the card
-     */
-    data: PropTypes.object,
-    /**
-     * The function called on click
-     */
-    clickFunc: PropTypes.func,
-  };
-
-  static defaultProps = {
-    data: {},
-  };
 
   render() {
     const { data, clickFunc } = this.props;
-    const { cardRef } = this;
 
     return (
-      <div onClick={clickFunc && clickFunc} ref={cardRef} className={classnames(styles.root)}>
+      <div onClick={clickFunc && clickFunc} className={classnames(styles.root)}>
         <div className={classnames(styles.imageContainer)}>
           <img
             className={classnames(styles.image)}

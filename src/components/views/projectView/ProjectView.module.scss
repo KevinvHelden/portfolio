@@ -75,7 +75,7 @@
 
 .frontpage {
   width: 100vw;
-  height: calc(100vh - 80px);
+  height: 600px;
   top: 0;
   left: 0;
 }
@@ -85,7 +85,7 @@
   left: 0;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: 680px;
   overflow: hidden;
 }
 
@@ -103,7 +103,7 @@
   left: 0;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: 680px;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -112,38 +112,18 @@
   left: 300px;
   top: 0;
   width: calc(80vw - 600px);
-  height: 100vh;
+  height: 680px;
   display: flex;
   flex-direction: row;
   align-items: center;
   word-break: normal;
 }
 
-.projectTitle h2 {
+.projectTitle h5 {
   color: var(--primary);
-}
-
-.scroll {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-}
-
-.scroll img {
-  margin: auto;
-  bottom: 80px;
-  position: absolute;
-  left: 0;
-  right: 0;
 }
 
 .content {
   width: 100%;
   height: auto;
-}
-
-.content > * {
-  margin-bottom: 75px;
 }

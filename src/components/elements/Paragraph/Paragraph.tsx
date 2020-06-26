@@ -1,68 +1,38 @@
 import React, { PureComponent } from "react";
-import styles from "./Paragraph.module.css";
-import PropTypes from "prop-types";
+import styles from "./Paragraph.module.scss";
 import classnames from "classnames";
 import { Text, Image } from "../";
 import maximize from "../../../images/icons/maximize.svg";
 
-class Paragraph extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+type Props = {
+  title?: string,
+  text?: string,
+  variant?: 'text' | 'image' | 'textAndImage' | 'textAndVideo',
+  image?: string,
+  imageAlt?: string | null,
+  imageClickFunc?: () => void,
+}
 
-  static propTypes = {
-    /**
-     * The children of the text
-     */
-    children: PropTypes.node,
-    /**
-     * The title value
-     */
-    title: PropTypes.string,
-    /**
-     * The way of presenting the children
-     */
-    variant: PropTypes.oneOf(["text", "image", "textAndImage", "textAndVideo"]),
-    /**
-     * The image is shown left instead of right
-     */
-    imageLeft: PropTypes.bool,
-    /**
-     * The image has a description below it
-     */
-    imageDescription: PropTypes.string,
-  };
-
-  static defaultProps = {
-    children: null,
-    title: null,
-    text: null,
-    type: "text",
-  };
-
+class Paragraph extends PureComponent <Props> {
   render() {
     const {
-      title,
-      children,
-      text,
-      variant,
-      image,
-      imageAlt,
-      imageLeft,
-      imageDescription,
-      imageClickFunc,
+      title = null,
+      text = "",
+      variant = 'text',
+      image = null,
+      imageAlt = null,
+      imageClickFunc = () => {},
     } = this.props;
 
     return (
       <section className={classnames(styles.root, title)}>
-        {title && <Text variant={"h2"} text={title} />}
+        {title && <Text variant={"h5"} text={title} />}
         {variant === "text" && (
           <div className={classnames(styles.textContainer)}>
             {<Text text={text} />}
           </div>
         )}
-        {variant === "image" && (
+        {variant === "image" && image && imageAlt && (
           <div className={classnames(styles.imageContainer)}>
             <div className={classnames(styles.imageContainerInner)}>
               <div onClick={imageClickFunc} className={classnames(styles.overlay)}>
@@ -78,10 +48,10 @@ class Paragraph extends PureComponent {
                 />
               }
             </div>
-            {imageDescription && <Text text={imageDescription} />}
+            {text && <Text text={text} />}
           </div>
         )}
-        {variant === "textAndImage" && (
+        {variant === "textAndImage" && image && imageAlt && (
           <div className={classnames(styles.textAndImageContainer)}>
             {<Text text={text} />}
             <div className={classnames(styles.imageContainerInner)}>
@@ -100,7 +70,6 @@ class Paragraph extends PureComponent {
             </div>
           </div>
         )}
-        {children}
       </section>
     );
   }

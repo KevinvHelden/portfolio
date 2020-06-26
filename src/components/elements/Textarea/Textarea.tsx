@@ -1,33 +1,30 @@
 import React, { PureComponent } from "react";
-import styles from "./Textarea.module.css";
-import PropTypes from "prop-types";
+import styles from "./Textarea.module.scss";
 import classnames from "classnames";
 
-class Textarea extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: "",
-    };
-  }
+type Props = {
+  placeholder: string,
+  saveToParent: (value: string) => void,
+}
 
-  static propTypes = {
-    /**
-     * The textarea placeholder
-     */
-    placeholder: PropTypes.string,
-    /**
-     * Saves the value to parent state
-     */
-    saveToParent: PropTypes.func,
-  };
+type State = {
+  value: string,
+}
+
+const initialState = {
+  value: "",
+}
+
+class Textarea extends PureComponent<Props, State> {
+
+  readonly state = initialState;
 
   static defaultProps = {
     placeholder: "Enter text here",
   };
 
-  handleChange = (event) => {
-    const {saveToParent} = this.props;
+  handleChange = (event: { target: HTMLTextAreaElement }) => {
+    const { saveToParent } = this.props;
     this.setState({ value: event.target.value });
     saveToParent && saveToParent(event.target.value);
   };

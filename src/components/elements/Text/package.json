@@ -1,6 +1,6 @@
 {
     "name": "Text",
     "version": "0.0.1",
-    "main": "./Text.js",
+    "main": "./Text.tsx",
     "private": true
 }

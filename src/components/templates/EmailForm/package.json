@@ -1,6 +1,6 @@
 {
     "name": "EmailForm",
     "version": "0.0.1",
-    "main": "./EmailForm.js",
+    "main": "./EmailForm.tsx",
     "private": true
 }

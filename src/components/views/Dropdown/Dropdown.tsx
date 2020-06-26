@@ -4,14 +4,14 @@ import classnames from "classnames";
 
 import { Text, Icon } from "../../elements";
 
-interface Props {
+type Props = {
   title: string,
   large: boolean,
   content: string[],
   clickFunc: () => void,
 }
 
-interface State {
+type State = {
   open: boolean,
 }
 

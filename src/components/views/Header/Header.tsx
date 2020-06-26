@@ -1,13 +1,14 @@
 import React, { PureComponent, Fragment } from "react";
 import styles from "./Header.module.scss";
 import classnames from "classnames";
+import RootRef from '@material-ui/core/RootRef';
 
 import { Text, Icon } from "../../elements";
 import { Dropdown } from "../../views";
 
 import Logo from "../../../images/icons/logo_white.svg";
 
-interface Props {
+type Props = {
   activePage: string,
   alt: boolean,
   navClickFunc: (ref: string) => void,
@@ -18,7 +19,7 @@ interface Props {
   },
 }
 
-interface State {
+type State = {
   activePage: string,
   activeOverlay: boolean,
   alt: boolean,
@@ -175,17 +176,19 @@ class Header extends PureComponent<Props, State> {
                     "https://www.linkedin.com/in/kevin-van-helden-671726141/"
                   }
                 >
-                  <Icon icon={"linkedIn"} alt={"LinkedIn"} />
+                  <Icon icon={"linkedIn"} />
                 </a>
               </div>
             )}
             {!alt && (
               <div className={styles.hamburger}>
-                <Icon
-                  reference={this.hamburgerRef}
-                  icon={activeOverlay ? "arrowRight" : "hamburgerClosed"}
-                  clickFunc={toggleHamburger}
-                />
+                <RootRef rootRef={this.hamburgerRef}>
+                  <Icon
+                    icon={activeOverlay ? "arrowRight" : "hamburgerClosed"}
+                    clickFunc={toggleHamburger}
+                  />
+                </RootRef>
+
               </div>
             )}
           </div>

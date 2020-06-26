@@ -1,40 +1,38 @@
-import React, { PureComponent } from "react";
-import styles from "./EmailForm.module.css";
-import PropTypes from "prop-types";
+import React, { PureComponent, FormEvent } from "react";
+import styles from "./EmailForm.module.scss";
 import classnames from "classnames";
 
 import { Input, Textarea } from "../../elements";
 
-class EmailForm extends PureComponent {
-  constructor(props) {
+type Props = {}
+
+type State = {
+  name: string,
+  email: string,
+  message: string,
+}
+
+const initialState = Object.freeze({
+  name: "",
+  email: "",
+  message: "",
+})
+
+class EmailForm extends PureComponent<Props, State> {
+  constructor(props: Props) {
     super(props);
-    this.state = {
-      name: "",
-      email: "",
-      message: "",
-    };
+    this.state = initialState;
   }
 
-  static propTypes = {
-    /**
-     * The text value
-     */
-    text: PropTypes.string,
-  };
-
-  static defaultProps = {
-    text: null,
-  };
-
-  saveName = (value) => {
+  saveName = (value: string) => {
     this.setState({ name: value });
   };
 
-  saveEmail = (value) => {
+  saveEmail = (value: string) => {
     this.setState({ email: value });
   };
 
-  saveMessage = (value) => {
+  saveMessage = (value: string) => {
     this.setState({ message: value });
   };
 
@@ -43,7 +41,7 @@ class EmailForm extends PureComponent {
     alert(`name: ${name}, email: ${email}, message: ${message}`);
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = (event: FormEvent) => {
     this.sendEmail();
     event.preventDefault();
   };
@@ -52,13 +50,13 @@ class EmailForm extends PureComponent {
     const { handleSubmit, saveName, saveEmail, saveMessage } = this;
     return (
       <form className={classnames(styles.root)} onSubmit={handleSubmit}>
-        <Input placeholder={"Your name"} saveToParent={saveName} />
-        <Input placeholder={"Your email address"} saveToParent={saveEmail} />
+        <Input type={"text"} placeholder={"Your name"} saveToParent={saveName} />
+        <Input type={"text"} placeholder={"Your email address"} saveToParent={saveEmail} />
         <Textarea
           placeholder={"Your comment/message"}
           saveToParent={saveMessage}
         />
-        <Input type={"submit"} placeholder={"Your email address"} />
+        <Input type={"submit"}/>
       </form>
     );
   }

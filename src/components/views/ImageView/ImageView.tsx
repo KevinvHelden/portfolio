@@ -3,7 +3,7 @@ import styles from "./ImageView.module.scss";
 import classnames from "classnames";
 import noImage from "../../../images/icons/noImage.svg";
 
-interface Props {
+type Props = {
   data: {
     image: string,
     alt: string,
@@ -11,7 +11,7 @@ interface Props {
   open: boolean,
 }
 
-interface State {
+type State = {
   open: boolean,
 }
 

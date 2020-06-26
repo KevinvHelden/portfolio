@@ -1,39 +1,22 @@
 import React, { PureComponent, Fragment } from "react";
-import styles from "./Button.module.css";
-import PropTypes from "prop-types";
+import styles from "./Button.module.scss";
 import classnames from "classnames";
 
 import { Text } from "../";
 
-class Button extends PureComponent {
-  constructor(props) {
+type Props = {
+  text: string,
+  variant: string,
+  clickFunc: () => void,
+  link: string,
+  disabled: boolean,
+}
+
+class Button extends PureComponent <Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {};
-    this.buttonRef = React.createRef();
   }
-
-  static propTypes = {
-    /**
-     * The text value
-     */
-    text: PropTypes.string,
-    /**
-     * The button variant
-     */
-    variant: PropTypes.oneOf(["primary", "secondary", "ghost"]),
-    /**
-     * The onclick function of the button
-     */
-    onClickFunc: PropTypes.func,
-    /**
-     * The string for a link on the button
-     */
-    link: PropTypes.string,
-    /**
-     * Wether the button is disabled
-     */
-    disabled: PropTypes.bool,
-  };
 
   static defaultProps = {
     text: null,
@@ -56,7 +39,6 @@ class Button extends PureComponent {
                 { [styles.secondary]: variant === "secondary" },
                 { [styles.ghost]: variant === "ghost" }
               )}
-              ref={this.buttonRef}
               {...(disabled && disabled)}
             >
               <Text text={text} strong />
@@ -72,7 +54,6 @@ class Button extends PureComponent {
               { [styles.secondary]: variant === "secondary" },
               { [styles.ghost]: variant === "ghost" }
             )}
-            ref={this.buttonRef}
             {...(disabled && disabled)}
           >
             <Text text={text} strong />

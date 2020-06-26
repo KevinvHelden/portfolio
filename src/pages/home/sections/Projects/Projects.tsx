@@ -9,12 +9,12 @@ import digitasLarge from '../../../../images/projects/Large/digitasLarge.jpg';
 
 import cards from "./fixtures/cards";
 
-interface Props {
+type Props = {
   anchor: string,
   reference: string,
 }
 
-interface State {
+type State = {
   projectIsOpen: boolean,
 }
 

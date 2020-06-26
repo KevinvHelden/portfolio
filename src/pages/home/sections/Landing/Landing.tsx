@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import styles from "./Landing.module.scss";
-import { Text, Icon } from "../../../../components/elements";
+import { Text } from "../../../../components/elements";
 import classnames from "classnames";
 
 type Props = {
@@ -33,9 +33,6 @@ class Landing extends PureComponent <Props> {
               "Welcome to my portfolio, I’m a webdeveloper with a background in UX/UI design"
             }
           />
-        </div>
-        <div className={classnames(styles.scroll)}>
-          <Icon icon={"mouse"} />
         </div>
       </section>
     );

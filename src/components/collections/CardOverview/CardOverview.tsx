@@ -5,11 +5,18 @@ import classnames from "classnames";
 import { Card } from "../../elements";
 
 interface Props {
-  cards: object[],
+  cards: {
+    title: string,
+    subtitle: string,
+    image: {
+      src: string,
+      alt: string,
+    }
+  }[],
   cardFunc: () => void,
 }
 
-class CardOverview extends PureComponent <Props> {
+class CardOverview extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.state = {};
@@ -19,7 +26,17 @@ class CardOverview extends PureComponent <Props> {
     const { cards, cardFunc } = this.props;
 
     return cards.map((card, index) => (
-      <Card data={card} clickFunc={cardFunc} key={index} />
+      <Card
+        data={{
+          title: card.title,
+          subtitle: card.subtitle,
+          image: {
+            src: card.image.src,
+            alt: card.image.alt
+          }
+        }
+        }
+        clickFunc={cardFunc} key={index} />
     ));
   };
 

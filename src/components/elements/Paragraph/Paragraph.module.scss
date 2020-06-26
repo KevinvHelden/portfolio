@@ -1,0 +1,99 @@
+@import "../../../global/styling.css";
+
+.root {
+  margin: auto 0 50px 0;
+  color: var(--default-font-colour);
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  padding: 50px 300px 0px;
+
+  .textContainer {
+    width: 75%;
+    height: auto;
+  }
+
+  .textAndImageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    > * {
+      width: calc(50% - 25px);
+      max-height: 360px;
+    }
+
+    .imageContainerInner {
+      position: relative;
+      max-height: 360px;
+
+      > * {
+        max-height: inherit;
+      }
+    }
+  }
+
+  .imageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > p {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    > * {
+      width: 650px;
+      max-height: 360px;
+      border-radius: 5px;
+    }
+
+    .imageContainerInner {
+      position: relative;
+      max-height: 360px;
+
+      > * {
+        max-height: inherit;
+      }
+    }
+  }
+
+  .overlay {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: var(--fast-transition);
+    z-index: 19;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .overlay_inner {
+      display: flex;
+      flex-direction: row;
+
+      img {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+}
+
+@media screen and (min-width: 992px) {
+}

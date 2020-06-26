@@ -1,6 +1,6 @@
 {
     "name": "Input",
     "version": "0.0.1",
-    "main": "./Input.js",
+    "main": "./Input.tsx",
     "private": true
 }

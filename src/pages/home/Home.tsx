@@ -3,7 +3,7 @@ import styles from './Home.module.scss';
 import classnames from 'classnames'
 import { Landing, Projects, Contact } from './sections';
 
-interface Props {
+type Props = {
   pageRefs: {
     home: string,
     projects: string,

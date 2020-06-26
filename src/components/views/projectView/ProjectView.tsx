@@ -1,11 +1,11 @@
 import React, { PureComponent, Fragment } from "react";
 import styles from "./ProjectView.module.scss";
 import classnames from "classnames";
-import { Text, Icon, Paragraph, Image } from "../../elements";
+import { Text, Paragraph, Image } from "../../elements";
 import { ImageView } from "../";
 import backArrow from "../../../images/icons/arrow-left.svg";
 
-interface Props {
+type Props = {
   data: {
     title: string,
     subtitle: string,
@@ -15,7 +15,7 @@ interface Props {
   closeProject: () => void,
 }
 
-interface State {
+type State = {
   isOpen: boolean,
   variableHeaderVisible: boolean,
   imageViewOpen: boolean,
@@ -39,7 +39,6 @@ class ProjectView extends PureComponent<Props, State> {
   private projectRef = React.createRef<HTMLDivElement>();
   private titleRef = React.createRef<HTMLDivElement>();
   private bannerRef = React.createRef<HTMLImageElement>();
-  private scrollRef = React.createRef<HTMLDivElement>();
 
   static getDerivedStateFromProps(props: Props) {
     return {
@@ -61,7 +60,6 @@ class ProjectView extends PureComponent<Props, State> {
     const project = this.projectRef.current;
     const title = this.titleRef.current;
     const banner = this.bannerRef.current;
-    const scrollIcon = this.scrollRef.current;
     const scrollTop = project && project.scrollTop / 1000;
 
     if (scrollTop && scrollTop >= 0.34) {
@@ -78,7 +76,6 @@ class ProjectView extends PureComponent<Props, State> {
           "translateY(-50%) scale(" + (scrollTop / 3 + 1) + ")";
         //become invisible on scroll
         banner.style.opacity = (1 - scrollTop).toString();
-        scrollIcon && (scrollIcon.style.opacity = (1 - scrollTop).toString());
         title.style.opacity = (1 - scrollTop).toString();
       }
     }
@@ -117,7 +114,6 @@ class ProjectView extends PureComponent<Props, State> {
       projectRef,
       titleRef,
       bannerRef,
-      scrollRef
     } = this;
 
     return (
@@ -153,13 +149,9 @@ class ProjectView extends PureComponent<Props, State> {
 
             <div ref={titleRef} className={classnames(styles.projectTitle)}>
               <div className={classnames(styles.projectTitleInner)}>
-                <Text variant={"h2"} text={data.subtitle} />
+                <Text variant={"h5"} text={data.subtitle} />
                 <Text variant={"h1"} text={data.title} extraLarge />
               </div>
-            </div>
-
-            <div ref={scrollRef} className={classnames(styles.scroll)}>
-              <Icon icon={"mouse"} />
             </div>
           </div>
 
@@ -179,7 +171,7 @@ class ProjectView extends PureComponent<Props, State> {
               text={
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
               }
-              image={""}
+              image={data.background}
               imageAlt={"Digitas banner"}
             />
 
@@ -188,14 +180,14 @@ class ProjectView extends PureComponent<Props, State> {
               imageClickFunc={() =>
                 openImageView(data.background, "Digitas banner")
               }
-              image={""}
+              image={data.background}
               imageAlt={"Digitas banner"}
-              imageDescription={
+              text={
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
               }
             />
             <Image
-              source={""}
+              source={data.background}
               alt={"Digitas banner"}
             />
           </div>
