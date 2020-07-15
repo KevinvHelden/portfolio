@@ -1,0 +1,6 @@
+{
+    "name": "Project",
+    "version": "0.0.1",
+    "main": "./Project.tsx",
+    "private": true
+}

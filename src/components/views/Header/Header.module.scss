@@ -77,16 +77,24 @@
   margin-right: 50px;
 }
 
-.root .navigation .navItems .navItem:hover {
+.root .navigation .navItems .navItem p:hover {
   cursor: pointer;
 }
 
 .root .navigation .navItems .navItem p {
-  color: var(--lifted3);
+  color: var(--default-font-colour);
 }
 
 .root .navigation .navItems .navItem.active p {
-  color: var(--default-font-colour);
+  color: var(--primary);
+}
+
+.root .navigation .navItems .navItem.active p:hover {
+  color: var(--primary);
+}
+
+.root .navigation .navItems .navItem p:hover {
+  color: var(--linkHover);
 }
 
 .root .navigation .navItems .navItem > :first-child {

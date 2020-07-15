@@ -1,13 +1,12 @@
 import React, { PureComponent } from "react";
 import styles from "./Projects.module.scss";
-import { Text } from "../../../../components/elements";
 import classnames from "classnames";
 
-import { CardOverview } from "../../../../components/collections";
+import { ProjectOverview } from "../../../../components/collections";
 import { ProjectView } from "../../../../components/views";
 import digitasLarge from '../../../../images/projects/Large/digitasLarge.jpg';
 
-import cards from "./fixtures/cards";
+import projects from "./fixtures/projects";
 
 type Props = {
   anchor: string,
@@ -18,7 +17,7 @@ type State = {
   projectIsOpen: boolean,
 }
 
-const intialState = Object.freeze({projectIsOpen: false,})
+const intialState = Object.freeze({ projectIsOpen: false, })
 
 class Projects extends PureComponent<Props, State> {
 
@@ -45,11 +44,8 @@ class Projects extends PureComponent<Props, State> {
 
     return (
       <section ref={reference} id={anchor} className={classnames(styles.root)}>
-        <div className={classnames(styles.title)}>
-          <Text variant={"h2"} text={"Projects"} />
-          <CardOverview cards={cards} cardFunc={openProject} />
-          <ProjectView data={projectData} isOpen={projectIsOpen} closeProject={closeProject} />
-        </div>
+        <ProjectOverview projects={projects} projectFunc={openProject} />
+        <ProjectView data={projectData} isOpen={projectIsOpen} closeProject={closeProject} />
       </section>
     );
   }

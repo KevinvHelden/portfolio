@@ -8,12 +8,23 @@ type Props = {
   reference: string,
 }
 
-class Landing extends PureComponent <Props> {
+class Landing extends PureComponent<Props> {
   render() {
     const { anchor, reference } = this.props;
     return (
       <section ref={reference} id={anchor} className={classnames(styles.root)}>
         <div className={classnames(styles.title)}>
+          <div className={classnames(styles.textInner)}>
+            <Text variant={"h1"} text={"Kevin"} extraLarge />
+            <Text variant={"h1"} text={"van Helden"} extraLarge />
+            <Text
+              variant={"p"}
+              strong
+              text={
+                "Welcome to my portfolio, I’m a webdeveloper with a background in UX/UI design"
+              }
+            />
+          </div>
           <div className={classnames(styles.outerRing)}>
             <div className={classnames(styles.outerRingTwo)}>
               <div className={classnames(styles.innerRingTwo)}>
@@ -23,16 +34,6 @@ class Landing extends PureComponent <Props> {
               </div>
             </div>
           </div>
-
-          <Text variant={"h1"} text={"Kevin"} extraLarge />
-          <Text variant={"h1"} text={"van Helden"} extraLarge />
-          <Text
-            variant={"p"}
-            strong
-            text={
-              "Welcome to my portfolio, I’m a webdeveloper with a background in UX/UI design"
-            }
-          />
         </div>
       </section>
     );

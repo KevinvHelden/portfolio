@@ -30,6 +30,8 @@
     .imageContainerInner {
       position: relative;
       max-height: 360px;
+      border-radius: 5px;
+      overflow: hidden;
 
       > * {
         max-height: inherit;
@@ -56,7 +58,9 @@
 
     .imageContainerInner {
       position: relative;
+      border-radius: 5px;
       max-height: 360px;
+      overflow: hidden;
 
       > * {
         max-height: inherit;

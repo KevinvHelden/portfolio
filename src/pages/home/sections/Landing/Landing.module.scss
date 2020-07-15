@@ -2,88 +2,95 @@
 
 :root {
   --mobile: var(--breakpoint-mobile);
-  --outerRingDimension: 266px;
+  --outerRingDimension: 450px;
 }
 
 .root {
   flex-direction: column;
-  text-align: center;
+  text-align: left;
+  align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
   display: flex;
   padding: 80px 300px 0px;
-}
 
-.root .title {
-  margin: auto;
-}
+  .title {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
 
-.root .title h1 {
-  z-index: 2;
-}
+    h1 {
+      z-index: 2;
+    }
 
-.root .title p {
-  color: var(--grey2);
-}
+    p {
+      color: var(--lifted3);
+    }
 
-.root .outerRing {
-  width: var(--outerRingDimension);
-  height: var(--outerRingDimension);
-  border: 1px var(--lifted1) solid;
-  display: flex;
-  border-radius: 50%;
-  position: absolute;
-  right: 57%;
-  margin: -100px auto;
-  z-index: -1;
-}
+    .textInner {
+      display: flex;
+      flex-direction: column;
+    }
 
-.root .outerRingTwo {
-  width: calc(var(--outerRingDimension) * 0.9);
-  height: calc(var(--outerRingDimension) * 0.9);
-  border: 1px var(--lifted2) solid;
-  margin: auto;
-  display: flex;
-  border-radius: 50%;
-}
+    .outerRing {
+      width: var(--outerRingDimension);
+      height: var(--outerRingDimension);
+      border: 1px var(--lifted1) solid;
+      margin-left: -175px;
+      display: flex;
+      border-radius: 50%;
+      right: 57%;
+      z-index: -1;
 
-.root .innerRingTwo {
-  width: calc(var(--outerRingDimension) * 0.8);
-  height: calc(var(--outerRingDimension) * 0.8);
-  border: 1px var(--lifted3) solid;
-  margin: auto;
-  display: flex;
-  border-radius: 50%;
-}
+      .outerRingTwo {
+        width: calc(var(--outerRingDimension) * 0.9);
+        height: calc(var(--outerRingDimension) * 0.9);
+        border: 1px var(--lifted2) solid;
+        margin: auto;
+        display: flex;
+        border-radius: 50%;
 
-.root .innerRing {
-  width: calc(var(--outerRingDimension) * 0.7);
-  height: calc(var(--outerRingDimension) * 0.7);
-  border: 1px var(--lifted4) solid;
-  margin: auto;
-  display: flex;
-  border-radius: 50%;
-}
+        .innerRingTwo {
+          width: calc(var(--outerRingDimension) * 0.8);
+          height: calc(var(--outerRingDimension) * 0.8);
+          border: 1px var(--lifted3) solid;
+          margin: auto;
+          display: flex;
+          border-radius: 50%;
 
-.root .innerRing .image {
-  width: calc(var(--outerRingDimension) * 0.6);
-  height: calc(var(--outerRingDimension) * 0.6);
-  margin: auto;
-  display: flex;
-  border-radius: 50%;
-  background-image: url("../../../../images/profilepicture.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
+          .innerRing {
+            width: calc(var(--outerRingDimension) * 0.7);
+            height: calc(var(--outerRingDimension) * 0.7);
+            border: 1px var(--lifted4) solid;
+            margin: auto;
+            display: flex;
+            border-radius: 50%;
 
-.root .scroll {
-  position: absolute;
-  bottom: 100px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+            .image {
+              width: calc(var(--outerRingDimension) * 0.6);
+              height: calc(var(--outerRingDimension) * 0.6);
+              margin: auto;
+              display: flex;
+              border-radius: 50%;
+              background-image: url("../../../../images/profilepicture.jpg");
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+            }
+          }
+        }
+      }
+    }
+
+    .scroll {
+      position: absolute;
+      bottom: 100px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  }
 }
 
 @media only screen and (min-width: 768px) {

@@ -133,9 +133,6 @@ class Header extends PureComponent<Props, State> {
                     [styles.active]: activePage === "home",
                   })}
                 >
-                  <Icon
-                    icon={activePage === "home" ? "home" : "homeDeselected"}
-                  />
                   <Text text={"Home"} strong />
                 </div>
                 <div
@@ -144,13 +141,6 @@ class Header extends PureComponent<Props, State> {
                     [styles.active]: activePage === "projects",
                   })}
                 >
-                  <Icon
-                    icon={
-                      activePage === "projects"
-                        ? "projects"
-                        : "projectsDeselected"
-                    }
-                  />
                   <Text text={"Projects"} strong />
                 </div>
                 <div
@@ -159,9 +149,6 @@ class Header extends PureComponent<Props, State> {
                     [styles.active]: activePage === "contact",
                   })}
                 >
-                  <Icon
-                    icon={activePage === "contact" ? "mail" : "mailDeselected"}
-                  />
                   <Text text={"Contact"} strong />
                 </div>
               </div>

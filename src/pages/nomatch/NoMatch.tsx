@@ -1,11 +1,14 @@
 import React, { PureComponent } from "react";
-import styles from "./NoMatch.module.css";
+import styles from "./NoMatch.module.scss";
 import classnames from "classnames";
-
 import { Text } from "../../components/elements";
 
-class NoMatch extends PureComponent {
-  constructor(props) {
+type Props = {
+  setAltHeader: () => void,
+}
+
+class NoMatch extends PureComponent <Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {};
   }

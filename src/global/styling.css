@@ -8,9 +8,11 @@
     * Colors
     ================================================================
     */
-    --primary: var(--styled-orange);
+    --primary: var(--green);
+    --lightPrimary: var(--lightGreen);
     --secondary: var(--white);
     --link: var(--primary);
+    --linkHover: var(--lightPrimary);
     --default-font-colour: var(--styled-font-colour);
     --base: var(--styled-base);
     --lifted5: var(--styled-lifted5);

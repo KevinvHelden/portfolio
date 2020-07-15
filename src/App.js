@@ -25,20 +25,23 @@ class App extends PureComponent {
   }
 
   checkPage = () => {
+    const homePosition = this.homeRef.current.offsetTop;
+    const projectsPosition = this.projectsRef.current.offsetTop;
+    const contactPosition = this.contactRef.current.offsetTop;
     const yIndex = window.scrollY;
     const windowHeight = window.innerHeight;
     const page = this.state.activePage;
-    if (yIndex <= windowHeight - 1 && page !== "home") {
+    if (yIndex < projectsPosition && page !== "home") {
       this.setState({ activePage: "home" });
     }
     if (
-      yIndex >= windowHeight &&
-      yIndex < windowHeight * 2 &&
+      yIndex >= projectsPosition &&
+      yIndex < contactPosition &&
       page !== "projects"
     ) {
       this.setState({ activePage: "projects" });
     }
-    if (yIndex >= windowHeight * 2 && page !== "contact") {
+    if (yIndex >= contactPosition && page !== "contact") {
       this.setState({ activePage: "contact" });
     }
   };

@@ -4,11 +4,12 @@
 .root[type="text"],
 select {
   outline: none;
-  border: none;
-  border-bottom: 1px var(--lifted3) solid;
+  border: 1px var(--lifted2) solid;
   height: 50px;
-  font-family: var(--default-font-paragraph-strong);
-  font-size: var(--default-font-size-header6);
+  border-radius: 5px;
+  padding: 0 25px;
+  font-family: var(--default-font-paragraph);
+  font-size: var(--default-font-size-paragraph);
   width: 500px;
   background-color: var(--base);
   color: var(--default-font-colour);
@@ -21,7 +22,7 @@ select {
 .root[type="text"]:not(:placeholder-shown),
 select:not(:placeholder-shown) {
   color: var(--default-font-colour);
-  border-bottom: 1px var(--default-font-colour) solid;
+  border: 1px var(--lifted4) solid;
 }
 
 /*Submit Button*/
@@ -29,12 +30,13 @@ select:not(:placeholder-shown) {
   background-color: var(--primary);
   border: none;
   outline: none;
+  border-radius: 5px;
   color: var(--white);
   font-family: var(--default-font-paragraph-strong);
-  font-size: var(--default-font-size-header6);
+  font-size: var(--default-font-size-paragraph);
   height: 50px;
   width: fit-content;
-  min-width: 200px;
+  min-width: 180px;
   padding: 0 50px;
   align-items: center;
 }

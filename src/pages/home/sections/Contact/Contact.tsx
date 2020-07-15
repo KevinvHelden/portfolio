@@ -16,7 +16,7 @@ class Contact extends PureComponent<Props> {
     return (
       <section ref={reference} id={anchor} className={classnames(styles.root)}>
         <div className={classnames(styles.title)}>
-          <Text variant={"h2"} text={"Contact"} />
+          <Text variant={"h2"} text={"Let's get in touch!"} />
           <EmailForm />
         </div>
       </section>

@@ -34,24 +34,23 @@
   position: sticky;
   display: flex;
   align-items: center;
-  background-color: rgba(var(--grey6RGB), 0.8);
   transition: var(--default-transition);
   top: 0;
 }
 
 .variableHeader p {
   margin: 0 auto;
-  display: none;
+  opacity: 0;
+  transition: var(--default-transition);
+  color: var(--primary);
 }
 
 .variableHeader.visible {
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
+  background-color: var(--base);
 }
 
 .variableHeader.visible p{
-  display: block;
+  opacity: 1;
 }
 
 .backContainer {
@@ -60,6 +59,11 @@
   align-items: center;
   cursor: pointer;
   z-index: 31;
+}
+
+.backContainer p {
+  opacity: 1;
+  color: var(--default-font-colour);
 }
 
 .dismissButton {
@@ -104,18 +108,18 @@
   top: 0;
   width: 100vw;
   height: 680px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(rgba(0, 11, 26, 0) 0%, rgba(0, 11, 26, 0.5) 45%, rgba(0, 11, 26, 1) 100%);
 }
 
 .projectTitle {
   position: absolute;
   left: 300px;
   top: 0;
-  width: calc(80vw - 600px);
+  width: calc(100vw - 600px);
   height: 680px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   word-break: normal;
 }
 

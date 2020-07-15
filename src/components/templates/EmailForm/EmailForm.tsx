@@ -53,7 +53,7 @@ class EmailForm extends PureComponent<Props, State> {
         <Input type={"text"} placeholder={"Your name"} saveToParent={saveName} />
         <Input type={"text"} placeholder={"Your email address"} saveToParent={saveEmail} />
         <Textarea
-          placeholder={"Your comment/message"}
+          placeholder={"Your question/message"}
           saveToParent={saveMessage}
         />
         <Input type={"submit"}/>
