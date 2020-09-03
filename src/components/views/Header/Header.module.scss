@@ -11,6 +11,101 @@
   display: flex;
   justify-content: space-between;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
+  padding: 0 25px;
+
+  .social {
+    display: none;
+    width: fit-content;
+    flex-direction: row;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .hamburger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .side {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .navigation {
+    width: 100%;
+    display: none;
+
+    .navItems {
+      display: flex;
+      width: fit-content;
+      height: 100%;
+      margin: auto;
+
+      &:hover {
+        color: var(--grey1) !important;
+      }
+
+      .navItem {
+        margin: auto 0;
+        display: flex;
+        margin-right: 50px;
+
+        p {
+          color: var(--default-font-colour);
+
+          &:hover {
+            cursor: pointer;
+            color: var(--linkHover);
+          }
+        }
+
+        > :first-child {
+          margin-right: 10px;
+        }
+
+        > :last-child {
+          margin-right: 0px;
+        }
+      }
+
+      .navItem.active {
+        p {
+          color: var(--primary);
+          &:hover {
+            color: var(--primary);
+          }
+        }
+      }
+    }
+  }
 }
 
 .overlay {
@@ -18,124 +113,50 @@
   min-height: 100vh;
   height: 500px;
   position: fixed;
-  background-color: var(--white);
+  background-color: var(--base);
   z-index: 14;
   display: none;
   padding: 130px 300px 0;
   justify-content: center;
   overflow-y: scroll;
   overflow: auto;
+
+  .overlayInner {
+    height: auto;
+    max-width: 100%;
+
+    > * {
+      margin-bottom: 45px;
+    }
+  }
 }
 
 .overlay.active {
   display: flex;
 }
 
-.overlayInner {
-  height: auto;
-  max-width: 100%;
-}
+@media only screen and (min-width: 768px) {
+  .root {
+    padding: 0 50px;
 
-.overlayInner > * {
-  margin-bottom: 45px;
-}
+    .social {
+      display: flex;
+    }
 
-.root .logo {
-  height: 100%;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .hamburger {
+      display: none;
+    }
 
-.root .logo img {
-  margin: auto;
-}
-
-.root .side {
-  width: 300px;
-}
-
-.root .navigation {
-  width: 100%;
-}
-
-.root .navigation .navItems {
-  display: flex;
-  width: fit-content;
-  height: 100%;
-  margin: auto;
-}
-
-.root .navigation .navItems:hover {
-  color: var(--grey1) !important;
-}
-
-.root .navigation .navItems .navItem {
-  margin: auto 0;
-  display: flex;
-  margin-right: 50px;
-}
-
-.root .navigation .navItems .navItem p:hover {
-  cursor: pointer;
-}
-
-.root .navigation .navItems .navItem p {
-  color: var(--default-font-colour);
-}
-
-.root .navigation .navItems .navItem.active p {
-  color: var(--primary);
-}
-
-.root .navigation .navItems .navItem.active p:hover {
-  color: var(--primary);
-}
-
-.root .navigation .navItems .navItem p:hover {
-  color: var(--linkHover);
-}
-
-.root .navigation .navItems .navItem > :first-child {
-  margin-right: 10px;
-}
-
-.root .navigation .navItems .navItem > :last-child {
-  margin-right: 0px;
-}
-
-.root .social {
-  display: none;
-  width: fit-content;
-  flex-direction: row;
-  margin: auto;
-  justify-content: center;
-  align-items: center;
-}
-
-.root .hamburger {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.root .hamburger:hover {
-  cursor: pointer;
-}
-
-.root .social img:hover {
-  cursor: pointer;
+    .navigation {
+      display: flex;
+    }
+  }
 }
 
 @media only screen and (min-width: 1200px) {
-  .root .social {
-    display: flex;
-  }
-
-  .root .hamburger {
-    display: none;
+  .root {
+    .side {
+      width: 300px;
+    }
   }
 }

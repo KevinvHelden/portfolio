@@ -21,8 +21,8 @@ class NoMatch extends PureComponent <Props> {
     return (
       <main className={classnames(styles.root)}>
         <Text variant={"h1"} text={"404"} extraLarge />
-        <Text variant={"h2"} text={"I’m sorry, I couldn’t find your page."} />
-        <Text variant={"h2"} text={"This link will take you home."} link={"/"} />
+        <Text variant={"p"} text={"I’m sorry, I couldn’t find your page."} />
+        <Text variant={"p"} text={"This link will take you home."} link={"/"} />
       </main>
     );
   }

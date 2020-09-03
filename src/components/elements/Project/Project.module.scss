@@ -5,13 +5,14 @@
   height: fit-content;
   align-items: center;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
 
   .title {
     position: relative;
     margin: 0 50px 0 0;
 
-    h5 {
+    > :first-child {
       color: var(--lifted3);
       margin-bottom: 15px;
     }
@@ -28,18 +29,18 @@
         filter: brightness(120%);
       }
     }
-
   }
 
   .imageView {
     height: 350px;
-    width: 550px;
+    width: 100%;
     display: block;
 
     .imageContainer {
       position: relative;
       overflow: hidden;
       width: 500px;
+      max-width: calc(100% - 50px);
       height: 300px;
       border-radius: 5px;
       display: flex;
@@ -49,14 +50,17 @@
 
       img {
         min-height: 100%;
-        width: 100%;
+        min-width: 100%;
         display: flex;
+        flex-shrink: 0;
+        -webkit-flex-shrink: 0;
       }
     }
-    
+
     .outline {
       height: 300px;
       width: 500px;
+      max-width: calc(100% - 50px);
       border-radius: 5px;
       margin: -250px 50px;
       border: 1px var(--lifted2) solid;
@@ -64,20 +68,26 @@
   }
 }
 
-.root.left {
-  flex-direction: row-reverse;
-
-  .title {
-    margin: 0 0 0 50px;
+@media only screen and (min-width: 1200px) {
+  .root {
+    flex-direction: row;
+    .imageView {
+      width: 550px;
+    }
   }
 
-  .imageView {
-    .imageContainer {
-      margin: 0 50px;
+  .root.left {
+    flex-direction: row-reverse;
+    .title {
+      margin: 0 0 0 50px;
     }
-
-    .outline {
-      margin: -250px 0px;
+    .imageView {
+      .imageContainer {
+        margin: 0 50px;
+      }
+      .outline {
+        margin: -250px 0px;
+      }
     }
   }
 }

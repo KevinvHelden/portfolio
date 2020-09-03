@@ -1,8 +1,9 @@
 import React, { Fragment, PureComponent } from "react";
 import "./App.module.scss";
 import { Header } from "./components/views";
-import { AfstudeerPortfolio, Home, NoMatch } from "./pages";
+import { Home, NoMatch } from "./pages";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import db from './firebase/db';
 
 class App extends PureComponent {
   constructor(props) {
@@ -24,12 +25,21 @@ class App extends PureComponent {
     window.removeEventListener("scroll", this.checkPage);
   }
 
+  handleChange = (event) => {
+    this.setState({ name: event.target.value });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    fetch(`/api/greeting?name=${encodeURIComponent(this.state.name)}`)
+      .then(response => response.json())
+      .then(state => this.setState(state));
+  }
+
   checkPage = () => {
-    const homePosition = this.homeRef.current.offsetTop;
     const projectsPosition = this.projectsRef.current.offsetTop;
     const contactPosition = this.contactRef.current.offsetTop;
     const yIndex = window.scrollY;
-    const windowHeight = window.innerHeight;
     const page = this.state.activePage;
     if (yIndex < projectsPosition && page !== "home") {
       this.setState({ activePage: "home" });
@@ -76,13 +86,6 @@ class App extends PureComponent {
                 exact
                 path="/"
                 component={() => <Home pageRefs={pageRefs} />}
-              />
-              <Route
-                exact
-                path="/afstudeerportfolio"
-                component={() => (
-                  <AfstudeerPortfolio setAltHeader={this.setAltHeader} />
-                )}
               />
               <Route
                 component={() => <NoMatch setAltHeader={this.setAltHeader} />}

@@ -11,6 +11,7 @@ select {
   font-family: var(--default-font-paragraph);
   font-size: var(--default-font-size-paragraph);
   width: 500px;
+  max-width: 100%;
   background-color: var(--base);
   color: var(--default-font-colour);
 }
@@ -35,7 +36,7 @@ select:not(:placeholder-shown) {
   font-family: var(--default-font-paragraph-strong);
   font-size: var(--default-font-size-paragraph);
   height: 50px;
-  width: fit-content;
+  width: 100%;
   min-width: 180px;
   padding: 0 50px;
   align-items: center;
@@ -44,4 +45,10 @@ select:not(:placeholder-shown) {
 .root[type="submit"]:hover{
   filter: brightness(110%);
   cursor: pointer;
+}
+
+@media only screen and (min-width: 1200px) {
+  .root[type="submit"]{
+    width: fit-content;
+  }
 }

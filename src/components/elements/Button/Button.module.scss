@@ -1,7 +1,7 @@
 @import "../../../global/styling.css";
 
 .root {
-  width: 200px;
+  width: 100%;
   height: 50px;
   outline: none;
   border: none;
@@ -27,4 +27,10 @@
 
 .root.secondary:hover p {
   color: var(--primary);
+}
+
+@media only screen and (min-width: 1200px) {
+  .root {
+    width: 200px;
+  }
 }
