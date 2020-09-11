@@ -10,7 +10,8 @@
 
   .title {
     position: relative;
-    margin: 0 50px 0 0;
+    margin: 0 auto 0 0;
+    max-width: 750px;
 
     > :first-child {
       color: var(--lifted3);
@@ -32,16 +33,15 @@
   }
 
   .imageView {
-    height: 350px;
+    height: calc(180px + 30px);
     width: 100%;
     display: block;
 
     .imageContainer {
       position: relative;
       overflow: hidden;
-      width: 500px;
-      max-width: calc(100% - 50px);
-      height: 300px;
+      width: calc(100% - 30px);
+      height: 180px;
       border-radius: 5px;
       display: flex;
       justify-content: center;
@@ -58,19 +58,42 @@
     }
 
     .outline {
-      height: 300px;
-      width: 500px;
-      max-width: calc(100% - 50px);
+      height: 180px;
+      width: calc(100% - 30px);
+      max-width: calc(100% - 30px);
       border-radius: 5px;
-      margin: -250px 50px;
+      margin: -150px 30px;
       border: 1px var(--lifted2) solid;
     }
   }
 }
 
+@media only screen and (min-width: 768px) {
+  .root {
+    .imageView {
+      height: 350px;
+      .imageContainer {
+        height: 300px;
+        width: 500px;
+        max-width: calc(100% - 50px);
+      }
+      .outline {
+        height: 300px;
+        margin: -250px 50px;
+        width: 500px;
+        max-width: calc(100% - 50px);
+      }
+    }
+  }
+
+}
+
 @media only screen and (min-width: 1200px) {
   .root {
     flex-direction: row;
+    .title {
+      margin: 0 50px 0 0;
+    }
     .imageView {
       width: 550px;
     }

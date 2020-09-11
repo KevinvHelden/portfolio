@@ -8,7 +8,7 @@
   width: 100vw;
   height: auto;
   display: flex;
-  padding: 50px 300px 0px;
+  padding: 50px 25px 0px;
 
   .textContainer {
     width: 75%;
@@ -96,8 +96,14 @@
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 768px) {
+  .root {
+    padding: 50px 50px 0px;
+  }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
+  .root {
+    padding: 50px 300px 0px;
+  }
 }

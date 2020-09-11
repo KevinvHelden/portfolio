@@ -30,7 +30,7 @@
   z-index: 20;
   width: 100%;
   height: 80px;
-  padding: 0 300px;
+  padding: 0 25px;
   position: sticky;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@
 }
 
 .variableHeader p {
-  margin: 0 auto;
+  margin: 0 0 0 auto;
   opacity: 0;
   transition: var(--default-transition);
   color: var(--primary);
@@ -79,9 +79,9 @@
 
 .frontpage {
   width: 100vw;
-  height: 600px;
-  top: 0;
-  left: 0;
+  height: 450px;
+  margin-top: -80px;
+
 }
 
 .backgroundImage {
@@ -89,7 +89,7 @@
   left: 0;
   top: 0;
   width: 100vw;
-  height: 680px;
+  height: 450px;
   overflow: hidden;
 }
 
@@ -107,16 +107,16 @@
   left: 0;
   top: 0;
   width: 100vw;
-  height: 680px;
-  background: linear-gradient(rgba(0, 11, 26, 0) 0%, rgba(0, 11, 26, 0.5) 45%, rgba(0, 11, 26, 1) 100%);
+  height: 450px;
+  background: linear-gradient(rgba(0, 11, 26, 0.4) 0%, rgba(0, 11, 26, 0.5) 45%, rgba(0, 11, 26, 1) 100%);
 }
 
 .projectTitle {
   position: absolute;
-  left: 300px;
+  left: 25px;
   top: 0;
   width: calc(100vw - 600px);
-  height: 680px;
+  height: 450px;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -130,4 +130,41 @@
 .content {
   width: 100%;
   height: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .variableHeader {
+    padding: 0 50px;
+  }
+
+  .projectTitle {
+    left: 50px;
+    height: 680px;
+  }
+
+  .frontpage {
+    height: 600px;
+  }
+
+  .backgroundFilter {
+    height: 680px;
+  }
+
+  .backgroundImage {
+    height: 680px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .variableHeader {
+    padding: 0 300px;
+  }
+
+  .variableHeader p {
+    margin: 0 auto;
+  }
+
+  .projectTitle {
+    left: 300px;
+  }
 }

@@ -20,6 +20,12 @@
   margin-bottom: 25px;
 }
 
+@media only screen and (min-width: 768px) {
+  .root {
+    padding: 80px 50px 0px;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   .root {
     padding: 80px 300px 0px;

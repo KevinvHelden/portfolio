@@ -137,7 +137,7 @@ class ProjectView extends PureComponent<Props, State> {
                 src={backArrow}
                 alt={"back button"}
               />
-              <Text text={"Back"} strong />
+              <Text text={"Projects"} strong />
             </div>
             <Text text={data.title} strong />
           </div>
