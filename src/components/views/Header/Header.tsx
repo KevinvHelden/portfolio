@@ -45,75 +45,46 @@ class Header extends PureComponent<Props, State> {
     this.setState({ activeOverlay: !activeOverlay });
   };
 
+  handleOverlayHome = () => {
+    const { navClickFunc, pageRefs } = this.props;
+    this.toggleHamburger();
+    navClickFunc(pageRefs.home);
+  }
+
+  handleOverlayProjects = () => {
+    const { navClickFunc, pageRefs } = this.props;
+    this.toggleHamburger();
+    navClickFunc(pageRefs.projects);
+  }
+
+  handleOverlayContact = () => {
+    const { navClickFunc, pageRefs } = this.props;
+    this.toggleHamburger();
+    navClickFunc(pageRefs.contact);
+  }
+
   render() {
     const { activePage, alt, activeOverlay } = this.state;
     const { navClickFunc, pageRefs } = this.props;
-    const { toggleHamburger } = this;
+    const { toggleHamburger, handleOverlayHome, handleOverlayProjects, handleOverlayContact } = this;
 
     return (
       <Fragment>
-        {alt ? (
-          <div
-            className={classnames(styles.overlay, {
-              [styles.active]: activeOverlay,
-            })}
-          >
-            <div className={classnames(styles.overlayInner)}>
-              <Dropdown
-                large
-                title={"Intro"}
-                content={["Glamorous Goat"]}
-                clickFunc={toggleHamburger}
-              />
-              <Dropdown
-                large
-                title={"Onderzoeksvraag"}
-                content={["Opdracht omschrijving", "Hoofdvraag", "Deelvragen"]}
-                clickFunc={toggleHamburger}
-              />
-              <Dropdown
-                large
-                title={"Analyse"}
-                content={[
-                  "Gebruiksvriendelijkheid",
-                  "Consistent en schaalbaar ontwerpen",
-                  "Consistent en schaalbaar ontwikkelen",
-                  "Toepasbaarheid op alle huidige en toekomstige klanten",
-                ]}
-                clickFunc={toggleHamburger}
-              />
-              <Dropdown
-                large
-                title={"Ontwikkelen en ontwerpen"}
-                content={[
-                  "Gebruiksvriendelijkheid",
-                  "Consistent en schaalbaar ontwerpen",
-                  "Consistent en schaalbaar ontwikkelen",
-                  "Toepasbaarheid op alle huidige en toekomstige klanten",
-                ]}
-                clickFunc={toggleHamburger}
-              />
-              <Dropdown
-                large
-                title={"Conclusie"}
-                content={[
-                  "Onderzoeksvraag",
-                  "Meerwaarde Glamorous Goat",
-                  "Advies",
-                ]}
-                clickFunc={toggleHamburger}
-              />
-            </div>
+        <div
+          className={classnames(styles.overlay, {
+            [styles.active]: activeOverlay,
+          })}
+        >
+          <div className={classnames({ [styles.active]: activePage === "home" })}>
+            <Text variant={"h6"} clickFunc={handleOverlayHome} text={"Home"} strong />
           </div>
-        ) : (
-            <div
-              className={classnames(styles.overlay, {
-                [styles.active]: activeOverlay,
-              })}
-            >
-              <Text text={"Normal overlay"} strong />
-            </div>
-          )}
+          <div className={classnames({ [styles.active]: activePage === "projects" })}>
+            <Text variant={"h6"} clickFunc={handleOverlayProjects} text={"Projects"} strong />
+          </div>
+          <div className={classnames({ [styles.active]: activePage === "contact" })}>
+            <Text variant={"h6"} clickFunc={handleOverlayContact} text={"Contact"} strong />
+          </div>
+        </div>
 
         <div className={classnames(styles.root)}>
           <div className={classnames(styles.side)}>
