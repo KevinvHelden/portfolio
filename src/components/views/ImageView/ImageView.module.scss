@@ -30,12 +30,17 @@
 
       &:hover {
         cursor: pointer;
+
+        img {
+          transform: scale(1.2);
+        }
       }
 
       img {
         height: 15px;
         width: auto;
         margin-left: 10px;
+        transition: var(--fast-transition);
       }
     }
   }

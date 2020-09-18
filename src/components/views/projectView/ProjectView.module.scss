@@ -49,7 +49,7 @@
   background-color: var(--base);
 }
 
-.variableHeader.visible p{
+.variableHeader.visible p {
   opacity: 1;
 }
 
@@ -59,22 +59,21 @@
   align-items: center;
   cursor: pointer;
   z-index: 31;
-}
 
-.backContainer p {
-  opacity: 1;
-  color: var(--default-font-colour);
-}
+  p {
+    opacity: 1;
+    color: var(--default-font-colour);
+    display: block;
+    transition: var(--default-transition);
+  }
 
-.dismissButton {
-  display: block;
-  width: auto;
-  height: 15px;
-  margin-right: 10px;
-}
-
-.backContainer p {
-  display: block;
+  .dismissButton {
+    display: block;
+    width: auto;
+    transition: var(--default-transition);
+    height: 15px;
+    margin-right: 10px;
+  }
 }
 
 .frontpage {
@@ -110,7 +109,11 @@
   top: 0;
   width: 100vw;
   height: 450px;
-  background: linear-gradient(rgba(0, 11, 26, 0.4) 0%, rgba(0, 11, 26, 0.5) 45%, rgba(0, 11, 26, 1) 100%);
+  background: linear-gradient(
+    rgba(0, 11, 26, 0.4) 0%,
+    rgba(0, 11, 26, 0.5) 45%,
+    rgba(0, 11, 26, 1) 100%
+  );
 }
 
 .projectTitle {
@@ -172,5 +175,14 @@
   .projectTitle {
     left: 300px;
     width: calc(100vw - 600px);
+  }
+
+  .backContainer {
+    &:hover {
+      img {
+        margin-left: -5px;
+        margin-right: 15px;
+      }
+    }
   }
 }

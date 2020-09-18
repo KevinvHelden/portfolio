@@ -19,8 +19,8 @@ class Paragraph extends PureComponent <Props> {
       title = null,
       text = "",
       variant = 'text',
-      image = null,
-      imageAlt = null,
+      image = "",
+      imageAlt = "",
       imageClickFunc = () => {},
     } = this.props;
 
@@ -32,7 +32,7 @@ class Paragraph extends PureComponent <Props> {
             {<Text text={text} />}
           </div>
         )}
-        {variant === "image" && image && imageAlt && (
+        {variant === "image" && imageAlt && (
           <div className={classnames(styles.imageContainer)}>
             <div className={classnames(styles.imageContainerInner)}>
               <div onClick={imageClickFunc} className={classnames(styles.overlay)}>
@@ -51,7 +51,7 @@ class Paragraph extends PureComponent <Props> {
             {text && <Text text={text} />}
           </div>
         )}
-        {variant === "textAndImage" && image && imageAlt && (
+        {variant === "textAndImage" && imageAlt && (
           <div className={classnames(styles.textAndImageContainer)}>
             {<Text text={text} />}
             <div className={classnames(styles.imageContainerInner)}>
