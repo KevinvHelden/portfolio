@@ -51,7 +51,7 @@ class EmailForm extends PureComponent<Props, State> {
     return (
       <form className={classnames(styles.root)} onSubmit={handleSubmit}>
         <Input type={"text"} placeholder={"Your name"} saveToParent={saveName} />
-        <Input type={"text"} placeholder={"Your email address"} saveToParent={saveEmail} />
+        <Input type={"email"} placeholder={"Your email address"} saveToParent={saveEmail} />
         <Textarea
           placeholder={"Your question/message"}
           saveToParent={saveMessage}
