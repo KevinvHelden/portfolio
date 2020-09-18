@@ -13,11 +13,12 @@ type Props = {
 
 class Home extends PureComponent <Props>{
   render() {
+    const { home, projects, contact } = this.props.pageRefs;
     return (
       <main className={classnames(styles.root)}>
-        <Landing reference={this.props.pageRefs.home} anchor={"#home"} />
-        <Projects reference={this.props.pageRefs.projects} anchor={"#projects"} />
-        <Contact reference={this.props.pageRefs.contact} anchor={"#contact"} />
+        <Landing reference={home} anchor={"#home"} />
+        <Projects reference={projects} anchor={"#projects"} />
+        <Contact reference={contact} anchor={"#contact"} />
       </main>
     );
   }

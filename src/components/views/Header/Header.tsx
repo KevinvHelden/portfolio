@@ -7,7 +7,7 @@ import { Text, Icon } from "../../elements";
 import Logo from "../../../images/icons/logo_white.svg";
 
 type Props = {
-  activePage: string,
+  activePage: () => string,
   alt: boolean,
   navClickFunc: (ref: string) => void,
   pageRefs: {
@@ -23,19 +23,35 @@ type State = {
   alt: boolean,
 }
 
-const intialState = Object.freeze({ activePage: "", activeOverlay: false, alt: false, })
-
 class Header extends PureComponent<Props, State> {
 
-  readonly state = intialState;
+  state:State = {
+    activePage: "home",
+    activeOverlay: false,
+    alt: false,
+  };
 
   private hamburgerRef = React.createRef<HTMLDivElement>();
 
   static getDerivedStateFromProps(props: Props) {
     return {
-      activePage: props.activePage,
+      activePage: props.activePage(),
       alt: props.alt
     };
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.updateActivePage);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.updateActivePage);
+  }
+
+  updateActivePage = () => {
+    this.setState({
+      activePage: this.props.activePage()
+    })
   }
 
   toggleHamburger = () => {
@@ -65,7 +81,6 @@ class Header extends PureComponent<Props, State> {
     const { activePage, alt, activeOverlay } = this.state;
     const { navClickFunc, pageRefs } = this.props;
     const { toggleHamburger, handleOverlayHome, handleOverlayProjects, handleOverlayContact } = this;
-
     return (
       <Fragment>
         <div
@@ -74,7 +89,7 @@ class Header extends PureComponent<Props, State> {
           })}
         >
           <div className={classnames({ [styles.active]: activePage === "home" })}>
-            <Text variant={"h6"} clickFunc={handleOverlayHome} text={"Home"} strong />
+            <Text variant={"h6"} clickFunc={handleOverlayHome} text={"About"} strong />
           </div>
           <div className={classnames({ [styles.active]: activePage === "projects" })}>
             <Text variant={"h6"} clickFunc={handleOverlayProjects} text={"Projects"} strong />
@@ -102,7 +117,7 @@ class Header extends PureComponent<Props, State> {
                     [styles.active]: activePage === "home",
                   })}
                 >
-                  <Text text={"Home"} strong />
+                  <Text text={"About"} strong />
                 </div>
                 <div
                   onClick={() => navClickFunc(pageRefs.projects)}
