@@ -16,7 +16,6 @@ type Props = {
 }
 
 type State = {
-  isOpen: boolean,
   variableHeaderVisible: boolean,
   imageViewOpen: boolean,
   imageViewData: {
@@ -26,7 +25,6 @@ type State = {
 }
 
 const intialState = Object.freeze({
-  isOpen: false,
   variableHeaderVisible: false,
   imageViewOpen: false,
   imageViewData: { image: "", alt: "" }
@@ -54,6 +52,10 @@ class ProjectView extends PureComponent<Props, State> {
   componentWillUnmount() {
     const project = this.projectRef.current;
     project && project.removeEventListener("scroll", this.onScrollFunctions);
+  }
+
+  componentDidUpdate() {
+    this.stopPageFromScrolling();
   }
 
   onScrollFunctions = () => {
@@ -106,10 +108,18 @@ class ProjectView extends PureComponent<Props, State> {
     });
   };
 
+  stopPageFromScrolling = () => {
+    const { isOpen } = this.props;
+    const body = document.getElementsByTagName("body")[0];
+    isOpen ?
+      body.style.overflow = "hidden"
+      :
+      body.style.overflow = "unset"
+  }
+
   render() {
-    const { data } = this.props;
+    const { data, isOpen, } = this.props;
     const {
-      isOpen,
       variableHeaderVisible,
       imageViewOpen,
       imageViewData,
