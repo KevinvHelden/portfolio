@@ -7,34 +7,60 @@
   top: 0;
   left: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   z-index: 30;
   display: none;
   background-color: rgba(0, 0, 0, 0.5);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
-}
+  backdrop-filter: blur(10px);
+  padding: 0 300px;
 
-.root.active {
-  display: flex;
-}
+  .exitHeader {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 
-.root .imageContainer {
-  width: 80vw;
-  height: 80vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .exitButton {
+      display: flex;
+      align-items: center;
+      height: auto;
+      width: auto;
 
-.root .imageContainer img {
-  max-height: 100%;
-  max-width: 100%;
-}
+      &:hover {
+        cursor: pointer;
+      }
 
-.root .noImageContainer {
+      img {
+        height: 15px;
+        width: auto;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .active {
+    display: flex;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      border-radius: 5px;
+    }
+  }
+
+  .noImageContainer {
     width: 80vw;
     height: 80vh;
     overflow: hidden;
@@ -43,9 +69,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
 
-.root .noImageContainer .noImage {
-  width: 100px;
-  height: auto;
+    .noImage {
+      width: 100px;
+      height: auto;
+    }
+  }
+}
+
+.root.active {
+  display: flex;
 }

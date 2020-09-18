@@ -27,7 +27,7 @@ select:not(:placeholder-shown) {
 }
 
 /*Submit Button*/
-.root[type="submit"]{
+.root[type="submit"] {
   background-color: var(--primary);
   border: none;
   outline: none;
@@ -40,15 +40,15 @@ select:not(:placeholder-shown) {
   min-width: 180px;
   padding: 0 50px;
   align-items: center;
-}
 
-.root[type="submit"]:hover{
-  filter: brightness(110%);
-  cursor: pointer;
+  &:hover {
+    filter: brightness(110%);
+    cursor: pointer;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-  .root[type="submit"]{
+  .root[type="submit"] {
     width: fit-content;
   }
 }

@@ -2,6 +2,9 @@ import React, { PureComponent } from "react";
 import styles from "./Landing.module.scss";
 import { Text } from "../../../../components/elements";
 import classnames from "classnames";
+import scroll from '../../../../images/icons/mouse.svg';
+import cartoonKevin from '../../../../images/cartoonKevin.svg';
+
 
 type Props = {
   anchor: string,
@@ -25,15 +28,12 @@ class Landing extends PureComponent<Props> {
               }
             />
           </div>
-          <div className={classnames(styles.outerRing)}>
-            <div className={classnames(styles.outerRingTwo)}>
-              <div className={classnames(styles.innerRingTwo)}>
-                <div className={classnames(styles.innerRing)}>
-                  <div className={classnames(styles.image)} />
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+
+        <img className={styles.cartoonKevin} src={cartoonKevin} alt={"Cartoon"} />
+
+        <div className={classnames(styles.scroll)}>
+          <img src={scroll} alt={"scroll"} />
         </div>
       </section>
     );

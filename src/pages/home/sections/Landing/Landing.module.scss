@@ -16,7 +16,7 @@
   padding: 80px 25px 0px;
 
   .title {
-    margin: auto;
+    margin: 150px 0 auto 0;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -28,70 +28,28 @@
 
     p {
       color: var(--lifted3);
+      max-width: 300px;
     }
 
     .textInner {
       display: flex;
       flex-direction: column;
     }
+  }
+  .scroll {
+    width: 100vw;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
 
-    .outerRing {
-      width: var(--outerRingDimension);
-      height: var(--outerRingDimension);
-      border: 1px var(--lifted1) solid;
-      margin-left: -175px;
-      display: flex;
-      border-radius: 50%;
-      right: 57%;
-      z-index: -1;
-
-      .outerRingTwo {
-        width: calc(var(--outerRingDimension) * 0.9);
-        height: calc(var(--outerRingDimension) * 0.9);
-        border: 1px var(--lifted2) solid;
-        margin: auto;
-        display: flex;
-        border-radius: 50%;
-
-        .innerRingTwo {
-          width: calc(var(--outerRingDimension) * 0.8);
-          height: calc(var(--outerRingDimension) * 0.8);
-          border: 1px var(--lifted3) solid;
-          margin: auto;
-          display: flex;
-          border-radius: 50%;
-
-          .innerRing {
-            width: calc(var(--outerRingDimension) * 0.7);
-            height: calc(var(--outerRingDimension) * 0.7);
-            border: 1px var(--lifted4) solid;
-            margin: auto;
-            display: flex;
-            border-radius: 50%;
-
-            .image {
-              width: calc(var(--outerRingDimension) * 0.6);
-              height: calc(var(--outerRingDimension) * 0.6);
-              margin: auto;
-              display: flex;
-              border-radius: 50%;
-              background-image: url("../../../../images/profilepicture.jpg");
-              background-repeat: no-repeat;
-              background-size: cover;
-              background-position: center;
-            }
-          }
-        }
-      }
-    }
-
-    .scroll {
-      position: absolute;
-      bottom: 100px;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-    }
+  .cartoonKevin {
+    position: relative;
+    width: 200px;
+    height: auto;
+    margin: 0 0 50px auto;
+    z-index: -1;
   }
 }
 
@@ -99,12 +57,18 @@
   .root {
     width: 100vw;
     padding: 80px 50px 0px;
-  }
-}
 
-@media only screen and (min-width: 992px) {
-  .root {
-    width: 100vw;
+    .title {
+      margin: auto 0 auto 0;
+    }
+
+    .cartoonKevin {
+      position: absolute;
+      right: 50px;
+      bottom: 50px;
+      width: 300px;
+      margin: unset;
+    }
   }
 }
 
@@ -112,5 +76,18 @@
   .root {
     width: 100vw;
     padding: 0 300px;
+
+    .title {
+      margin: auto;
+    }
+
+    .cartoonKevin {
+      right: 300px;
+      width: 400px;
+    }
+
+    .scroll {
+      display: flex;
+    }
   }
 }

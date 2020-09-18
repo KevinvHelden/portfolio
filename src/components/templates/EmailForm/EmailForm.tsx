@@ -56,7 +56,7 @@ class EmailForm extends PureComponent<Props, State> {
           placeholder={"Your question/message"}
           saveToParent={saveMessage}
         />
-        <Input type={"submit"}/>
+        <Input type={"submit"} />
       </form>
     );
   }

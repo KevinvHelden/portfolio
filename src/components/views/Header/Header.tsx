@@ -2,9 +2,7 @@ import React, { PureComponent, Fragment } from "react";
 import styles from "./Header.module.scss";
 import classnames from "classnames";
 import RootRef from '@material-ui/core/RootRef';
-
 import { Text, Icon } from "../../elements";
-import { Dropdown } from "../../views";
 
 import Logo from "../../../images/icons/logo_white.svg";
 

@@ -100,6 +100,12 @@ class ProjectView extends PureComponent<Props, State> {
     });
   };
 
+  closeImageView = () => {
+    this.setState({
+      imageViewOpen: false,
+    });
+  };
+
   render() {
     const { data } = this.props;
     const {
@@ -114,6 +120,7 @@ class ProjectView extends PureComponent<Props, State> {
       projectRef,
       titleRef,
       bannerRef,
+      closeImageView,
     } = this;
 
     return (
@@ -192,7 +199,7 @@ class ProjectView extends PureComponent<Props, State> {
             />
           </div>
         </div>
-        <ImageView open={imageViewOpen} data={{ image: imageViewData.image, alt: imageViewData.alt }} />
+        <ImageView closeView={closeImageView} open={imageViewOpen} data={{ image: imageViewData.image, alt: imageViewData.alt }} />
       </Fragment>
     );
   }
