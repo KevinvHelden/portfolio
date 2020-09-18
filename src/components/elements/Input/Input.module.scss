@@ -2,7 +2,8 @@
 
 /*Inputfield*/
 .root[type="text"],
-select {
+select,
+.root[type="email"] {
   outline: none;
   border: 1px var(--lifted2) solid;
   height: 50px;
@@ -21,13 +22,15 @@ select {
 }
 
 .root[type="text"]:not(:placeholder-shown),
-select:not(:placeholder-shown) {
+select:not(:placeholder-shown),
+.root[type="email"]:not(:placeholder-shown) {
   color: var(--default-font-colour);
   border: 1px var(--lifted4) solid;
 }
 
 /*Submit Button*/
 .root[type="submit"] {
+  -webkit-appearance: none;
   background-color: var(--primary);
   border: none;
   outline: none;
