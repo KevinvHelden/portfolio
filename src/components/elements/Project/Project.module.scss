@@ -38,6 +38,7 @@
     display: block;
 
     .imageContainer {
+      background-color: var(--grey5);
       position: relative;
       overflow: hidden;
       width: calc(100% - 30px);
@@ -54,6 +55,13 @@
         display: flex;
         flex-shrink: 0;
         -webkit-flex-shrink: 0;
+      }
+
+      .imagePlaceholder {
+        width: 50px;
+        height: auto;
+        min-height: unset;
+        min-width: unset;
       }
     }
 
@@ -101,6 +109,10 @@
         height: 300px;
         width: 500px;
         max-width: calc(100% - 50px);
+
+        .imagePlaceholder {
+          width: 100px;
+        }
       }
       .outline {
         height: 300px;

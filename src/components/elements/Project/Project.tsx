@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import styles from "./Project.module.scss";
 import classnames from "classnames";
+import loadingImage from "../../../images/icons/noImage.svg";
 
 import { Text } from "../";
 
@@ -28,7 +29,7 @@ class Project extends PureComponent<Props> {
     const { data, clickFunc, alignment } = this.props;
 
     return (
-      <div className={classnames(styles.root, {[styles.left]: alignment === "left"})}>
+      <div className={classnames(styles.root, { [styles.left]: alignment === "left" })}>
         <div className={classnames(styles.title)}>
           <Text variant={"p"} text={data.tags} strong />
           <Text variant={"h2"} text={data.title} />
@@ -37,11 +38,15 @@ class Project extends PureComponent<Props> {
         </div>
         <div className={classnames(styles.imageView)}>
           <div className={classnames(styles.imageContainer)}>
-            <img
-              className={classnames(styles.image)}
-              src={data.image.src}
-              alt={data.image.alt}
-            />
+            {data.image.src ?
+              <img
+                className={classnames(styles.image)}
+                src={data.image.src}
+                alt={data.image.alt}
+              />
+              :
+              <img className={classnames(styles.imagePlaceholder)} src={loadingImage} alt={"imageNotLoaded"} />
+            }
           </div>
           <div className={classnames(styles.outline)} />
         </div>
