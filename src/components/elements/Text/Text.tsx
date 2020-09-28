@@ -25,7 +25,8 @@ class Text extends PureComponent<Props> {
               className={classnames(
                 styles.root, styles.link,
                 { [styles.strong]: strong },
-                { [styles.extraLarge]: extraLarge }
+                { [styles.extraLarge]: extraLarge },
+                { [styles.notRendered]: !text }
               )}
               onClick={clickFunc}
             >
@@ -37,7 +38,8 @@ class Text extends PureComponent<Props> {
               className={classnames(
                 styles.root,
                 { [styles.strong]: strong },
-                { [styles.extraLarge]: extraLarge }
+                { [styles.extraLarge]: extraLarge },
+                { [styles.notRendered]: !text }
               )}
               onClick={clickFunc}
             >

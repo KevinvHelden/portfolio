@@ -1,9 +1,10 @@
 import React, { PureComponent, Fragment } from "react";
 import styles from "./ProjectView.module.scss";
 import classnames from "classnames";
-import { Text, Paragraph, Image } from "../../elements";
+import { Text, Paragraph, Image, Icon } from "../../elements";
 import { ImageView } from "../";
 import backArrow from "../../../images/icons/arrow-left.svg";
+import nextArrow from "../../../images/icons/arrow-right-white.svg";
 
 type Props = {
   data: {
@@ -117,6 +118,10 @@ class ProjectView extends PureComponent<Props, State> {
       body.style.overflow = "unset"
   }
 
+  openMessagePopup = () => {
+    alert("open popup");
+  }
+
   render() {
     const { data, isOpen, } = this.props;
     const {
@@ -131,6 +136,7 @@ class ProjectView extends PureComponent<Props, State> {
       titleRef,
       bannerRef,
       closeImageView,
+      openMessagePopup,
     } = this;
 
     return (
@@ -173,23 +179,73 @@ class ProjectView extends PureComponent<Props, State> {
           </div>
 
           <div className={classnames(styles.content)}>
+            <div className={classnames(styles.summaryContainer)}>
+              <div className={classnames(styles.summary)}>
+                <Text
+                  variant={"h2"}
+                  text={
+                    "Summary"
+                  }
+                />
+                <Text
+                  variant={"p"}
+                  text={
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                  }
+                />
+              </div>
+              <div className={classnames(styles.skills)}>
+                <Text
+                  text={"Skills used"}
+                  strong
+                />
+                <Text
+                  text={"React JS"}
+                />
+              </div>
+              <div className={classnames(styles.year)}>
+                <Text
+                  text={"Year"}
+                  strong
+                />
+                <Text
+                  text={"2018"}
+                />
+              </div>
+            </div>
+
             <Paragraph
-              title={"Intro"}
-              variant={"text"}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              }
-            />
-            <Paragraph
+              lifted
               variant={"textAndImage"}
               imageClickFunc={() =>
                 openImageView(data.background, "Digitas banner")
               }
+              title={"Title"}
               text={
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
               }
               image={data.background}
               imageAlt={"Digitas banner"}
+              imageDescription={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+              }
+            />
+
+            <Paragraph
+              reversed
+              variant={"textAndImage"}
+              imageClickFunc={() =>
+                openImageView(data.background, "Digitas banner")
+              }
+              title={"Title"}
+              text={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              }
+              image={data.background}
+              imageAlt={"Digitas banner"}
+              imageDescription={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+              }
             />
 
             <Paragraph
@@ -199,8 +255,8 @@ class ProjectView extends PureComponent<Props, State> {
               }
               image={data.background}
               imageAlt={"Digitas banner"}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              imageDescription={
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
               }
             />
             <Image
@@ -208,6 +264,37 @@ class ProjectView extends PureComponent<Props, State> {
               alt={"Digitas banner"}
             />
           </div>
+          <footer className={classnames(styles.projectFooter)}>
+            <div className={classnames(styles.imageContainer)}>
+              <img src={data.background} alt={"Footer background"} />
+            </div>
+            <div className={classnames(styles.haze)} />
+            <div className={classnames(styles.footerInner)} >
+              <div className={classnames(styles.prevProject)}>
+                <img src={backArrow} alt={"previous project"} />
+                <Text strong text={"Previous project"} />
+              </div>
+              <div className={classnames(styles.titleContainer)}>
+                <Text variant={"h2"} text={data.title} />
+              </div>
+              <div className={classnames(styles.nextProject)}>
+                <Text strong text={"Next project"} />
+                <img src={nextArrow} alt={"previous project"} />
+              </div>
+            </div>
+            <div className={classnames(styles.socialFooter)}>
+              <div className={classnames(styles.socialContainer)}>
+                <a
+                  href={
+                    "https://www.linkedin.com/in/kevin-van-helden-671726141/"
+                  }
+                >
+                  <Icon icon={"linkedIn"} />
+                </a>
+                <Icon clickFunc={openMessagePopup} icon={"mail"} />
+              </div>
+            </div>
+          </footer>
         </div>
         <ImageView closeView={closeImageView} open={imageViewOpen} data={{ image: imageViewData.image, alt: imageViewData.alt }} />
       </Fragment>

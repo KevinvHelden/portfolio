@@ -2,7 +2,7 @@
 
 :root {
     --styled-font-colour: var(--white);
-    --styled-base: var(--darkBlue);
+    --styled-base: var(--black);
 
     --styled-orange: var(--orange-lighter);
     --styled-lifted5: var(--grey1);

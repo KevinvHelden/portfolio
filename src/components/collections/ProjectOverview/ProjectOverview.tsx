@@ -1,19 +1,15 @@
 import React, { PureComponent } from "react";
 import styles from "./ProjectOverview.module.scss";
 import classnames from "classnames";
-
 import { Project } from "../../elements";
 
 type Props = {
-  projects: {
+  projects: [{
     title: string,
-    tags: string,
     description: string,
-    image: {
-      src: string,
-      alt: string,
-    }
-  }[],
+    tags: Array<string>,
+    bannerSource: string,
+  }],
   projectFunc: () => void,
 }
 
@@ -27,29 +23,38 @@ class ProjectOverview extends PureComponent<Props> {
     return num % 2;
   }
 
+  compare = (a: any, b: any) => {
+    if (a.index < b.index) {
+      return -1;
+    }
+    if (a.index > b.index) {
+      return 1;
+    }
+    return 0;
+  }
+
+  sortByIndex = (items: any) => {
+    return items.sort(this.compare);
+  }
+
   formatCards = () => {
     const { projects, projectFunc } = this.props;
-
-    return projects.map((project, index) => (
-      <Project
-        data={{
-          title: project.title,
-          tags: project.tags,
-          description: project.description,
-          image: {
-            src: project.image.src,
-            alt: project.image.alt
-          }
-        }
-        }
-        alignment={this.isOdd(index) ? "left" : "right"}
-        clickFunc={projectFunc} key={index} />
-    ));
+    const { sortByIndex } = this;
+    const sortedProjects = sortByIndex(projects);
+    if (projects) {
+      return sortedProjects.map((project: any, index: number) => (
+        <Project
+          data={project}
+          alignment={this.isOdd(index) ? "left" : "right"}
+          clickFunc={projectFunc}
+          key={index}
+        />
+      ))
+    };
   };
 
   render() {
     const { formatCards } = this;
-
     return <div className={classnames(styles.root)}>{formatCards()}</div>;
   }
 }

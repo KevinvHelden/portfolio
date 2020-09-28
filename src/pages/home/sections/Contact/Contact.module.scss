@@ -3,17 +3,31 @@
 .root {
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   display: flex;
   padding: 80px 25px 0px;
+
+  .staticContactInfo {
+    margin-top: 50px;
+    display: flex;
+
+    > * {
+      margin-right: 100px;
+    }
+  }
+
+  .socialContact {
+    margin-top: 50px;
+  }
 }
 
 .root .title {
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 .root form {
-  margin-top: 75px;
+  margin-top: 25px;
 }
 
 .root form > * {
@@ -28,6 +42,11 @@
 
 @media only screen and (min-width: 1200px) {
   .root {
-    padding: 80px 300px 0px;
+    width: 1200px;
+    margin: 0 auto;
+
+    form {
+      margin-top: 75px;
+    }
   }
 }

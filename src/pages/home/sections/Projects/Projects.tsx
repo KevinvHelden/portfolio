@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
 import styles from "./Projects.module.scss";
 import classnames from "classnames";
-
 import { ProjectOverview } from "../../../../components/collections";
 import { ProjectView } from "../../../../components/views";
 import digitasLarge from '../../../../images/projects/Large/digitasLarge.jpg';
-
-import projects from "./fixtures/projects";
+import db from '../../../../firebase/db';
 
 type Props = {
   anchor: string,
@@ -15,14 +13,29 @@ type Props = {
 
 type State = {
   projectIsOpen: boolean,
+  projects: [{
+    title: string,
+    description: string,
+    tags: Array<string>,
+    bannerSource: string,
+  }],
 }
-
-const intialState = Object.freeze({ projectIsOpen: false, })
 
 class Projects extends PureComponent<Props, State> {
 
-  readonly state = intialState
+  state: State = {
+    projectIsOpen: false,
+    projects: [{
+      title: "",
+      description: "",
+      tags: [""],
+      bannerSource: ""
+    }]
+  };
 
+  componentDidMount() {
+    this.getProjects();
+  }
 
   openProject = () => {
     this.setState({
@@ -36,10 +49,22 @@ class Projects extends PureComponent<Props, State> {
     })
   }
 
+  getProjects = async () => {
+    const projects: any = [];
+    await db.collection("projects").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        projects.push(doc.data());
+      });
+    });
+    this.setState({
+      projects: projects
+    });
+  }
+
   render() {
     const { anchor, reference } = this.props;
     const { openProject, closeProject } = this;
-    const { projectIsOpen } = this.state;
+    const { projectIsOpen, projects } = this.state;
     const projectData = { title: "3rd Year internship", subtitle: "Digitas", background: digitasLarge, content: "" };
 
     return (

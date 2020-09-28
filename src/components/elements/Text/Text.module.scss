@@ -9,8 +9,23 @@
   font-family: var(--default-font-paragraph-strong);
 }
 
+h1.notRendered,
+h2.notRendered,
+h3.notRendered,
+h4.notRendered {
+  height: 3rem;
+  width: 60%;
+  background-color: var(--grey4);
+}
+
+p.notRendered {
+  height: 14px;
+  width: 100%;
+  background-color: var(--grey5);
+}
+
 .link p:hover {
-  filter: brightness(120%);;
+  filter: brightness(120%);
 }
 
 a {
@@ -32,31 +47,38 @@ h6 {
 
 h1 {
   font-size: var(--default-font-size-header1);
+  line-height: 100%;
 }
 
 h2 {
   font-size: var(--default-font-size-header2);
+  line-height: 100%;
 }
 
 h3 {
   font-size: var(--default-font-size-header3);
+  line-height: 100%;
 }
 
 h4 {
   font-size: var(--default-font-size-header4);
+  line-height: 100%;
 }
 
 h5 {
   font-size: var(--default-font-size-header5);
+  line-height: 200%;
 }
 
 h6 {
   font-size: var(--default-font-size-header6);
+  line-height: 200%;
 }
 
 p {
   font-family: var(--default-font-paragraph);
   font-size: var(--default-font-size-paragraph);
+  line-height: 150%;
 }
 
 @media only screen and (min-width: 768px) {

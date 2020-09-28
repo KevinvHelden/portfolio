@@ -7,49 +7,68 @@
 
 .root {
   flex-direction: column;
-  text-align: left;
+  text-align: center;
   align-items: center;
-  justify-content: center;
   width: 100vw;
   height: 100vh;
   display: flex;
   padding: 80px 25px 0px;
+  position: relative;
+  overflow: hidden;
 
   .title {
-    margin: 150px 0 auto 0;
+    margin: 100px 0 0;
     width: 100%;
     display: flex;
     flex-direction: row;
     overflow: hidden;
-
-    h1 {
-      z-index: 2;
-    }
-
-    p {
-      color: var(--lifted3);
-      max-width: 300px;
-    }
+    align-items: flex-end;
 
     .textInner {
       display: flex;
       flex-direction: column;
+      text-align: left;
+      margin: auto auto 25px 0;
+      z-index: 1;
+
+      h1 {
+        z-index: 2;
+        max-width: 250px;
+      }
+
+      p {
+        color: var(--lifted2);
+        max-width: 150px;
+        margin-top: 25px;
+      }
+    }
+
+    .cutoutBackground {
+      background-color: var(--link);
+      width: 100vw;
+      height: 200px;
+      position: absolute;
+      left: 0;
+      z-index: 0;
+    }
+
+    img {
+      width: 300px;
+      height: auto;
+      z-index: 1;
+      position: absolute;
+      right: -100px;
     }
   }
+
   .scroll {
     width: 100vw;
-    display: none;
     justify-content: center;
     align-items: center;
-    height: 100px;
-  }
-
-  .cartoonKevin {
-    position: relative;
-    width: 200px;
-    height: auto;
-    margin: 0 0 50px auto;
-    z-index: -1;
+    height: 150px;
+    position: absolute;
+    display: flex;
+    top: calc(100vh - 150px);
   }
 }
 
@@ -60,14 +79,22 @@
 
     .title {
       margin: auto 0 auto 0;
-    }
 
-    .cartoonKevin {
-      position: absolute;
-      right: 50px;
-      bottom: 50px;
-      width: 300px;
-      margin: unset;
+      .textInner {
+
+        h1 {
+          max-width: unset;
+        }
+        
+        p {
+          max-width: 250px;
+        }
+      }
+
+      img {
+        width: 250px;
+        right: 50px;
+      }
     }
   }
 }
@@ -75,19 +102,22 @@
 @media only screen and (min-width: 1200px) {
   .root {
     width: 100vw;
-    padding: 0 300px;
+    padding: 0 calc(calc(100vw - 1200px) / 2);
+    margin: 0 auto;
 
     .title {
       margin: auto;
-    }
 
-    .cartoonKevin {
-      right: 300px;
-      width: 400px;
-    }
+      .textInner {
+        p {
+          max-width: 450px;
+        }
+      }
 
-    .scroll {
-      display: flex;
+      img {
+        width: 400px;
+        right: calc(calc(100vw - 1200px) / 2);
+      }
     }
   }
 }

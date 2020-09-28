@@ -1,14 +1,18 @@
 @import "../../../global/styling.css";
 
 .root {
-  margin: auto 0 50px 0;
+  margin: auto 0 100px 0;
   color: var(--default-font-colour);
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: auto;
   display: flex;
-  padding: 50px 25px 0px;
+  padding: 0px 25px 0px;
+
+  h2 {
+    font-size: var(--default-font-size-header4);
+  }
 
   .textContainer {
     width: 75%;
@@ -19,7 +23,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
 
     > * {
@@ -31,14 +34,57 @@
       margin-bottom: 0;
     }
 
-    .imageContainerInner {
-      position: relative;
-      max-height: 360px;
-      border-radius: 5px;
-      overflow: hidden;
+    .textAndImageContainerText {
+      display: flex;
+      flex-direction: column;
 
-      > * {
-        max-height: inherit;
+      h2 {
+        line-height: unset;
+        margin-bottom: calc(var(--default-font-size-header2) / 2);
+      }
+
+      p {
+        margin-bottom: 25px;
+      }
+    }
+
+    .textAndImageContainerImage {
+      display: flex;
+      flex-direction: column;
+
+      .imageContainerInner {
+        width: 100vw;
+        margin-left: -25px;
+        position: relative;
+        max-height: 360px;
+        overflow: hidden;
+        margin-bottom: 25px;
+
+        > :last-child {
+          height: 200px;
+        }
+
+        > * {
+          max-height: inherit;
+
+          p {
+            color: var(--default-font-color-paragraph);
+          }
+        }
+      }
+
+      p {
+        color: var(--lifted3);
+      }
+    }
+  }
+
+  .textAndImageContainer.reversed {
+    flex-direction: column-reverse;
+
+    .textAndImageContainerText {
+      h2 {
+        margin-top: 50px;
       }
     }
   }
@@ -62,14 +108,29 @@
     }
 
     .imageContainerInner {
+      width: 100vw;
+      max-width: unset;
       position: relative;
-      border-radius: 5px;
       max-height: 360px;
       overflow: hidden;
+      margin-bottom: 25px;
+      border-radius: 0;
+
+      > :last-child {
+        height: 200px;
+      }
 
       > * {
         max-height: inherit;
+
+        p {
+          color: var(--default-font-color-paragraph);
+        }
       }
+    }
+
+    p {
+      color: var(--lifted3);
     }
   }
 
@@ -97,23 +158,81 @@
   }
 }
 
+.root.lifted {
+  background-color: var(--lifted1);
+  margin: 0;
+  margin-bottom: 100px;
+  width: 100vw;
+  padding: 50px 25px;
+}
+
 @media screen and (min-width: 768px) {
   .root {
     padding: 50px 50px 0px;
+    margin-bottom: 200px;
+
+    h2 {
+      font-size: var(--default-font-size-header2);
+    }
+
+    .textAndImageContainer.reversed {
+      flex-direction: row-reverse;
+
+      .textAndImageContainerText {
+        h2 {
+          margin-top: unset;
+        }
+      }
+    }
+
+    .imageContainer {
+      .imageContainerInner {
+        width: 650px !important;
+        max-width: 100%;
+        border-radius: 5px;
+
+        > :last-child {
+          height: 650px !important;
+        }
+      }
+    }
 
     .textAndImageContainer {
       flex-direction: row;
+
+      .imageContainerInner {
+        width: 100% !important;
+        margin-left: 0 !important;
+        border-radius: 5px;
+
+        > :last-child {
+          height: 650px !important;
+        }
+      }
+
+      .textAndImageContainerText {
+        p {
+          margin-bottom: unset;
+        }
+      }
 
       > * {
         width: calc(50% - 25px);
       }
     }
   }
+
+  .root.lifted {
+    padding: 100px 50px;
+    margin-bottom: 200px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .root {
-    padding: 50px 300px 0px;
+    padding: 0;
+    margin: 0 auto 200px auto;
+    width: 1200px;
 
     .overlay {
       display: flex;
@@ -122,5 +241,9 @@
         opacity: 1;
       }
     }
+  }
+
+  .root.lifted {
+    padding: 100px calc(calc(100vw - 1200px) / 2);
   }
 }

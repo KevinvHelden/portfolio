@@ -80,9 +80,9 @@
 
         p {
           color: var(--default-font-colour);
+          cursor: pointer;
 
           &:hover {
-            cursor: pointer;
             color: var(--linkHover);
           }
         }
@@ -113,7 +113,7 @@
   min-height: 100vh;
   height: 500px;
   position: fixed;
-  background-color: rgba(0, 11, 26, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   z-index: 14;
   display: none;
@@ -163,7 +163,7 @@
 @media only screen and (min-width: 1200px) {
   .root {
     .side {
-      width: 300px;
+      width: auto;
     }
   }
 }

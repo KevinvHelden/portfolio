@@ -3,7 +3,7 @@ import styles from "./Landing.module.scss";
 import { Text } from "../../../../components/elements";
 import classnames from "classnames";
 import scroll from '../../../../images/icons/mouse.svg';
-import cartoonKevin from '../../../../images/cartoonKevin.svg';
+import cutOut from '../../../../images/cutout.png';
 
 
 type Props = {
@@ -18,8 +18,8 @@ class Landing extends PureComponent<Props> {
       <section ref={reference} id={anchor} className={classnames(styles.root)}>
         <div className={classnames(styles.title)}>
           <div className={classnames(styles.textInner)}>
-            <Text variant={"h1"} text={"Kevin"} extraLarge />
-            <Text variant={"h1"} text={"van Helden"} extraLarge />
+            <Text variant={"h1"} text={"Hi, I'm"} extraLarge />
+            <Text variant={"h1"} text={"Kevin van Helden"} extraLarge />
             <Text
               variant={"p"}
               strong
@@ -28,10 +28,9 @@ class Landing extends PureComponent<Props> {
               }
             />
           </div>
+          <div className={classnames(styles.cutoutBackground)}/>
+          <img src={cutOut} alt={"Kevin cutout"} />
         </div>
-
-        <img className={styles.cartoonKevin} src={cartoonKevin} alt={"Cartoon"} />
-
         <div className={classnames(styles.scroll)}>
           <img src={scroll} alt={"scroll"} />
         </div>
