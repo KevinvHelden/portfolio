@@ -58,7 +58,6 @@ class Paragraph extends PureComponent<Props, State> {
       text = "",
       variant = 'text',
       imageAlt = "",
-      imageClickFunc,
       lifted,
       reversed,
       imageDescription,

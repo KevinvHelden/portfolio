@@ -67,7 +67,7 @@ class Projects extends PureComponent<Props, State> {
 
   storeProjectIndexes = (indexes: number[]) => {
     const { allProjectIndexes } = this.state;
-    if (allProjectIndexes.length == 0) {
+    if (allProjectIndexes.length === 0) {
       this.setState({
         allProjectIndexes: indexes
       })

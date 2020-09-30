@@ -4,7 +4,6 @@ import classnames from "classnames";
 import loadingImage from "../../../images/icons/noImage.svg";
 import { Text } from "../";
 import { getUrl } from '../../../firebase/helpers';
-const firebase = require("firebase");
 
 type Props = {
   data: {
