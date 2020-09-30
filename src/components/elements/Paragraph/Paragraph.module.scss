@@ -53,7 +53,7 @@
       flex-direction: column;
 
       .imageContainerInner {
-        width: 100%;
+        width: 100vw;
         margin-left: -25px;
         position: relative;
         max-height: 360px;
@@ -108,7 +108,7 @@
     }
 
     .imageContainerInner {
-      width: 100%;
+      width: 100vw;
       max-width: unset;
       position: relative;
       max-height: 360px;
