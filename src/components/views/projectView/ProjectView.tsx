@@ -9,6 +9,7 @@ import nextArrow from "../../../images/icons/arrow-right-white.svg";
 type Props = typeof ProjectView.defaultProps & {
   isOpen: boolean,
   closeProject: () => void,
+  switchProject: (destination: any, projectRef: any) => void,
   data: {
     title: string,
     skills_used: Array<string>,
@@ -23,6 +24,7 @@ type Props = typeof ProjectView.defaultProps & {
 }
 
 type State = {
+  currentProject: number,
   isOpen: boolean,
   variableHeaderVisible: boolean,
   imageViewOpen: boolean,
@@ -36,6 +38,7 @@ class ProjectView extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      currentProject: 0,
       isOpen: false,
       variableHeaderVisible: false,
       imageViewOpen: false,
@@ -67,6 +70,7 @@ class ProjectView extends PureComponent<Props, State> {
   static getDerivedStateFromProps(props: Props) {
     return {
       isOpen: props.isOpen,
+      currentProject: props.data.index
     };
   }
 
@@ -154,22 +158,31 @@ class ProjectView extends PureComponent<Props, State> {
 
   mapParagraphs = () => {
     const { paragraphs } = this.props;
+    const { openImageView } = this;
     return paragraphs.map((paragraph: any, key: number) => (
       <Paragraph
         key={key}
         lifted={paragraph.lifted}
         reversed={paragraph.reversed}
         variant={paragraph.variant}
-        imageClickFunc={() =>
-          this.openImageView(paragraph.image, paragraph.imageAlt)
-        }
+        imageClickFunc={openImageView}
         title={paragraph.title}
         text={paragraph.text}
-        image={paragraph.image}
+        image={paragraph.imageSource}
         imageAlt={paragraph.imageAlt}
         imageDescription={paragraph.imageDescription}
       />
     ))
+  }
+
+  handleNextClick = () => {
+    const { switchProject } = this.props;
+    switchProject("next", this.projectRef.current);
+  }
+
+  handlePreviousClick = () => {
+    const { switchProject } = this.props;
+    switchProject("previous", this.projectRef.current);
   }
 
   render() {
@@ -187,6 +200,8 @@ class ProjectView extends PureComponent<Props, State> {
       closeImageView,
       mapSkills,
       mapParagraphs,
+      handleNextClick,
+      handlePreviousClick,
     } = this;
 
     return (
@@ -272,9 +287,9 @@ class ProjectView extends PureComponent<Props, State> {
             <div className={classnames(styles.haze)} />
             <div className={classnames(styles.footerInner)} >
               {
-                allIndexes.some(el => el < data.index) &&
+                allIndexes.some(otherIndex => otherIndex < data.index) &&
                 (
-                  <div className={classnames(styles.prevProject)}>
+                  <div className={classnames(styles.prevProject)} onClick={handlePreviousClick}>
                     <img src={backArrow} alt={"previous project"} />
                     <Text strong text={"Previous project"} />
                   </div>
@@ -284,8 +299,8 @@ class ProjectView extends PureComponent<Props, State> {
                 <Text variant={"h2"} text={data.title} />
               </div>
               {
-                allIndexes.some(el => el > data.index) &&
-                (<div className={classnames(styles.nextProject)}>
+                allIndexes.some(otherIndex => otherIndex > data.index) &&
+                (<div className={classnames(styles.nextProject)} onClick={handleNextClick}>
                   <Text strong text={"Next project"} />
                   <img src={nextArrow} alt={"previous project"} />
                 </div>)

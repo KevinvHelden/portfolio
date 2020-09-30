@@ -52,6 +52,19 @@ class Projects extends PureComponent<Props, State> {
     })
   }
 
+  switchProject = (destination: any, projectRef: any) => {
+    const { retrieveData } = this;
+    projectRef.scrollTop = 0;
+    const currentProject = this.state.projectViewData.index;
+    let destinationProject = 0;
+    if (destination === "next") {
+      destinationProject = currentProject + 1
+    } else if (destination === "previous") {
+      destinationProject = currentProject - 1
+    }
+    retrieveData(destinationProject);
+  }
+
   storeProjectIndexes = (indexes: number[]) => {
     const { allProjectIndexes } = this.state;
     if (allProjectIndexes.length == 0) {
@@ -116,13 +129,13 @@ class Projects extends PureComponent<Props, State> {
 
   render() {
     const { anchor, reference } = this.props;
-    const { openProject, closeProject, storeProjectIndexes } = this;
+    const { openProject, closeProject, storeProjectIndexes, switchProject } = this;
     const { projectIsOpen, projectViewData, projectViewBanner, projectViewParagraphs, allProjectIndexes } = this.state;
 
     return (
       <section ref={reference} id={anchor} className={classnames(styles.root)}>
         <ProjectOverview projectFunc={openProject} loadFunc={storeProjectIndexes} />
-        <ProjectView data={projectViewData} paragraphs={projectViewParagraphs} banner={projectViewBanner} allIndexes={allProjectIndexes} isOpen={projectIsOpen} closeProject={closeProject} />
+        <ProjectView data={projectViewData} paragraphs={projectViewParagraphs} banner={projectViewBanner} allIndexes={allProjectIndexes} switchProject={switchProject} isOpen={projectIsOpen} closeProject={closeProject} />
       </section>
     );
   }
