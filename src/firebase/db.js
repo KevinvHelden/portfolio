@@ -1,11 +1,5 @@
-import { config } from "./config";
-const firebase = require("firebase");
-// Required for side-effects
-require("firebase/firestore");
+import { firebaseInit } from "./helpers";
 
-// Initialize Cloud Firestore through Firebase
-firebase.initializeApp(config);
-
-const db = firebase.firestore();
+const db = firebaseInit.firestore();
 
 export default db;

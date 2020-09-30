@@ -3,7 +3,8 @@ import styles from "./Project.module.scss";
 import classnames from "classnames";
 import loadingImage from "../../../images/icons/noImage.svg";
 import { Text } from "../";
-import getImage from '../../../firebase/helpers/getImage';
+import { getUrl } from '../../../firebase/helpers';
+const firebase = require("firebase");
 
 type Props = {
   data: {
@@ -11,15 +12,25 @@ type Props = {
     tags: Array<string>,
     description: string,
     bannerSource: string,
+    index: number,
   },
   alignment?: string,
-  clickFunc: () => void,
+  clickFunc: (id: number) => void,
 }
 
-class Project extends PureComponent<Props> {
+type State = {
+  bannerSource: string,
+}
+
+class Project extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {};
+    // Don't call this.setState() here!
+    this.state = { bannerSource: "" };
+  }
+
+  componentDidMount() {
+    this.storeBanner("projectBanners", this.props.data.bannerSource);
   }
 
   formatTags = (tags: Array<string>) => {
@@ -33,10 +44,21 @@ class Project extends PureComponent<Props> {
     return tagsString
   }
 
+  storeBanner = (folder: string, image: string) => {
+    getUrl(folder, image).then(src => this.setState({
+      bannerSource: src
+    }));
+  }
+
+  handleClick = () => {
+    const { clickFunc, data } = this.props;
+    clickFunc && clickFunc(data.index);
+  }
+
   render() {
-    const { data, clickFunc, alignment } = this.props;
-    const { formatTags } = this;
-    console.log(getImage("projectBanners", "3rdYearInternshipSmall.jpeg"));
+    const { data, alignment } = this.props;
+    const { formatTags, handleClick } = this;
+    const { bannerSource } = this.state;
 
     return (
       <div className={classnames(styles.root, { [styles.left]: alignment === "left" })}>
@@ -44,14 +66,14 @@ class Project extends PureComponent<Props> {
           <Text variant={"p"} text={formatTags(data.tags)} strong />
           <Text variant={"h2"} text={data.title} />
           <Text variant={"p"} text={data.description} />
-          <Text clickFunc={clickFunc && clickFunc} variant={"p"} text={"Read more"} strong />
+          <Text clickFunc={handleClick} variant={"p"} text={"Read more"} strong />
         </div>
         <div className={classnames(styles.imageView)}>
           <div className={classnames(styles.imageContainer)}>
-            {data.bannerSource ?
+            {bannerSource ?
               <img
                 className={classnames(styles.image)}
-                src={data.bannerSource}
+                src={bannerSource ? bannerSource : ""}
                 alt={"banner"}
                 draggable={false}
               />

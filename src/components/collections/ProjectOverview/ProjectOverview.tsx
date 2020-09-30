@@ -2,21 +2,37 @@ import React, { PureComponent } from "react";
 import styles from "./ProjectOverview.module.scss";
 import classnames from "classnames";
 import { Project } from "../../elements";
+import db from '../../../firebase/db';
 
 type Props = {
+  projectFunc: (id: number) => void,
+  loadFunc: (indexes: number[]) => void,
+}
+
+type State = {
   projects: [{
     title: string,
     description: string,
     tags: Array<string>,
     bannerSource: string,
   }],
-  projectFunc: () => void,
 }
 
-class ProjectOverview extends PureComponent<Props> {
+class ProjectOverview extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {};
+    this.state = {
+      projects: [{
+        title: "",
+        description: "",
+        tags: [""],
+        bannerSource: ""
+      }]
+    };
+  }
+
+  componentDidMount() {
+    this.getProjects();
   }
 
   isOdd = (num: number) => {
@@ -38,10 +54,11 @@ class ProjectOverview extends PureComponent<Props> {
   }
 
   formatCards = () => {
-    const { projects, projectFunc } = this.props;
+    const { projectFunc } = this.props;
     const { sortByIndex } = this;
+    const { projects } = this.state;
     const sortedProjects = sortByIndex(projects);
-    if (projects) {
+    if (projects[0].title) {
       return sortedProjects.map((project: any, index: number) => (
         <Project
           data={project}
@@ -52,6 +69,22 @@ class ProjectOverview extends PureComponent<Props> {
       ))
     };
   };
+
+  getProjects = async () => {
+    const { loadFunc } = this.props;
+    const projects: any = [];
+    const projectIndexes: number[] = [];
+    await db.collection("projects").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        projects.push(doc.data());
+        projectIndexes.push(doc.data().index);
+      });
+    });
+    this.setState({
+      projects: projects
+    });
+    loadFunc(projectIndexes);
+  }
 
   render() {
     const { formatCards } = this;

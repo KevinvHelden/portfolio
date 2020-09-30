@@ -5,7 +5,7 @@
   color: var(--default-font-colour);
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   height: auto;
   display: flex;
   padding: 0px 25px 0px;
@@ -53,7 +53,7 @@
       flex-direction: column;
 
       .imageContainerInner {
-        width: 100vw;
+        width: 100%;
         margin-left: -25px;
         position: relative;
         max-height: 360px;
@@ -108,7 +108,7 @@
     }
 
     .imageContainerInner {
-      width: 100vw;
+      width: 100%;
       max-width: unset;
       position: relative;
       max-height: 360px;
@@ -162,7 +162,7 @@
   background-color: var(--lifted1);
   margin: 0;
   margin-bottom: 100px;
-  width: 100vw;
+  width: 100%;
   padding: 50px 25px;
 }
 
@@ -244,6 +244,6 @@
   }
 
   .root.lifted {
-    padding: 100px calc(calc(100vw - 1200px) / 2);
+    padding: 100px calc(calc(100% - 1200px) / 2);
   }
 }

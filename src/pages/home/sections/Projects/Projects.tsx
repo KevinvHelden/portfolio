@@ -3,8 +3,8 @@ import styles from "./Projects.module.scss";
 import classnames from "classnames";
 import { ProjectOverview } from "../../../../components/collections";
 import { ProjectView } from "../../../../components/views";
-import digitasLarge from '../../../../images/projects/Large/digitasLarge.jpg';
 import db from '../../../../firebase/db';
+import { getUrl } from '../../../../firebase/helpers';
 
 type Props = {
   anchor: string,
@@ -13,33 +13,36 @@ type Props = {
 
 type State = {
   projectIsOpen: boolean,
-  projects: [{
-    title: string,
-    description: string,
-    tags: Array<string>,
-    bannerSource: string,
-  }],
+  projectId: number,
+  projectViewData: any,
+  projectViewBanner: string,
+  projectViewParagraphs: any,
+  allProjectIndexes: any,
 }
 
 class Projects extends PureComponent<Props, State> {
 
   state: State = {
     projectIsOpen: false,
-    projects: [{
+    projectId: 0,
+    projectViewData: {
       title: "",
-      description: "",
-      tags: [""],
-      bannerSource: ""
-    }]
+      skills_used: [],
+      subtitle: "",
+      summary: "",
+      year: "",
+      index: 0,
+    },
+    projectViewBanner: "",
+    projectViewParagraphs: [],
+    allProjectIndexes: [],
   };
 
-  componentDidMount() {
-    this.getProjects();
-  }
-
-  openProject = () => {
+  openProject = (id: number) => {
+    this.retrieveData(id);
     this.setState({
       projectIsOpen: true,
+      projectId: id
     })
   };
 
@@ -49,28 +52,77 @@ class Projects extends PureComponent<Props, State> {
     })
   }
 
-  getProjects = async () => {
-    const projects: any = [];
-    await db.collection("projects").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        projects.push(doc.data());
+  storeProjectIndexes = (indexes: number[]) => {
+    const { allProjectIndexes } = this.state;
+    if (allProjectIndexes.length == 0) {
+      this.setState({
+        allProjectIndexes: indexes
+      })
+    }
+  }
+
+  storeBanner = (folder: string, image: string) => {
+    getUrl(folder, image).then((src: any) => this.setState({
+      projectViewBanner: src
+    }
+    ));
+  }
+
+  retrieveParagraphs = () => {
+    const { projectId } = this.state;
+    const index: number = projectId;
+    const paragraphs: any[] = [];
+
+    db.collection("projectOverviews").where("index", "==", index).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc: any) => {
+        db.collection(`projectOverviews/${doc.id}/paragraphs`).get().then((querySnapshot: any) => {
+          querySnapshot.forEach((doc: any) => {
+            paragraphs.push(doc.data())
+          })
+          this.setState({
+            projectViewParagraphs: paragraphs
+          })
+        })
       });
-    });
-    this.setState({
-      projects: projects
-    });
+    })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
+
+  retrieveData = (id: number) => {
+    const { projectId } = this.state;
+    const index = id;
+    let items: any = {};
+    if (projectId !== id) {
+      this.setState({
+        projectId: id
+      });
+      db.collection("projectOverviews").where("index", "==", index)
+        .get()
+        .then((querySnapshot: any) => {
+          items = querySnapshot.docs[0].data();
+          this.setState({
+            projectViewData: items,
+          });
+          this.storeBanner("projectViewBanners", this.state.projectViewData.banner);
+          this.retrieveParagraphs();
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+    }
   }
 
   render() {
     const { anchor, reference } = this.props;
-    const { openProject, closeProject } = this;
-    const { projectIsOpen, projects } = this.state;
-    const projectData = { title: "3rd Year internship", subtitle: "Digitas", background: digitasLarge, content: "" };
+    const { openProject, closeProject, storeProjectIndexes } = this;
+    const { projectIsOpen, projectViewData, projectViewBanner, projectViewParagraphs, allProjectIndexes } = this.state;
 
     return (
       <section ref={reference} id={anchor} className={classnames(styles.root)}>
-        <ProjectOverview projects={projects} projectFunc={openProject} />
-        <ProjectView data={projectData} isOpen={projectIsOpen} closeProject={closeProject} />
+        <ProjectOverview projectFunc={openProject} loadFunc={storeProjectIndexes} />
+        <ProjectView data={projectViewData} paragraphs={projectViewParagraphs} banner={projectViewBanner} allIndexes={allProjectIndexes} isOpen={projectIsOpen} closeProject={closeProject} />
       </section>
     );
   }

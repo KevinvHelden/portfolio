@@ -26,12 +26,12 @@ class Contact extends PureComponent<Props> {
               <Text text={"Phone"} strong />
               <Text link={"tel:+31611031374"} text={"+31 6 1103 1374"} />
             </div>
+            <div>
+              <Text text={"Social"} strong />
+              <Text link={"https://www.linkedin.com/in/kevin-van-helden-671726141/"} text={"LinkedIn"} />
+            </div>
           </div>
           <EmailForm />
-          <div className={classnames(styles.socialContact)}>
-            <Text variant={"h5"} text={"Contact me via social media"} />
-            <Text link={"https://www.linkedin.com/in/kevin-van-helden-671726141/"} text={"LinkedIn"} />
-          </div>
         </div>
       </section>
     );
