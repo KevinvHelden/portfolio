@@ -9,7 +9,7 @@ import nextArrow from "../../../images/icons/arrow-right-white.svg";
 type Props = typeof ProjectView.defaultProps & {
   isOpen: boolean,
   closeProject: () => void,
-  switchProject: (destination: any, turnLoadingOff: () => void) => void,
+  switchProject: (destination: any, turnLoadingOff: (direction: string) => void) => void,
   data: {
     title: string,
     skills_used: Array<string>,
@@ -174,14 +174,24 @@ class ProjectView extends PureComponent<Props, State> {
     ))
   }
 
-  stopLoading = () => {
+  transitionPages = (direction: string) => {
     //Scroll up and make everything scale back to normal
     const project = this.projectRef.current;
     const title = this.titleRef.current;
     const banner = this.bannerRef.current;
-    setTimeout(() => {
-      if (banner && title && project) {
+    const rootInner = document.getElementById("rootInner");
+
+    //Fade out
+    if (rootInner && banner && title && project) {
+      //pushes content to left
+      direction === "next" ?
+        rootInner.style.transform = "translateX(-200px)"
+        :
+        rootInner.style.transform = "translateX(200px)";
+      rootInner.style.opacity = "0";
+      setTimeout(() => {
         project.style.scrollBehavior = "unset";
+        //scrolls back up
         project.scrollTop = 0;
         project.style.scrollBehavior = "smooth";
         //image enlarges on scroll
@@ -190,23 +200,34 @@ class ProjectView extends PureComponent<Props, State> {
         //become invisible on scroll
         banner.style.opacity = "1";
         title.style.opacity = "1";
-      };
-    }, 500);
-
-    //Fade in
-    console.log("turn loading off")
-  }
+        setTimeout(() => {
+          rootInner.style.transition = "unset";
+          setTimeout(() => {
+            direction === "next" ?
+              rootInner.style.transform = "translateX(200px)"
+              :
+              rootInner.style.transform = "translateX(-200px)";
+            setTimeout(() => {
+              rootInner.style.transition = "inherit";
+              rootInner.style.transform = "translateX(0)";
+              rootInner.style.opacity = "1";
+            }, 500);
+          }, 1);
+        }, 1);
+      }, 500);
+    }
+  };
 
   handleNextClick = () => {
     //enable loading animation
     const { switchProject } = this.props;
-    switchProject("next", this.stopLoading);
+    switchProject("next", () => this.transitionPages("next"));
   }
 
   handlePreviousClick = () => {
     //enable loading animation
     const { switchProject } = this.props;
-    switchProject("previous", this.stopLoading);
+    switchProject("previous", () => this.transitionPages("previous"));
   }
 
   render() {
@@ -234,115 +255,117 @@ class ProjectView extends PureComponent<Props, State> {
           ref={projectRef}
           className={classnames(styles.root, { [styles.active]: isOpen })}
         >
-          <div
-            id={"variableHeaderRef"}
-            className={classnames(styles.variableHeader, {
-              [styles.visible]: variableHeaderVisible,
-            })}
-          >
+          <div id={"rootInner"} className={classnames(styles.rootInner)}>
             <div
-              className={classnames(styles.backContainer)}
-              onClick={handleClose}
+              id={"variableHeaderRef"}
+              className={classnames(styles.variableHeader, {
+                [styles.visible]: variableHeaderVisible,
+              })}
             >
-              <img
-                className={classnames(styles.dismissButton)}
-                src={backArrow}
-                alt={"back button"}
-              />
-              <Text text={"Projects"} strong />
-            </div>
-            <Text text={data.title} strong />
-          </div>
-          <div className={classnames(styles.frontpage)}>
-            <div className={classnames(styles.backgroundImage)}>
-              <img ref={bannerRef} src={banner} alt={"background"} />
-              <div className={classnames(styles.backgroundFilter)} />
-            </div>
-
-            <div ref={titleRef} className={classnames(styles.projectTitle)}>
-              <div className={classnames(styles.projectTitleInner)}>
-                <Text variant={"h5"} text={data.subtitle} />
-                <Text variant={"h1"} text={data.title} extraLarge />
+              <div
+                className={classnames(styles.backContainer)}
+                onClick={handleClose}
+              >
+                <img
+                  className={classnames(styles.dismissButton)}
+                  src={backArrow}
+                  alt={"back button"}
+                />
+                <Text text={"Projects"} strong />
               </div>
+              <Text text={data.title} strong />
             </div>
-          </div>
-
-          <div className={classnames(styles.content)}>
-            <div className={classnames(styles.summaryContainer)}>
-              <div className={classnames(styles.summary)}>
-                <Text
-                  variant={"h2"}
-                  text={
-                    "Summary"
-                  }
-                />
-                <Text
-                  variant={"p"}
-                  text={
-                    data.summary
-                  }
-                />
+            <div className={classnames(styles.frontpage)}>
+              <div className={classnames(styles.backgroundImage)}>
+                <img ref={bannerRef} src={banner} alt={"background"} />
+                <div className={classnames(styles.backgroundFilter)} />
               </div>
-              <div className={classnames(styles.skills)}>
-                <Text
-                  text={"Skills used"}
-                  strong
-                />
-                <div>
-                  {mapSkills()}
+
+              <div ref={titleRef} className={classnames(styles.projectTitle)}>
+                <div className={classnames(styles.projectTitleInner)}>
+                  <Text variant={"h5"} text={data.subtitle} />
+                  <Text variant={"h1"} text={data.title} extraLarge />
                 </div>
               </div>
-              <div className={classnames(styles.year)}>
-                <Text
-                  text={"Year"}
-                  strong
-                />
-                <Text
-                  text={data.year}
-                />
-              </div>
             </div>
-            {mapParagraphs()}
-          </div>
-          <footer className={classnames(styles.projectFooter)}>
-            <div className={classnames(styles.imageContainer)}>
-              <img src={banner} alt={"Footer background"} />
-            </div>
-            <div className={classnames(styles.haze)} />
-            <div className={classnames(styles.footerInner)} >
-              {
-                allIndexes.some(otherIndex => otherIndex < data.index) &&
-                (
-                  <div className={classnames(styles.prevProject)} onClick={handlePreviousClick}>
-                    <img src={backArrow} alt={"previous project"} />
-                    <Text strong text={"Previous project"} />
+
+            <div className={classnames(styles.content)}>
+              <div className={classnames(styles.summaryContainer)}>
+                <div className={classnames(styles.summary)}>
+                  <Text
+                    variant={"h2"}
+                    text={
+                      "Summary"
+                    }
+                  />
+                  <Text
+                    variant={"p"}
+                    text={
+                      data.summary
+                    }
+                  />
+                </div>
+                <div className={classnames(styles.skills)}>
+                  <Text
+                    text={"Skills used"}
+                    strong
+                  />
+                  <div>
+                    {mapSkills()}
                   </div>
-                )
-              }
-              <div className={classnames(styles.titleContainer)}>
-                <Text variant={"h2"} text={data.title} />
+                </div>
+                <div className={classnames(styles.year)}>
+                  <Text
+                    text={"Year"}
+                    strong
+                  />
+                  <Text
+                    text={data.year}
+                  />
+                </div>
               </div>
-              {
-                allIndexes.some(otherIndex => otherIndex > data.index) &&
-                (<div className={classnames(styles.nextProject)} onClick={handleNextClick}>
-                  <Text strong text={"Next project"} />
-                  <img src={nextArrow} alt={"previous project"} />
-                </div>)
-              }
+              {mapParagraphs()}
             </div>
-            <div className={classnames(styles.socialFooter)}>
-              <div className={classnames(styles.socialContainer)}>
-                <a
-                  href={
-                    "https://www.linkedin.com/in/kevin-van-helden-671726141/"
-                  }
-                >
-                  <Icon icon={"linkedIn"} />
-                </a>
-                <Icon link={"mailto:k.v.helden96@hotmail.com"} icon={"mail"} />
+            <footer className={classnames(styles.projectFooter)}>
+              <div className={classnames(styles.imageContainer)}>
+                <img src={banner} alt={"Footer background"} />
               </div>
-            </div>
-          </footer>
+              <div className={classnames(styles.haze)} />
+              <div className={classnames(styles.footerInner)} >
+                {
+                  allIndexes.some(otherIndex => otherIndex < data.index) &&
+                  (
+                    <div className={classnames(styles.prevProject)} onClick={handlePreviousClick}>
+                      <img src={backArrow} alt={"previous project"} />
+                      <Text strong text={"Previous project"} />
+                    </div>
+                  )
+                }
+                <div className={classnames(styles.titleContainer)}>
+                  <Text variant={"h2"} text={data.title} />
+                </div>
+                {
+                  allIndexes.some(otherIndex => otherIndex > data.index) &&
+                  (<div className={classnames(styles.nextProject)} onClick={handleNextClick}>
+                    <Text strong text={"Next project"} />
+                    <img src={nextArrow} alt={"previous project"} />
+                  </div>)
+                }
+              </div>
+              <div className={classnames(styles.socialFooter)}>
+                <div className={classnames(styles.socialContainer)}>
+                  <a
+                    href={
+                      "https://www.linkedin.com/in/kevin-van-helden-671726141/"
+                    }
+                  >
+                    <Icon icon={"linkedIn"} />
+                  </a>
+                  <Icon link={"mailto:k.v.helden96@hotmail.com"} icon={"mail"} />
+                </div>
+              </div>
+            </footer>
+          </div>
         </div>
         <ImageView closeView={closeImageView} open={imageViewOpen} data={{ image: imageViewData.image, alt: imageViewData.alt }} />
       </Fragment>

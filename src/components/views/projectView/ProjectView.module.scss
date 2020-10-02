@@ -21,6 +21,10 @@
   /* CHANGE TO AUTO TO MAKE OVERFLOW X WORK ON MOBILE */
   -webkit-overflow-scrolling: touch;
 
+  .rootInner {
+    transition: var(--default-transition);
+  }
+
   footer {
     display: flex;
     flex-direction: column;

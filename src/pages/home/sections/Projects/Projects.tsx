@@ -48,7 +48,7 @@ class Projects extends PureComponent<Props, State> {
     })
   }
 
-  switchProject = (destination: any, turnLoadingOff: () => void) => {
+  switchProject = (destination: any, turnLoadingOff: (direction: string) => void) => {
     const { retrieveData } = this;
     const currentProject = this.state.projectViewData.index;
     let destinationProject = 0;
@@ -58,7 +58,7 @@ class Projects extends PureComponent<Props, State> {
       destinationProject = currentProject - 1
     }
     retrieveData(destinationProject).then(() => {
-      turnLoadingOff();
+      turnLoadingOff(destination);
     });
   }
 
@@ -96,7 +96,7 @@ class Projects extends PureComponent<Props, State> {
         .catch(function (error) {
           console.log("Error getting documents: ", error);
         });
-    //Same project as before is opened so no calls to firebase
+      //Same project as before is opened so no calls to firebase
     } else {
       this.setState({
         projectIsOpen: true,
