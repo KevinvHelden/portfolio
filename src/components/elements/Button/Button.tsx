@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import styles from "./Button.module.scss";
 import classnames from "classnames";
-import { Text } from "../";
+import { Text, Icon } from "../";
 
 type Props = typeof Button.defaultProps & {
   text: string,
@@ -10,9 +10,10 @@ type Props = typeof Button.defaultProps & {
   clickFunc?: () => void,
   link?: string,
   disabled?: boolean,
+  icon?: string,
 }
 
-class Button extends PureComponent <Props> {
+class Button extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.state = {};
@@ -26,7 +27,7 @@ class Button extends PureComponent <Props> {
   };
 
   render() {
-    const { text, variant, link, disabled, buttonType } = this.props;
+    const { text, variant, link, disabled, buttonType, icon } = this.props;
 
     return (
       <Fragment>
@@ -38,28 +39,36 @@ class Button extends PureComponent <Props> {
                 styles.root,
                 { [styles.primary]: variant === "primary" },
                 { [styles.secondary]: variant === "secondary" },
-                { [styles.ghost]: variant === "ghost" }
+                { [styles.ghost]: variant === "ghost" },
+                { [styles.iconButton]: icon },
               )}
               {...(disabled && disabled)}
             >
               <Text text={text} strong />
+              {
+                icon && <Icon icon={icon} />
+              }
             </button>
           </a>
         ) : (
-          <button
-            type={buttonType}
-            {...(disabled && disabled)}
-            className={classnames(
-              styles.root,
-              { [styles.primary]: variant === "primary" },
-              { [styles.secondary]: variant === "secondary" },
-              { [styles.ghost]: variant === "ghost" }
-            )}
-            {...(disabled && disabled)}
-          >
-            <Text text={text} strong />
-          </button>
-        )}
+            <button
+              type={buttonType}
+              {...(disabled && disabled)}
+              className={classnames(
+                styles.root,
+                { [styles.primary]: variant === "primary" },
+                { [styles.secondary]: variant === "secondary" },
+                { [styles.ghost]: variant === "ghost" },
+                { [styles.iconButton]: icon },
+              )}
+              {...(disabled && disabled)}
+            >
+              <Text text={text} strong />
+              {
+                icon && <Icon icon={icon} />
+              }
+            </button>
+          )}
       </Fragment>
     );
   }

@@ -7,10 +7,24 @@
   border: none;
   border-radius: 5px;
   transition: var(--default-transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .root:hover {
   cursor: pointer;
+}
+
+.root.iconButton {
+  p {
+    margin-right: 10px;
+  }
+
+  img {
+    height: 12px;
+    width: auto;
+  }
 }
 
 .root.primary {
@@ -18,7 +32,7 @@
 }
 
 .root.primary:hover {
-  filter: brightness(120%)
+  filter: brightness(120%);
 }
 
 .root.secondary p {
