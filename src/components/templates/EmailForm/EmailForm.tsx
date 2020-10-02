@@ -57,7 +57,7 @@ class EmailForm extends PureComponent<Props, State> {
           placeholder={"Your question/message"}
           saveToParent={saveMessage}
         />
-        <Button buttonType={"submit"} text={"Send"} />
+        <Button buttonType={"submit"} text={"Send"} icon={"arrowRightWhite"} />
       </form>
     );
   }
