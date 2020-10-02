@@ -9,7 +9,7 @@ import nextArrow from "../../../images/icons/arrow-right-white.svg";
 type Props = typeof ProjectView.defaultProps & {
   isOpen: boolean,
   closeProject: () => void,
-  switchProject: (destination: any, projectRef: any) => void,
+  switchProject: (destination: any, turnLoadingOff: () => void) => void,
   data: {
     title: string,
     skills_used: Array<string>,
@@ -70,7 +70,6 @@ class ProjectView extends PureComponent<Props, State> {
   static getDerivedStateFromProps(props: Props) {
     return {
       isOpen: props.isOpen,
-      currentProject: props.data.index
     };
   }
 
@@ -175,14 +174,39 @@ class ProjectView extends PureComponent<Props, State> {
     ))
   }
 
+  stopLoading = () => {
+    //Scroll up and make everything scale back to normal
+    const project = this.projectRef.current;
+    const title = this.titleRef.current;
+    const banner = this.bannerRef.current;
+    setTimeout(() => {
+      if (banner && title && project) {
+        project.style.scrollBehavior = "unset";
+        project.scrollTop = 0;
+        project.style.scrollBehavior = "smooth";
+        //image enlarges on scroll
+        banner.style.transform =
+          "translateY(-50%) scale(1)";
+        //become invisible on scroll
+        banner.style.opacity = "1";
+        title.style.opacity = "1";
+      };
+    }, 500);
+
+    //Fade in
+    console.log("turn loading off")
+  }
+
   handleNextClick = () => {
+    //enable loading animation
     const { switchProject } = this.props;
-    switchProject("next", this.projectRef.current);
+    switchProject("next", this.stopLoading);
   }
 
   handlePreviousClick = () => {
+    //enable loading animation
     const { switchProject } = this.props;
-    switchProject("previous", this.projectRef.current);
+    switchProject("previous", this.stopLoading);
   }
 
   render() {

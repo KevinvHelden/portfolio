@@ -35,7 +35,6 @@ class Header extends PureComponent<Props, State> {
 
   static getDerivedStateFromProps(props: Props) {
     return {
-      activePage: props.activePage(),
       alt: props.alt
     };
   }
@@ -89,7 +88,7 @@ class Header extends PureComponent<Props, State> {
           })}
         >
           <div className={classnames({ [styles.active]: activePage === "home" })}>
-            <Text variant={"h6"} clickFunc={handleOverlayHome} text={"About"} strong />
+            <Text variant={"h6"} clickFunc={handleOverlayHome} text={"Home"} strong />
           </div>
           <div className={classnames({ [styles.active]: activePage === "projects" })}>
             <Text variant={"h6"} clickFunc={handleOverlayProjects} text={"Projects"} strong />
@@ -117,7 +116,7 @@ class Header extends PureComponent<Props, State> {
                     [styles.active]: activePage === "home",
                   })}
                 >
-                  <Text text={"About"} strong />
+                  <Text text={"Home"} strong />
                 </div>
                 <div
                   onClick={() => navClickFunc(pageRefs.projects)}

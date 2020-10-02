@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
 import styles from "./Paragraph.module.scss";
 import classnames from "classnames";
 import { Text, Image } from "../";
@@ -7,8 +7,8 @@ import { getUrl } from '../../../firebase/helpers';
 
 type Props = {
   title?: string,
-  text?: string,
-  variant?: 'text' | 'image' | 'textAndImage' | 'textAndVideo',
+  text?: Array<string>,
+  variant?: 'text' | 'image' | 'textAndImage' | 'textAndVideo' | 'banner',
   image: string,
   imageAlt: string,
   imageClickFunc: (image: string, alt: string) => void,
@@ -31,12 +31,12 @@ class Paragraph extends PureComponent<Props, State> {
 
   componentDidMount() {
     const { image } = this.props;
-    this.getImage("paragraphImages", image);
+    image && this.getImage("paragraphImages", image);
   }
 
   componentDidUpdate() {
     const { image } = this.props;
-    this.getImage("paragraphImages", image);
+    image !== "" && this.getImage("paragraphImages", image);
   }
 
   getImage = (folder: string, imageSource: string) => {
@@ -52,10 +52,33 @@ class Paragraph extends PureComponent<Props, State> {
     imageClickFunc(image, imageAlt);
   }
 
+  formatTextarray = () => {
+    const { text } = this.props;
+    const firstHalf = text?.slice(0, text.length / 2);
+    const secondHalf = text?.slice(text.length / 2, text.length);
+    return (
+      <Fragment>
+        <div className={classnames(styles.textContainerInner)}>
+          {
+            firstHalf?.map((item: string, index: number) => {
+              return <Text key={index} text={item} />
+            })
+          }
+        </div>
+        <div className={classnames(styles.textContainerInner)}>
+          {
+            secondHalf?.map((item: string, index: number) => {
+              return <Text key={index} text={item} />
+            })
+          }
+        </div>
+      </Fragment>
+    )
+  }
+
   render() {
     const {
       title = "",
-      text = "",
       variant = 'text',
       imageAlt = "",
       lifted,
@@ -63,7 +86,7 @@ class Paragraph extends PureComponent<Props, State> {
       imageDescription,
     } = this.props;
     const { image } = this.state;
-    const { handleImageClick } = this;
+    const { handleImageClick, formatTextarray } = this;
 
     return (
       <section className={classnames(styles.root, title, { [styles.lifted]: lifted })}>
@@ -71,7 +94,9 @@ class Paragraph extends PureComponent<Props, State> {
         {variant === "text" && (
           <div className={classnames(styles.textContainer)}>
             <Text variant={"h2"} text={title} />
-            {<Text text={text} />}
+            <div className={classnames(styles.textInnerContainer)}>
+              {formatTextarray()}
+            </div>
           </div>
         )}
         {/* ----------------------------------------------------------------------------IMAGE */}
@@ -96,12 +121,23 @@ class Paragraph extends PureComponent<Props, State> {
             </div>
           </div>
         )}
+        {/* ----------------------------------------------------------------------------BANNER */}
+        {variant === "banner" && imageAlt && (
+          <div className={classnames(styles.bannerContainer)}>
+            {
+              <Image
+                source={image}
+                alt={imageAlt}
+              />
+            }
+          </div>
+        )}
         {/* ----------------------------------------------------------------------TEXT & IMAGE */}
         {variant === "textAndImage" && imageAlt && (
           <div className={classnames(styles.textAndImageContainer, { [styles.reversed]: reversed })}>
             <div className={classnames(styles.textAndImageContainerText)}>
               <Text variant={"h2"} text={title} />
-              <Text text={text} />
+              {formatTextarray()}
             </div>
             <div className={classnames(styles.textAndImageContainerImage)}>
               <div className={classnames(styles.imageContainerInner)}>

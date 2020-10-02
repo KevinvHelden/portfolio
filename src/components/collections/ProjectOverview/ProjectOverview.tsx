@@ -83,6 +83,7 @@ class ProjectOverview extends PureComponent<Props, State> {
     this.setState({
       projects: projects
     });
+    //Sets array of all indexes to check wether there is a higher or lower index than the current one
     loadFunc(projectIndexes);
   }
 

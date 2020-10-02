@@ -29,7 +29,7 @@ class Landing extends PureComponent<Props> {
             />
           </div>
           <div className={classnames(styles.cutoutBackground)}/>
-          <img src={cutOut} alt={"Kevin cutout"} />
+          <img src={cutOut} alt={"Kevin cutout"} draggable={false} />
         </div>
         <div className={classnames(styles.scroll)}>
           <img src={scroll} alt={"scroll"} />

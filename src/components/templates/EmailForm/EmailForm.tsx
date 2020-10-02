@@ -2,7 +2,7 @@ import React, { PureComponent, FormEvent } from "react";
 import styles from "./EmailForm.module.scss";
 import classnames from "classnames";
 
-import { Input, Textarea, Text } from "../../elements";
+import { Textarea, Text, Button, Input } from "../../elements";
 
 type Props = {}
 
@@ -57,7 +57,7 @@ class EmailForm extends PureComponent<Props, State> {
           placeholder={"Your question/message"}
           saveToParent={saveMessage}
         />
-        <Input type={"submit"} />
+        <Button buttonType={"submit"} text={"Send"} />
       </form>
     );
   }

@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { ProjectOverview } from "../../../../components/collections";
 import { ProjectView } from "../../../../components/views";
 import db from '../../../../firebase/db';
-import { getUrl } from '../../../../firebase/helpers';
+import { getUrl, getDocs } from '../../../../firebase/helpers';
 
 type Props = {
   anchor: string,
@@ -40,10 +40,6 @@ class Projects extends PureComponent<Props, State> {
 
   openProject = (id: number) => {
     this.retrieveData(id);
-    this.setState({
-      projectIsOpen: true,
-      projectId: id
-    })
   };
 
   closeProject = () => {
@@ -52,9 +48,8 @@ class Projects extends PureComponent<Props, State> {
     })
   }
 
-  switchProject = (destination: any, projectRef: any) => {
+  switchProject = (destination: any, turnLoadingOff: () => void) => {
     const { retrieveData } = this;
-    projectRef.scrollTop = 0;
     const currentProject = this.state.projectViewData.index;
     let destinationProject = 0;
     if (destination === "next") {
@@ -62,7 +57,9 @@ class Projects extends PureComponent<Props, State> {
     } else if (destination === "previous") {
       destinationProject = currentProject - 1
     }
-    retrieveData(destinationProject);
+    retrieveData(destinationProject).then(() => {
+      turnLoadingOff();
+    });
   }
 
   storeProjectIndexes = (indexes: number[]) => {
@@ -74,56 +71,36 @@ class Projects extends PureComponent<Props, State> {
     }
   }
 
-  storeBanner = (folder: string, image: string) => {
-    getUrl(folder, image).then((src: any) => this.setState({
-      projectViewBanner: src
-    }
-    ));
-  }
-
-  retrieveParagraphs = () => {
+  retrieveData = async (id: number) => {
     const { projectId } = this.state;
-    const index: number = projectId;
-    const paragraphs: any[] = [];
-
-    db.collection("projectOverviews").where("index", "==", index).get().then((querySnapshot) => {
-      querySnapshot.forEach((doc: any) => {
-        db.collection(`projectOverviews/${doc.id}/paragraphs`).get().then((querySnapshot: any) => {
-          querySnapshot.forEach((doc: any) => {
-            paragraphs.push(doc.data())
-          })
-          this.setState({
-            projectViewParagraphs: paragraphs
-          })
-        })
-      });
-    })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-  }
-
-  retrieveData = (id: number) => {
-    const { projectId } = this.state;
-    const index = id;
-    let items: any = {};
+    //If a new project is opened
     if (projectId !== id) {
-      this.setState({
-        projectId: id
-      });
-      db.collection("projectOverviews").where("index", "==", index)
+      //Gets the project with the given id
+      await db.collection("projectOverviews").where("index", "==", id)
         .get()
         .then((querySnapshot: any) => {
-          items = querySnapshot.docs[0].data();
-          this.setState({
-            projectViewData: items,
+          const doc = querySnapshot.docs[0];
+          //Gets the banner of the project
+          getUrl("projectViewBanners", doc.data().banner).then((src: string) => {
+            getDocs(`projectOverviews/${doc.id}/paragraphs`).then((paragraphs) => {
+              this.setState({
+                projectViewBanner: src,
+                projectViewData: doc.data(),
+                projectViewParagraphs: paragraphs,
+                projectIsOpen: true,
+                projectId: id,
+              });
+            });
           });
-          this.storeBanner("projectViewBanners", this.state.projectViewData.banner);
-          this.retrieveParagraphs();
         })
         .catch(function (error) {
           console.log("Error getting documents: ", error);
         });
+    //Same project as before is opened so no calls to firebase
+    } else {
+      this.setState({
+        projectIsOpen: true,
+      });
     }
   }
 

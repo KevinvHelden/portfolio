@@ -1,15 +1,15 @@
 import React, { PureComponent, Fragment } from "react";
 import styles from "./Button.module.scss";
 import classnames from "classnames";
-
 import { Text } from "../";
 
-type Props = {
+type Props = typeof Button.defaultProps & {
   text: string,
-  variant: string,
-  clickFunc: () => void,
-  link: string,
-  disabled: boolean,
+  buttonType?: JSX.IntrinsicElements['button']['type'],
+  variant?: string,
+  clickFunc?: () => void,
+  link?: string,
+  disabled?: boolean,
 }
 
 class Button extends PureComponent <Props> {
@@ -19,20 +19,21 @@ class Button extends PureComponent <Props> {
   }
 
   static defaultProps = {
-    text: null,
+    text: "",
+    buttonType: "button",
     variant: "primary",
-    disabled: true,
+    disabled: false,
   };
 
   render() {
-    const { text, variant, link, disabled } = this.props;
+    const { text, variant, link, disabled, buttonType } = this.props;
 
     return (
       <Fragment>
         {link ? (
           <a href={link}>
             <button
-              type={"button"}
+              type={buttonType}
               className={classnames(
                 styles.root,
                 { [styles.primary]: variant === "primary" },
@@ -46,7 +47,7 @@ class Button extends PureComponent <Props> {
           </a>
         ) : (
           <button
-            type={"button"}
+            type={buttonType}
             {...(disabled && disabled)}
             className={classnames(
               styles.root,

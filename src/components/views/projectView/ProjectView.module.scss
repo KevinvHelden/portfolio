@@ -132,6 +132,15 @@
   transition: var(--default-transition);
   top: 0;
 
+  .visible {
+    background-color: var(--base);
+  
+    p {
+      opacity: 1;
+    }
+  }
+  
+
   p {
     margin: 0 0 0 auto;
     opacity: 0;
@@ -164,6 +173,14 @@
 }
 
 .variableHeader.visible {
+  background-color: var(--base);
+
+  p {
+    opacity: 1;
+  }
+}
+
+.visible {
   background-color: var(--base);
 
   p {

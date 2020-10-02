@@ -1,7 +1,8 @@
 import React, { Fragment, PureComponent } from "react";
-import "./App.module.scss";
+import styles from './App.module.scss';
 import { Header } from "./components/views";
 import { Home, NoMatch } from "./pages";
+import classnames from 'classnames'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends PureComponent {
@@ -67,7 +68,7 @@ class App extends PureComponent {
     };
 
     return (
-      <div className="App">
+      <div className={classnames(styles.root)}>
         <BrowserRouter>
           <Fragment>
             <Header
