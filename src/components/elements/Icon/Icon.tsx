@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import styles from "./Icon.module.scss";
 import classnames from "classnames";
-
 import icons from "./fixtures/icons";
 
 type Props = {
@@ -51,6 +50,7 @@ class Icon extends PureComponent<Props> {
                 (icon === "arrowRight" && icons.arrowRight) ||
                 (icon === "chevronDown" && icons.chevronDown) ||
                 (icon === "chevronUp" && icons.chevronUp) ||
+                (icon === "arrowRightWhite" && icons.arrowRightWhite) ||
                 undefined
               }
               alt={icon}
@@ -82,6 +82,7 @@ class Icon extends PureComponent<Props> {
                 (icon === "arrowRight" && icons.arrowRight) ||
                 (icon === "chevronDown" && icons.chevronDown) ||
                 (icon === "chevronUp" && icons.chevronUp) ||
+                (icon === "arrowRightWhite" && icons.arrowRightWhite) ||
                 undefined
               }
               alt={icon}
