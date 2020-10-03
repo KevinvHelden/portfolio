@@ -1,7 +1,5 @@
 @import './fonts.css';
 @import './colours.css';
-@import './light.css';
-@import './dark.css';
 
 :root {
      /*
@@ -13,13 +11,13 @@
     --secondary: var(--white);
     --link: var(--primary);
     --linkHover: var(--lightPrimary);
-    --default-font-colour: var(--styled-font-colour);
-    --base: var(--styled-base);
-    --lifted5: var(--styled-lifted5);
-    --lifted4: var(--styled-lifted4);
-    --lifted3: var(--styled-lifted3);
-    --lifted2: var(--styled-lifted2);
-    --lifted1: var(--styled-lifted1);
+    --default-font-colour: var(--white);
+    --base: var(--black);
+    --lifted5: var(--grey1);
+    --lifted4: var(--grey2);
+    --lifted3: var(--grey3);
+    --lifted2: var(--grey4);
+    --lifted1: var(--grey5);
     /*
     * Fonts
     ================================================================
