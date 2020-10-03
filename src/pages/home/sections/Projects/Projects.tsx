@@ -48,7 +48,7 @@ class Projects extends PureComponent<Props, State> {
     })
   }
 
-  switchProject = (destination: any, turnLoadingOff: (direction: string) => void) => {
+  switchProject = (destination: any, fadeOut: (direction: string) => void, fadeIn: (direction: string) => void) => {
     const { retrieveData } = this;
     const currentProject = this.state.projectViewData.index;
     let destinationProject = 0;
@@ -57,9 +57,8 @@ class Projects extends PureComponent<Props, State> {
     } else if (destination === "previous") {
       destinationProject = currentProject - 1
     }
-    retrieveData(destinationProject).then(() => {
-      turnLoadingOff(destination);
-    });
+
+    retrieveData(destinationProject, () => fadeOut(destination), () => fadeIn(destination), destination);
   }
 
   storeProjectIndexes = (indexes: number[]) => {
@@ -71,7 +70,11 @@ class Projects extends PureComponent<Props, State> {
     }
   }
 
-  retrieveData = async (id: number) => {
+  retrieveData = async (
+    id: number,
+    fadeOut?: (desination: string) => void,
+    fadeIn?: (destination: string) => void,
+    direction?: string) => {
     const { projectId } = this.state;
     //If a new project is opened
     if (projectId !== id) {
@@ -83,13 +86,19 @@ class Projects extends PureComponent<Props, State> {
           //Gets the banner of the project
           getUrl("projectViewBanners", doc.data().banner).then((src: string) => {
             getDocs(`projectOverviews/${doc.id}/paragraphs`).then((paragraphs) => {
-              this.setState({
-                projectViewBanner: src,
-                projectViewData: doc.data(),
-                projectViewParagraphs: paragraphs,
-                projectIsOpen: true,
-                projectId: id,
-              });
+              //fades projectview out if needed
+              fadeOut && fadeOut(direction ? direction : "");
+              setTimeout(() => {
+                //sets all info in state after fade out
+                this.setState({
+                  projectViewBanner: src,
+                  projectViewData: doc.data(),
+                  projectViewParagraphs: paragraphs,
+                  projectIsOpen: true,
+                  projectId: id,
+                  //fades projectview back if needed after the state has been set
+                }, fadeIn && (() => { fadeIn(direction ? direction : "") }));
+              }, 300);
             });
           });
         })

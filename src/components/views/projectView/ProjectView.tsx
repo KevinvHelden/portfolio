@@ -9,7 +9,7 @@ import nextArrow from "../../../images/icons/arrow-right-white.svg";
 type Props = typeof ProjectView.defaultProps & {
   isOpen: boolean,
   closeProject: () => void,
-  switchProject: (destination: any, turnLoadingOff: (direction: string) => void) => void,
+  switchProject: (destination: any, fadeOut: (direction: string) => void, fadeIn: (direction: string) => void) => void,
   data: {
     title: string,
     skills_used: Array<string>,
@@ -174,60 +174,57 @@ class ProjectView extends PureComponent<Props, State> {
     ))
   }
 
-  transitionPages = (direction: string) => {
-    //Scroll up and make everything scale back to normal
-    const project = this.projectRef.current;
-    const title = this.titleRef.current;
-    const banner = this.bannerRef.current;
+  fadeOut = (direction: string) => {
     const rootInner = document.getElementById("rootInner");
-
-    //Fade out
-    if (rootInner && banner && title && project) {
+    if (rootInner) {
       //pushes content to left
       direction === "next" ?
         rootInner.style.transform = "translateX(-200px)"
         :
         rootInner.style.transform = "translateX(200px)";
       rootInner.style.opacity = "0";
-      setTimeout(() => {
-        project.style.scrollBehavior = "unset";
-        //scrolls back up
-        project.scrollTop = 0;
-        project.style.scrollBehavior = "smooth";
-        //image enlarges on scroll
-        banner.style.transform =
-          "translateY(-50%) scale(1)";
-        //become invisible on scroll
-        banner.style.opacity = "1";
-        title.style.opacity = "1";
-        setTimeout(() => {
-          rootInner.style.transition = "unset";
-          setTimeout(() => {
-            direction === "next" ?
-              rootInner.style.transform = "translateX(200px)"
-              :
-              rootInner.style.transform = "translateX(-200px)";
-            setTimeout(() => {
-              rootInner.style.transition = "inherit";
-              rootInner.style.transform = "translateX(0)";
-              rootInner.style.opacity = "1";
-            }, 500);
-          }, 1);
-        }, 1);
-      }, 500);
     }
-  };
+  }
+
+  fadeIn = (direction: string) => {
+    const project = this.projectRef.current;
+    const title = this.titleRef.current;
+    const banner = this.bannerRef.current;
+    const rootInner = document.getElementById("rootInner");
+    if (rootInner && banner && title && project) {
+      project.style.scrollBehavior = "unset";
+      //scrolls back up
+      project.scrollTop = 0;
+      project.style.scrollBehavior = "smooth";
+      //image enlarges on scroll
+      banner.style.transform =
+        "translateY(-50%) scale(1)";
+      //become invisible on scroll
+      banner.style.opacity = "1";
+      title.style.opacity = "1";
+      rootInner.style.transition = "unset";
+      direction === "next" ?
+        rootInner.style.transform = "translateX(200px)"
+        :
+        rootInner.style.transform = "translateX(-200px)";
+      setTimeout(() => {
+        rootInner.style.transition = "inherit";
+        rootInner.style.transform = "translateX(0)";
+        rootInner.style.opacity = "1";
+      }, 300);
+    }
+  }
 
   handleNextClick = () => {
     //enable loading animation
     const { switchProject } = this.props;
-    switchProject("next", () => this.transitionPages("next"));
+    switchProject("next", () => this.fadeOut("next"), () => this.fadeIn("next"));
   }
 
   handlePreviousClick = () => {
     //enable loading animation
     const { switchProject } = this.props;
-    switchProject("previous", () => this.transitionPages("previous"));
+    switchProject("previous", () => this.fadeOut("previous"), () => this.fadeIn("previous"));
   }
 
   render() {
