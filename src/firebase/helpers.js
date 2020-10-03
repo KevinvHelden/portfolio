@@ -1,10 +1,6 @@
-import { config } from "./config";
 import firebase from 'firebase/app';
-import 'firebase/firestore';
 import 'firebase/storage';
-
-const firebaseInit = firebase.initializeApp(config);
-const db = firebaseInit.firestore();
+import db from './db';
 
 async function getUrl(folder, image) {
   const storage = firebase.storage();
@@ -31,4 +27,4 @@ async function getDocs(path) {
     return docArray;
 }
 
-export { getUrl, firebaseInit, getDocs };
+export { getUrl, getDocs };
