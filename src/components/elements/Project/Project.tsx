@@ -63,7 +63,7 @@ class Project extends PureComponent<Props, State> {
       <div className={classnames(styles.root, { [styles.left]: alignment === "left" })}>
         <div className={classnames(styles.title)}>
           <Text variant={"p"} text={formatTags(data.tags)} strong />
-          <Text variant={"h2"} text={data.title} />
+          <Text variant={"h4"} text={data.title} />
           <Text variant={"p"} text={data.description} />
           <Text clickFunc={handleClick} variant={"p"} text={"Read more"} strong />
         </div>

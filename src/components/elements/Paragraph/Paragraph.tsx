@@ -93,7 +93,7 @@ class Paragraph extends PureComponent<Props, State> {
         {/* ----------------------------------------------------------------------------TEXT */}
         {variant === "text" && (
           <div className={classnames(styles.textContainer)}>
-            <Text variant={"h2"} text={title} />
+            <Text variant={"h4"} text={title} />
             <div className={classnames(styles.textInnerContainer)}>
               {formatTextarray()}
             </div>
@@ -136,7 +136,7 @@ class Paragraph extends PureComponent<Props, State> {
         {variant === "textAndImage" && imageAlt && (
           <div className={classnames(styles.textAndImageContainer, { [styles.reversed]: reversed })}>
             <div className={classnames(styles.textAndImageContainerText)}>
-              <Text variant={"h2"} text={title} />
+              <Text variant={"h4"} text={title} />
               {formatTextarray()}
             </div>
             <div className={classnames(styles.textAndImageContainerImage)}>

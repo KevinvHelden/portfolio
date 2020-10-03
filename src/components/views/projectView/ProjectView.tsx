@@ -290,7 +290,7 @@ class ProjectView extends PureComponent<Props, State> {
               <div className={classnames(styles.summaryContainer)}>
                 <div className={classnames(styles.summary)}>
                   <Text
-                    variant={"h2"}
+                    variant={"h4"}
                     text={
                       "Summary"
                     }

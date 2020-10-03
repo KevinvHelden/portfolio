@@ -10,10 +10,9 @@
   display: flex;
   padding: 0px 25px 0px;
 
-  h2 {
-    font-size: var(--default-font-size-header4);
+  h4 {
     line-height: unset;
-    margin-bottom: calc(var(--default-font-size-header2) / 2);
+    margin-bottom: calc(var(--default-font-size-header4) / 2);
   }
 
   .bannerContainer {
@@ -103,7 +102,7 @@
     flex-direction: column-reverse;
 
     .textAndImageContainerText {
-      h2 {
+      h4 {
         margin-top: 50px;
       }
     }
@@ -191,10 +190,6 @@
     padding: 50px 50px 0px;
     margin-bottom: 200px;
 
-    h2 {
-      font-size: var(--default-font-size-header2);
-    }
-
     .bannerContainer {
       margin-left: -50px;
       width: 100vw;
@@ -222,7 +217,7 @@
       flex-direction: row-reverse;
 
       .textAndImageContainerText {
-        h2 {
+        h4 {
           margin-top: unset;
         }
       }

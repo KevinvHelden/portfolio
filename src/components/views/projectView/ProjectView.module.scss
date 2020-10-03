@@ -265,10 +265,9 @@
 
     .summary {
       margin-right: 0;
-      h2 {
+      h4 {
         line-height: unset;
-        margin-bottom: calc(var(--default-font-size-header2) / 2);
-        font-size: var(--default-font-size-header4);
+        margin-bottom: calc(var(--default-font-size-header4) / 2);
       }
 
       > * {
@@ -326,10 +325,6 @@
 
       .summary {
         margin-right: 100px;
-
-        h2 {
-          font-size: var(--default-font-size-header2);
-        }
       }
 
       .skills {
