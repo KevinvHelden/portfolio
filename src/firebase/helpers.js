@@ -1,7 +1,7 @@
 import { config } from "./config";
-const firebase = require("firebase");
-// Required for side-effects
-require("firebase/firestore");
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 const firebaseInit = firebase.initializeApp(config);
 const db = firebaseInit.firestore();

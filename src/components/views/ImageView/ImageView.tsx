@@ -31,11 +31,16 @@ class ImageView extends PureComponent<Props, State> {
     };
   }
 
+  noClickEvent = (e: any) => {
+    e.stopPropagation();
+  }
+
   render() {
     const { data, closeView } = this.props;
     const { open } = this.state;
+    const { noClickEvent } = this;
     return (
-      <div className={classnames(styles.root, { [styles.active]: open })}>
+      <div onClick={closeView} className={classnames(styles.root, { [styles.active]: open })}>
         <div className={classnames(styles.exitHeader)}>
           <div onClick={closeView} className={classnames(styles.exitButton)}>
             <Text text={"Close"} strong />
@@ -45,11 +50,11 @@ class ImageView extends PureComponent<Props, State> {
 
         {data.image ? (
           <div className={classnames(styles.imageContainer)}>
-            <img src={data.image} alt={data.alt} />
+            <img onClick={noClickEvent} src={data.image} alt={data.alt} draggable={false} />
           </div>
         ) : (
             <div className={classnames(styles.noImageContainer)}>
-              <img className={classnames(styles.noImage)} src={noImage} alt={"Nothing has loaded yet"} />
+              <img onClick={noClickEvent} className={classnames(styles.noImage)} src={noImage} alt={"Nothing has loaded yet"} draggable={false} />
             </div>
           )}
       </div>

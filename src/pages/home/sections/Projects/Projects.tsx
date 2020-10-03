@@ -102,7 +102,7 @@ class Projects extends PureComponent<Props, State> {
             });
           });
         })
-        .catch(function (error) {
+        .catch(function (error: any) {
           console.log("Error getting documents: ", error);
         });
       //Same project as before is opened so no calls to firebase
