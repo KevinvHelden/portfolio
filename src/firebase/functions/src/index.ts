@@ -2,8 +2,8 @@ import * as functions from "firebase-functions";
 import * as nodemailer from "nodemailer";
 import config from "./mailConfig";
 
-const RECEIVER_EMAIL = "k.v.helden96@hotmail.com";
-const SENDER_EMAIL = '"Kevin van Helden - message box" <k.v.helden96@hotmail.com>';
+const RECEIVER_EMAIL = "hello.kevinvanhelden@gmail.com";
+const SENDER_EMAIL = '"Portfolio - message box" <k.v.helden96@hotmail.com>';
 
 function getParams(url: string) {
   const _paramString: string = url.split("?")[1];
