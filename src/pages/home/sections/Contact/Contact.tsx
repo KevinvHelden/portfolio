@@ -20,7 +20,7 @@ class Contact extends PureComponent<Props> {
           <div className={classnames(styles.staticContactInfo)}>
             <div>
               <Text text={"Email"} strong />
-              <Text link={"mailto:k.v.helden96@hotmail.com"} text={"k.v.helden96@hotmail.com"} />
+              <Text link={"mailto:hello.kevinvanhelden@gmail.com"} text={"hello.kevinvanhelden@gmail.com"} />
             </div>
             <div>
               <Text text={"Phone"} strong />
