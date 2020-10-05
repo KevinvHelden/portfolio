@@ -51,6 +51,7 @@ class Icon extends PureComponent<Props> {
                 (icon === "chevronDown" && icons.chevronDown) ||
                 (icon === "chevronUp" && icons.chevronUp) ||
                 (icon === "arrowRightWhite" && icons.arrowRightWhite) ||
+                (icon === "tick" && icons.tick) ||
                 undefined
               }
               alt={icon}
@@ -83,6 +84,7 @@ class Icon extends PureComponent<Props> {
                 (icon === "chevronDown" && icons.chevronDown) ||
                 (icon === "chevronUp" && icons.chevronUp) ||
                 (icon === "arrowRightWhite" && icons.arrowRightWhite) ||
+                (icon === "tick" && icons.tick) ||
                 undefined
               }
               alt={icon}

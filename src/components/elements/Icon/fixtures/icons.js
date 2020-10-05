@@ -11,6 +11,7 @@ import arrowRight from "../../../../images/icons/arrowRight.svg";
 import chevronDown from "../../../../images/icons/chevronDown.svg";
 import chevronUp from "../../../../images/icons/chevronUp.svg";
 import arrowRightWhite from "../../../../images/icons/arrow-right-white.svg";
+import tick from "../../../../images/icons/tick.svg";
 
 const icons = {
     mouse: mouse,
@@ -26,6 +27,7 @@ const icons = {
     chevronDown: chevronDown,
     chevronUp: chevronUp,
     arrowRightWhite: arrowRightWhite,
+    tick: tick,
 }
 
 export default icons;
