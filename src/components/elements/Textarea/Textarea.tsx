@@ -3,7 +3,9 @@ import styles from "./Textarea.module.scss";
 import classnames from "classnames";
 
 type Props = typeof Textarea.defaultProps & {
-  saveToParent: (value: string) => void,
+  saveToParent?: (value: string) => void,
+  value?: string,
+  handleParentChange?: (event: { target: HTMLTextAreaElement }) => void,
 }
 
 type State = {
@@ -23,6 +25,12 @@ class Textarea extends PureComponent<Props, State> {
     required: true,
   };
 
+  static getDerivedStateFromProps(props: Props) {
+    if(props.value !== undefined){
+      return {value: props.value};
+    }
+  }
+
   handleChange = (event: { target: HTMLTextAreaElement }) => {
     const { saveToParent } = this.props;
     this.setState({ value: event.target.value });
@@ -30,7 +38,7 @@ class Textarea extends PureComponent<Props, State> {
   };
 
   render() {
-    const { placeholder, required } = this.props;
+    const { placeholder, required, handleParentChange } = this.props;
     const { value } = this.state;
     const { handleChange } = this;
 
@@ -39,7 +47,7 @@ class Textarea extends PureComponent<Props, State> {
         className={classnames(styles.root)}
         value={value}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={handleParentChange ? handleParentChange : handleChange}
         required={required}
       />
     );
