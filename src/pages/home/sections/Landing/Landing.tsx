@@ -24,7 +24,7 @@ class Landing extends PureComponent<Props> {
               variant={"p"}
               strong
               text={
-                "Welcome to my portfolio, I’m a webdeveloper with a background in UX/UI design"
+                "Welcome to my portfolio, I’m a web developer with a background in UX/UI design"
               }
             />
           </div>
