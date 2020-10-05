@@ -1,9 +1,9 @@
 @import "../../../global/styling.css";
 
 .root {
-  width: fit-content;
+  width: 500px;
+  height: 300px;
   max-width: calc(100vw - 50px);
-  height: fit-content;
   display: none;
   flex-direction: column;
   align-items: center;
