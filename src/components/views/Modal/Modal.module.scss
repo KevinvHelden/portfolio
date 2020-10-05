@@ -1,0 +1,56 @@
+@import "../../../global/styling.css";
+
+.root {
+  width: fit-content;
+  max-width: calc(100vw - 50px);
+  height: fit-content;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(28,28,30, 0.8);
+  border-radius: 5px;
+  padding: 50px 35px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 10;
+  --webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: var(--fast-transition);
+  opacity: 0;
+  transform: scale(0.8);
+
+  h4 {
+    color: var(--link);
+  }
+
+  .modalInner {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .root {
+    padding: 50px;
+    max-width: calc(100vw - 100px);
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .root {
+    padding: 75px 100px;
+    max-width: calc(100vw - calc(calc(100vw - 1200px) / 2));
+  }
+}
