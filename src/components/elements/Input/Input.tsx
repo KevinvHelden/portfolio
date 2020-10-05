@@ -2,9 +2,8 @@ import React, { PureComponent } from "react";
 import styles from "./Input.module.scss";
 import classnames from "classnames";
 
-type Props = {
+type Props = typeof Input.defaultProps & {
   placeholder?: string,
-  type: string,
   saveToParent?: (value: string) => void,
 }
 
@@ -20,6 +19,11 @@ class Input extends PureComponent<Props, State> {
     };
   }
 
+  static defaultProps = {
+    required: true,
+    type: "text",
+  }
+
   handleChange = (event: { target: HTMLInputElement }) => {
     const { saveToParent } = this.props;
     this.setState({ value: event.target.value });
@@ -27,7 +31,7 @@ class Input extends PureComponent<Props, State> {
   };
 
   render() {
-    const { placeholder = "", type = "text" } = this.props;
+    const { placeholder = "", type = "text", required } = this.props;
     const { value } = this.state;
     const { handleChange } = this;
 
@@ -38,6 +42,7 @@ class Input extends PureComponent<Props, State> {
         type={type}
         placeholder={placeholder}
         onChange={handleChange}
+        required={required}
       />
     );
   }

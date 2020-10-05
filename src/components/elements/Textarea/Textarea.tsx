@@ -2,8 +2,7 @@ import React, { PureComponent } from "react";
 import styles from "./Textarea.module.scss";
 import classnames from "classnames";
 
-type Props = {
-  placeholder: string,
+type Props = typeof Textarea.defaultProps & {
   saveToParent: (value: string) => void,
 }
 
@@ -21,6 +20,7 @@ class Textarea extends PureComponent<Props, State> {
 
   static defaultProps = {
     placeholder: "Enter text here",
+    required: true,
   };
 
   handleChange = (event: { target: HTMLTextAreaElement }) => {
@@ -30,7 +30,7 @@ class Textarea extends PureComponent<Props, State> {
   };
 
   render() {
-    const { placeholder } = this.props;
+    const { placeholder, required } = this.props;
     const { value } = this.state;
     const { handleChange } = this;
 
@@ -40,6 +40,7 @@ class Textarea extends PureComponent<Props, State> {
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        required={required}
       />
     );
   }
