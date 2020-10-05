@@ -5,6 +5,8 @@ import classnames from "classnames";
 type Props = typeof Input.defaultProps & {
   placeholder?: string,
   saveToParent?: (value: string) => void,
+  value?: string,
+  handleParentChange?: (event: { target: HTMLInputElement }) => void,
 }
 
 type State = {
@@ -15,13 +17,19 @@ class Input extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      value: props.type === "submit" ? "Send" : "",
+      value: "",
     };
   }
 
   static defaultProps = {
     required: true,
     type: "text",
+  }
+
+  static getDerivedStateFromProps(props: Props) {
+    if(props.value !== undefined){
+      return {value: props.value};
+    }
   }
 
   handleChange = (event: { target: HTMLInputElement }) => {
@@ -31,7 +39,7 @@ class Input extends PureComponent<Props, State> {
   };
 
   render() {
-    const { placeholder = "", type = "text", required } = this.props;
+    const { placeholder = "", type = "text", required, handleParentChange } = this.props;
     const { value } = this.state;
     const { handleChange } = this;
 
@@ -41,7 +49,7 @@ class Input extends PureComponent<Props, State> {
         value={value}
         type={type}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={handleParentChange ? handleParentChange : handleChange}
         required={required}
       />
     );
