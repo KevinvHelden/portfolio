@@ -358,7 +358,7 @@ class ProjectView extends PureComponent<Props, State> {
                   >
                     <Icon icon={"linkedIn"} />
                   </a>
-                  <Icon link={"mailto:k.v.helden96@hotmail.com"} icon={"mail"} />
+                  <Icon link={"mailto:hello.kevinvanhelden@gmail.com"} icon={"mail"} />
                 </div>
               </div>
             </footer>
