@@ -1,44 +1,71 @@
-import React, { PureComponent, FormEvent } from "react";
+import React, { PureComponent, FormEvent, Fragment } from "react";
 import styles from "./EmailForm.module.scss";
 import classnames from "classnames";
-
 import { Textarea, Text, Button, Input } from "../../elements";
+import { Modal } from '../../views';
 
 type Props = {}
 
 type State = {
   name: string,
   email: string,
-  message: string,
+  text: string,
+  activeModal: boolean,
 }
-
-const initialState = Object.freeze({
-  name: "",
-  email: "",
-  message: "",
-})
 
 class EmailForm extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = initialState;
+    this.state = {
+      name: "",
+      email: "",
+      text: "",
+      activeModal: false,
+    };
   }
 
-  saveName = (value: string) => {
-    this.setState({ name: value });
+  handleName = (event: { target: HTMLInputElement }) => {
+    this.setState({ name: event.target.value });
   };
 
-  saveEmail = (value: string) => {
-    this.setState({ email: value });
+  handleEmail = (event: { target: HTMLInputElement }) => {
+    this.setState({ email: event.target.value });
   };
 
-  saveMessage = (value: string) => {
-    this.setState({ message: value });
+  handleText = (event: { target: HTMLTextAreaElement }) => {
+    this.setState({ text: event.target.value });
   };
+
+  eraseInputs = () => {
+    this.setState({
+      name: "",
+      email: "",
+      text: "",
+    })
+  }
 
   sendEmail = () => {
-    const { name, email, message } = this.state;
-    alert(`name: ${name}, email: ${email}, message: ${message}`);
+    const { name, email, text } = this.state;
+    const { eraseInputs } = this;
+    const sendMail =
+      `https://europe-west2-portfolio-website-284917.cloudfunctions.net/sendMail?name=${name}&email=${email}&text=${text}`;
+    fetch(sendMail)
+      .then(response => response.json())
+      .then(() =>
+          this.setState({
+            activeModal: true
+          }, () => eraseInputs()
+        )
+      )
+      .catch((err: any) => {
+        console.log(err);
+      });
+  };
+
+  turnOffModal = () => {
+    this.setState({
+      activeModal: false,
+    })
   };
 
   handleSubmit = (event: FormEvent) => {
@@ -47,18 +74,23 @@ class EmailForm extends PureComponent<Props, State> {
   };
 
   render() {
-    const { handleSubmit, saveName, saveEmail, saveMessage } = this;
+    const { handleSubmit, turnOffModal, handleName, handleEmail, handleText } = this;
+    const { activeModal, name, email, text } = this.state;
     return (
-      <form className={classnames(styles.root)} onSubmit={handleSubmit}>
-        <Text variant={"h5"} text={"Send me a message!"} />
-        <Input type={"text"} placeholder={"Your name"} saveToParent={saveName} />
-        <Input type={"email"} placeholder={"Your email address"} saveToParent={saveEmail} />
-        <Textarea
-          placeholder={"Your question/message"}
-          saveToParent={saveMessage}
-        />
-        <Button buttonType={"submit"} text={"Send"} icon={"arrowRightWhite"} />
-      </form>
+      <Fragment>
+        <form className={classnames(styles.root)} onSubmit={handleSubmit}>
+          <Text variant={"h5"} text={"Send me a message!"} />
+          <Input value={name} handleParentChange={handleName} type={"text"} placeholder={"Your name"} />
+          <Input value={email} handleParentChange={handleEmail} type={"email"} placeholder={"Your email address"} />
+          <Textarea
+            placeholder={"Your question/message"}
+            value={text}
+            handleParentChange={handleText}
+          />
+          <Button buttonType={"submit"} text={"Send"} icon={"arrowRightWhite"} />
+        </form>
+        <Modal isActive={activeModal} title={"Thank you"} text={"Your message has been sent"} icon={"tick"} turnOff={turnOffModal} />
+      </Fragment>
     );
   }
 }
